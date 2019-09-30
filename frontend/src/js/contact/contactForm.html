@@ -1,0 +1,37 @@
+<form id="contactForm" name="contactForm">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input required ng-model="$ctrl.user.name" id="inputName" name="inputName" type="text" placeholder="Enter name" class="form-control" ng-minlength="3" ng-maxlength="20" ng-model-options="{  debounce: 500 }">
+                <span ng-show="contactForm.inputName.$error.required && (contactForm.inputName.$dirty || contactForm.inputName.$touched)">Enter a name</span>
+                <span ng-show="contactForm.inputName.$error.minlength || contactForm.inputName.$error.maxlength && (contactForm.inputName.$dirty || contactForm.inputName.$touched)">Enter between 3 and 20 characters</span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-group">
+                    <input required ng-model="$ctrl.user.email" name="inputMail" type="text" id="inputMail" class="form-control" placeholder="Enter email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i" ng-model-options="{  debounce: 500 }"/><br>
+                </div>
+                <span ng-show="contactForm.inputMail.$error.required && (contactForm.inputMail.$dirty || contactForm.inputMail.$touched)">Enter a Electronic Mail</span>
+                <span ng-show="contactForm.inputMail.$error.pattern">The format of electronic mail is incorrect</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">Message</label>
+                <textarea style="resize: none;" required ng-model="$ctrl.user.message" name="inputMessage" class="form-control" rows="5" cols="25" id="inputMessage" ng-minlength="1" ng-maxlength="100" ng-model-options="{  debounce: 500 }" placeholder="Please enter your message here..."></textarea>
+                <span ng-show="contactForm.inputMessage.$error.required && (contactForm.inputMessage.$dirty || contactForm.inputMessage.$touched)">Input a message</span>
+                <span ng-show="contactForm.inputMessage.$error.minlength">Enter more than 20 characters</span>
+                <span ng-show="contactForm.inputMessage.$error.maxlength">Enter less than 100 characters</span>
+            </div>
+        </div>
+        <div class="col-md-12">
+                <input class="btn btn-primary pull-right" type="submit" id="submitBtn" name="submit" value="Send"
+                ng-show="contactForm.inputName.$valid && contactForm.inputMail.$valid && contactForm.inputMessage.$valid"
+                ng-click="$ctrl.sendEmail()"/>
+                <input class="btn btn-primary pull-right" type="submit" id="submitBtn" name="submit" value="Send"
+                ng-hide="contactForm.inputName.$valid && contactForm.inputMail.$valid && contactForm.inputMessage.$valid"
+                ng-click="$ctrl.invalidContact()"/>
+        </div>
+    </div>
+</form>

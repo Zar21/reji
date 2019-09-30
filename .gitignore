@@ -34,7 +34,7 @@ build/Release
 
 .DS_Store
 
-build/*
+build
 dist/*
 app.templates.js
 

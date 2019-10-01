@@ -52,32 +52,34 @@ router.get('/feed', auth.required, function(req, res, next) {
   });
 });
 
-//POST WILL ONLY BE AVAILABLE TO ADMINS
+// * POST WILL ONLY BE AVAILABLE TO ADMINS
 router.post('/', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
 
-    // console.log(req.body.hotel);
     var hotel = new Hotel(req.body.hotel);
 
     // hotel.author = user;
 
     return hotel.save().then(function(){
-    //   console.log(hotel.author);
+
       return res.json({hotel: hotel.toJSONFor(user)});
     });
   }).catch(next);
 });
 
-// return a product
-router.get('/:product', auth.optional, function(req, res, next) {
+// * return a product
+router.get('/:hotel', auth.optional, function(req, res, next) {
   Promise.all([
-    req.payload ? User.findById(req.payload.id) : null,
-    req.product.populate('author').execPopulate()
-  ]).then(function(results){
-    var user = results[0];
 
+    req.payload ? User.findById(req.payload.id) : null,
+    req.hotel.populate('author').execPopulate()
+
+  ]).then(function(results){
+
+    var user = results[0];
     return res.json({product: req.product.toJSONFor(user)});
+
   }).catch(next);
 });
 

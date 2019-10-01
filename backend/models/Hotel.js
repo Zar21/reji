@@ -6,13 +6,13 @@ var HotelSchema = new mongoose.Schema({
   slug: {type: String, lowercase: true, unique: true},
   name: String,
   description: String,
-  location: String,
+  city: String, // * change to city's model
   inDate: String,
   outDate: String,
   stars: Number,
   reviewScore: Number,
   features: String,
-  rooms: Number,
+  rooms: Number, // * change to room model
   services: String
 }, {timestamps: true});
 
@@ -32,8 +32,34 @@ HotelSchema.methods.slugify = function() {
 HotelSchema.methods.toJSONFor = function(user){
   return {
     slug: this.slug,
-    name: this.name
+    name: this.name,
+    description: this.description,
+    city: this.city, 
+    inDate: this.inDate,
+    outDate: this.outDate,
+    stars: this.stars,
+    reviewScore: this.reviewScore,
+    features: this.features,
+    rooms: this.rooms,
+    services: this.services
   };
 };
 
 mongoose.model('Hotel', HotelSchema);
+
+
+// db.conduit_nodejs.insert({
+// 	"hotel": {
+// 	    "name": "third-name",
+// 	    "description": "asdasdsadsadasdasdsad",
+// 	    "location": "Ontinyent",
+// 	    "inDate": "indate",
+// 	    "outDate": "outDate",
+// 	    "stars": 5,
+// 	    "reviewScore": 7,
+// 	    "features": "asdasdasda",
+// 	    "rooms": 4,
+// 	    "services": "asdasdasd"
+		
+// 	}
+// })

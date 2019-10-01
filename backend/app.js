@@ -45,6 +45,7 @@ if(isProduction){
 require('./models/User');
 require('./models/Article');
 require('./models/Product');
+require('./models/Restaurant');
 require('./models/Comment');
 require('./models/Country');
 require('./models/City');
@@ -56,8 +57,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log(req);
-  console.log(res);
+  // console.log(req);
+  // console.log(res);
   var err = new Error('Not Found');
   err.status = 404;
   next(err);

@@ -50,6 +50,7 @@ require('./models/Comment');
 require('./models/Country');
 require('./models/City');
 require('./config/passport');
+require('./models/Hotel');
 
 app.use(require('./routes'));
 //// Swagger ////

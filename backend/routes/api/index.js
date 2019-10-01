@@ -6,6 +6,7 @@ router.use('/articles', require('./articles'));
 router.use('/tags', require('./tags'));
 router.use('/contact', require('./contact'));
 router.use('/products', require('./products'));
+router.use('/hotels', require('./hotel'));
 router.use('/cities', require('./cities'));
 router.use('/countries', require('./countries'));
 router.use('/restaurants', require('./restaurants'));

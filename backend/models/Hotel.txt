@@ -1,0 +1,12 @@
+HOTEL
+- Slug
+- Name
+- Description
+- Location
+- Fecha entrada
+- Fecha salida
+- Estrellas
+- Putuacion Usuarios
+- Features(we minusvalidos)
+- Habitaciones
+- Services

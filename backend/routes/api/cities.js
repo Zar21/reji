@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var City = mongoose.model('City');
+var Country = mongoose.model('Country');
 
 // Preload product objects on routes with ':product'
 router.param('city', function(req, res, next, slug) {
@@ -51,17 +52,26 @@ router.param('city', function(req, res, next, slug) {
 
 //POST WILL ONLY BE AVAILABLE TO ADMINS
 router.post('/', function(req, res, next) {
-
-    var city = new City(req.body.city);
-
-    return city.save().then(function(){
-      return res.json({city: city.toJSONFor(city)});
-    });
+    Country.findOne({"slug":req.body.city.country}).then(function(country) {
+        console.log(country);
+        if (!country) { 
+            req.body.city.country = null;
+        }
+        var city = new City(req.body.city);
+        city.country = country._id;
+        return city.save().then(function(){
+            return res.json({city: city.toJSONFor(country)});
+        });
+    }).catch(next);
 });
 
 // return a city
 router.get('/:city', function(req, res, next) {
-    return res.json({city: req.city.toJSONFor(user)});
+    Promise.all([
+      req.city.populate('country').execPopulate()
+    ]).then(function(results){
+      return res.json({city: results[0]});
+    }).catch(next);
 });
 
 module.exports = router;

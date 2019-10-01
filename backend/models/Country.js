@@ -21,13 +21,11 @@ CountrySchema.methods.slugify = function() {
   this.slug = slug(this.title) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
 };
 
-CountrySchema.methods.toJSONFor = function(user){
+CountrySchema.methods.toJSONFor = function(){
   return {
     slug: this.slug,
     name: this.name,
-    description: this.description,
-    createdAt: this.createdAt,
-    updatedAt: this.updatedAt
+    description: this.description
   };
 };
 

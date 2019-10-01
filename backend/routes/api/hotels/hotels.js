@@ -2,11 +2,12 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Hotel = mongoose.model('Hotel');
 var User = mongoose.model('User');
-var auth = require('../auth');
+var auth = require('../../auth');
+var city = mongoose.model("City");
 
 // Preload product objects on routes with ':product'
-router.param('hotel', function(req, res, next, slug) {
-  Hotel.findOne({ slug: slug})
+router.param('hotel', function (req, res, next, slug) {
+  Hotel.findOne({ slug: slug })
     .populate('author')
     .then(function (product) {
       if (!product) { return res.sendStatus(404); }
@@ -17,19 +18,19 @@ router.param('hotel', function(req, res, next, slug) {
     }).catch(next);
 });
 
-router.get('/feed', auth.required, function(req, res, next) {
+router.get('/feed', auth.required, function (req, res, next) {
   var limit = 20;
   var offset = 0;
 
-  if(typeof req.query.limit !== 'undefined'){
+  if (typeof req.query.limit !== 'undefined') {
     limit = req.query.limit;
   }
 
-  if(typeof req.query.offset !== 'undefined'){
+  if (typeof req.query.offset !== 'undefined') {
     offset = req.query.offset;
   }
 
-  User.findById(req.payload.id).then(function(user){
+  User.findById(req.payload.id).then(function (user) {
     if (!user) { return res.sendStatus(401); }
 
     Promise.all([
@@ -38,12 +39,12 @@ router.get('/feed', auth.required, function(req, res, next) {
         .skip(Number(offset))
         .exec(),
       Product.count()
-    ]).then(function(results){
+    ]).then(function (results) {
       var products = results[0];
       var productsCount = results[1];
 
       return res.json({
-        products: products.map(function(product){
+        products: products.map(function (product) {
           return product.toJSONFor(user);
         }),
         productsCount: productsCount
@@ -52,33 +53,46 @@ router.get('/feed', auth.required, function(req, res, next) {
   });
 });
 
+
+
+
 // * POST WILL ONLY BE AVAILABLE TO ADMINS
-router.post('/', auth.required, function(req, res, next) {
-  User.findById(req.payload.id).then(function(user){
+router.post('/', auth.required, function (req, res, next) {
+
+  User.findById(req.payload.id).then(function (user) {
     if (!user) { return res.sendStatus(401); }
+
+    console.log(req.body);
+    city.findOne({"slug": req.body.city}).then(function(city){
+      console.log(city);
+    }).catch(next);
 
     var hotel = new Hotel(req.body.hotel);
 
     // hotel.author = user;
 
-    return hotel.save().then(function(){
+    return hotel.save().then(function () {
 
-      return res.json({hotel: hotel.toJSONFor(user)});
+      return res.json({ hotel: hotel.toJSONFor(user) });
     });
   }).catch(next);
+  
 });
 
+
+
+
 // * return a product
-router.get('/:hotel', auth.optional, function(req, res, next) {
+router.get('/:hotel', auth.optional, function (req, res, next) {
   Promise.all([
 
     req.payload ? User.findById(req.payload.id) : null,
     req.hotel.populate('author').execPopulate()
 
-  ]).then(function(results){
+  ]).then(function (results) {
 
     var user = results[0];
-    return res.json({product: req.product.toJSONFor(user)});
+    return res.json({ product: req.product.toJSONFor(user) });
 
   }).catch(next);
 });

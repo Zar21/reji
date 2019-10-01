@@ -2,7 +2,7 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
 var User = mongoose.model('User');
-var auth = require('../auth');
+var auth = require('../../auth');
 
 // Preload product objects on routes with ':product'
 router.param('product', function(req, res, next, slug) {

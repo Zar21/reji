@@ -44,13 +44,14 @@ if(isProduction){
 
 require('./models/User');
 require('./models/Article');
-require('./models/Product');
-require('./models/Restaurant');
 require('./models/Comment');
-require('./models/Country');
-require('./models/City');
 require('./config/passport');
-require('./models/Hotel');
+
+require('./models/products/Product');
+require('./models/restaurants/Restaurant');
+require('./models/travels/Country');
+require('./models/travels/City');
+require('./models/hotels/Hotel');
 
 app.use(require('./routes'));
 //// Swagger ////

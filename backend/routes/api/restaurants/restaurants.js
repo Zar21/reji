@@ -2,7 +2,7 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Restaurant = mongoose.model('Restaurant');
 var User = mongoose.model('User');
-var auth = require('../auth');
+var auth = require('../../auth');
 
 // Preload restaurant objects on routes with ':restaurant'
 router.param('restaurant', function(req, res, next, slug) {

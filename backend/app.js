@@ -47,6 +47,7 @@ require('./models/Article');
 require('./models/Product');
 require('./models/Comment');
 require('./config/passport');
+require('./models/Hotel');
 
 app.use(require('./routes'));
 //// Swagger ////

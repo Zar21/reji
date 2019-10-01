@@ -46,6 +46,8 @@ require('./models/User');
 require('./models/Article');
 require('./models/Product');
 require('./models/Comment');
+require('./models/Country');
+require('./models/City');
 require('./config/passport');
 
 app.use(require('./routes'));

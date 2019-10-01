@@ -61,7 +61,7 @@ router.post('/', function(req, res, next) {
 
 // return a country
 router.get('/:country', function(req, res, next) {
-    return res.json({country: req.country.toJSONFor(user)});
+    return res.json({country: req.country.toJSONFor()});
 });
 
 module.exports = router;

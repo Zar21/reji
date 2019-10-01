@@ -25,12 +25,14 @@ CitySchema.methods.slugify = function() {
   this.slug = slug(this.title) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
 };
 
-CitySchema.methods.toJSONFor = function(user){
+CitySchema.methods.toJSONFor = function(country){
   return {
     slug: this.slug,
     title: this.title,
     description: this.description,
-    price: this.price,
+    latitude: this.latitude,
+    longitude: this.longitude,
+    country: country.toJSONFor(),
     createdAt: this.createdAt,
     updatedAt: this.updatedAt
   };

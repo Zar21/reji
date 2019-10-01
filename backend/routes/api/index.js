@@ -7,6 +7,9 @@ router.use('/tags', require('./tags'));
 router.use('/contact', require('./contact'));
 router.use('/products', require('./products'));
 router.use('/hotels', require('./hotel'));
+router.use('/cities', require('./cities'));
+router.use('/countries', require('./countries'));
+router.use('/restaurants', require('./restaurants'));
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){

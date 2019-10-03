@@ -2,6 +2,8 @@ import angular from 'angular';
 
 let componentsModule = angular.module('app.components', []);
 
+import ListPagination from './list-pagination.component';
+componentsModule.component('listPagination', ListPagination);
 
 import ListErrors from './list-errors.component'
 componentsModule.component('listErrors', ListErrors);
@@ -24,7 +26,14 @@ componentsModule.component('articlePreview', ArticlePreview);
 import ArticleList from './article-helpers/article-list.component';
 componentsModule.component('articleList', ArticleList);
 
-import ListPagination from './article-helpers/list-pagination.component';
-componentsModule.component('listPagination', ListPagination);
+import ProductMeta from './product-helpers/product-meta.component';
+componentsModule.component('productMeta', ProductMeta);
+
+import ProductPreview from './product-helpers/product-preview.component';
+componentsModule.component('productPreview', ProductPreview);
+
+import ProductList from './product-helpers/product-list.component';
+componentsModule.component('productList', ProductList);
+
 
 export default componentsModule;

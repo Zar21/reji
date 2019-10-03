@@ -50,6 +50,7 @@ require('./models/products/Product');
 require('./models/restaurants/Restaurant');
 require('./models/travels/Country');
 require('./models/travels/City');
+require('./models/hotels/Room');
 require('./models/hotels/Hotel');
 
 app.use(require('./routes'));

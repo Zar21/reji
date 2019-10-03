@@ -5,7 +5,7 @@ const AppConstants = {
   //api: 'http://localhost:3003/api',
 
   jwtKey: 'jwtToken',
-  appName: 'Conduit',
+  appName: 'Reji',
 };
 
 export default AppConstants;

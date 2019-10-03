@@ -1,81 +1,86 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var Hotel = mongoose.model('Hotel');
-var User = mongoose.model('User');
-var auth = require('../../auth');
+// var User = mongoose.model('User');
+// var auth = require('../../auth');
 var city = mongoose.model("City");
+var room = mongoose.model("Room");
 
 // Preload product objects on routes with ':product'
 router.param('hotel', function (req, res, next, slug) {
   Hotel.findOne({ slug: slug })
-    .populate('author')
-    .then(function (product) {
-      if (!product) { return res.sendStatus(404); }
+    .then(function (hotel) {
+      if (!hotel) { return res.sendStatus(404); }
 
-      req.product = product;
+      req.hotel = hotel;
 
       return next();
     }).catch(next);
 });
 
-router.get('/feed', auth.required, function (req, res, next) {
-  var limit = 20;
-  var offset = 0;
+// router.get('/feed', auth.required, function (req, res, next) {
+//   var limit = 20;
+//   var offset = 0;
 
-  if (typeof req.query.limit !== 'undefined') {
-    limit = req.query.limit;
-  }
+//   if (typeof req.query.limit !== 'undefined') {
+//     limit = req.query.limit;
+//   }
 
-  if (typeof req.query.offset !== 'undefined') {
-    offset = req.query.offset;
-  }
+//   if (typeof req.query.offset !== 'undefined') {
+//     offset = req.query.offset;
+//   }
 
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+//   User.findById(req.payload.id).then(function (user) {
+//     if (!user) { return res.sendStatus(401); }
 
-    Promise.all([
-      Product.find()
-        .limit(Number(limit))
-        .skip(Number(offset))
-        .exec(),
-      Product.count()
-    ]).then(function (results) {
-      var products = results[0];
-      var productsCount = results[1];
+//     Promise.all([
+//       Product.find()
+//         .limit(Number(limit))
+//         .skip(Number(offset))
+//         .exec(),
+//       Product.count()
+//     ]).then(function (results) {
+//       var products = results[0];
+//       var productsCount = results[1];
 
-      return res.json({
-        products: products.map(function (product) {
-          return product.toJSONFor(user);
-        }),
-        productsCount: productsCount
-      });
-    }).catch(next);
-  });
-});
+//       return res.json({
+//         products: products.map(function (product) {
+//           return product.toJSONFor(user);
+//         }),
+//         productsCount: productsCount
+//       });
+//     }).catch(next);
+//   });
+// });
 
 
 
 
 // * POST WILL ONLY BE AVAILABLE TO ADMINS
-router.post('/', auth.required, function (req, res, next) {
-
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+router.post('/', function (req, res, next) {
 
     console.log(req.body);
-    city.findOne({"slug": req.body.city}).then(function(city){
+    city.findOne({"slug": req.body.hotel.city}).then(function(city){
       console.log(city);
+      if (!city) {
+        req.body.hotel.city = null;
+      }
+      var hotel = new Hotel(req.body.hotel);
+
+      hotel.city = city._id;
+
+      return hotel.save().then(function () {
+
+        return res.json({ hotel: hotel.toJSONFor() });
+      });
+
     }).catch(next);
 
-    var hotel = new Hotel(req.body.hotel);
+    
+    // console.log(hotel);
 
-    // hotel.author = user;
-
-    return hotel.save().then(function () {
-
-      return res.json({ hotel: hotel.toJSONFor(user) });
-    });
-  }).catch(next);
+    
+  // }).catch(next);
   
 });
 
@@ -83,19 +88,19 @@ router.post('/', auth.required, function (req, res, next) {
 
 
 // * return a product
-router.get('/:hotel', auth.optional, function (req, res, next) {
-  Promise.all([
+// router.get('/:hotel', function (req, res, next) {
+//   Promise.all([
 
-    req.payload ? User.findById(req.payload.id) : null,
-    req.hotel.populate('author').execPopulate()
+//     req.payload ? User.findById(req.payload.id) : null,
+//     req.hotel.populate('author').execPopulate()
 
-  ]).then(function (results) {
+//   ]).then(function (results) {
 
-    var user = results[0];
-    return res.json({ product: req.product.toJSONFor(user) });
+//     var user = results[0];
+//     return res.json({ product: req.product.toJSONFor(user) });
 
-  }).catch(next);
-});
+//   }).catch(next);
+// });
 
 // update product
 /* UPDATE WILL ONLY BE AVAILABLE TO ADMINS

@@ -1,0 +1,17 @@
+<div class="product-meta">
+  <a ui-sref="app.profile.main({ username:$ctrl.product.author.username })">
+    <img ng-src="{{$ctrl.product.author.image}}" />
+  </a>
+
+  <div class="info">
+    <a class="author"
+      ui-sref="app.profile.main({ username:$ctrl.product.author.username })"
+      ng-bind="$ctrl.product.author.username">
+    </a>
+    <span class="date"
+      ng-bind="$ctrl.product.createdAt | date: 'longDate' ">
+    </span>
+  </div>
+
+  <ng-transclude></ng-transclude>
+</div>

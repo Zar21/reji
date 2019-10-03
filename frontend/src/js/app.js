@@ -18,6 +18,8 @@ import './auth';
 import './settings';
 import './editor';
 import './contact';
+import './product';
+import './shop';
 import toaster from 'angularjs-toaster';
 
 // Create and bootstrap application
@@ -34,6 +36,8 @@ const requires = [
   'app.settings',
   'app.editor',
   'app.contact',
+  'app.product',
+  'app.shop',
   toaster
 ];
 

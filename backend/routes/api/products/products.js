@@ -17,7 +17,7 @@ router.param('product', function(req, res, next, slug) {
     }).catch(next);
 });
 
-router.get('/feed', auth.required, function(req, res, next) {
+router.get('/', function(req, res, next) {
   var limit = 20;
   var offset = 0;
 
@@ -29,28 +29,25 @@ router.get('/feed', auth.required, function(req, res, next) {
     offset = req.query.offset;
   }
 
-  User.findById(req.payload.id).then(function(user){
-    if (!user) { return res.sendStatus(401); }
+  Promise.all([
+    Product.find()
+      .limit(Number(limit))
+      .skip(Number(offset))
+      .exec(),
+    Product.count()
+  ]).then(function(results){
+    var products = results[0];
+    var productsCount = results[1];
 
-    Promise.all([
-      Product.find()
-        .limit(Number(limit))
-        .skip(Number(offset))
-        .exec(),
-      Product.count()
-    ]).then(function(results){
-      var products = results[0];
-      var productsCount = results[1];
-
-      return res.json({
-        products: products.map(function(product){
-          return product.toJSONFor(user);
-        }),
-        productsCount: productsCount
-      });
-    }).catch(next);
+    return res.json({
+      products: products.map(function(product){
+        return product.toJSONFor();
+      }),
+      productsCount: productsCount
+    });
   });
 });
+
 
 //POST WILL ONLY BE AVAILABLE TO ADMINS
 router.post('/', auth.required, function(req, res, next) {
@@ -69,15 +66,8 @@ router.post('/', auth.required, function(req, res, next) {
 });
 
 // return a product
-router.get('/:product', auth.optional, function(req, res, next) {
-  Promise.all([
-    req.payload ? User.findById(req.payload.id) : null,
-    req.product.populate('author').execPopulate()
-  ]).then(function(results){
-    var user = results[0];
-
-    return res.json({product: req.product.toJSONFor(user)});
-  }).catch(next);
+router.get('/:product', function(req, res, next) {
+  return res.json({product: req.product.toJSONFor()});
 });
 
 // update product

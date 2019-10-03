@@ -7,6 +7,7 @@ var ProductSchema = new mongoose.Schema({
   title: String,
   description: String,
   price: Number,
+  image: String
 }, {timestamps: true});
 
 ProductSchema.plugin(uniqueValidator, {message: 'is already taken'});
@@ -28,6 +29,7 @@ ProductSchema.methods.toJSONFor = function(user){
     title: this.title,
     description: this.description,
     price: this.price,
+    image: this.image,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt
   };

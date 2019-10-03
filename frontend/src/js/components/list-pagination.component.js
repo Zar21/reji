@@ -29,7 +29,7 @@ let ListPagination= {
     currentPage: '='
   },
   controller: ListPaginationCtrl,
-  templateUrl: 'components/article-helpers/list-pagination.html'
+  templateUrl: 'components/list-pagination.html'
 };
 
 export default ListPagination;

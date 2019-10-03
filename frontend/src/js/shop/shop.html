@@ -1,0 +1,39 @@
+<div class="shop-page">
+
+  <!-- Splash banner that only shows when not logged in -->
+  <div class="banner" show-authed="false">
+    <div class="container">
+      <h1 class="logo-font" ng-bind="::$ctrl.appName | lowercase"></h1>
+      <p>You can find different products that could be useful on your trips</p>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="row">
+
+
+      <!-- Main view - contains tabs & article list -->
+      <div class="col-md-12">
+        <!-- Tabs for toggling between feed, article lists -->
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active">
+
+
+            <li class="nav-item" ng-show="$ctrl.listConfig.filters.tag">
+              <a href="" class="nav-link active">
+                <i class="ion-pound"></i> {{$ctrl.listConfig.filters.tag}}
+              </a>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- List the current articles -->
+        <product-list class="row col-md-12" limit="10" list-config="$ctrl.listConfig"></product-list>
+
+      </div>
+      <!-- End the row & container divs -->
+    </div>
+  </div>
+
+</div>

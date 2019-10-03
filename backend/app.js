@@ -16,6 +16,10 @@ swaggerDocument.host="localhost:3001"
 
 var isProduction = process.env.NODE_ENV === 'production';
 
+
+var express_graphql = require('express-graphql'),
+    { buildSchema} = require('graphql');
+
 // Create global app object
 var app = express();
 
@@ -56,6 +60,44 @@ require('./models/hotels/Hotel');
 app.use(require('./routes'));
 //// Swagger ////
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+var Restaurant = mongoose.model('Restaurant');
+
+var schemas = buildSchema(`
+    type Query {
+        message: String
+        restaurant(slug: String!): Restaurant
+        restaurants: [Restaurant]
+    }
+    type Restaurant {
+        id: ID!
+        slug: String!
+        title: String
+        description: String
+        price: Int
+        createdAt: String
+        updatedAt: String
+    }
+`);
+
+var resolvers = {
+    restaurant: (args) => {
+      let slug = args.slug;
+      return Restaurant.findOne({slug: slug});
+    },
+    restaurants: () => {
+      return Restaurant.find();
+    },
+    message: () => 'Hello World!'
+    
+}
+
+//// GraphQL ////
+app.use('/graphql',bodyParser.json(), express_graphql({
+    schema: schemas,
+    rootValue: resolvers,
+    graphiql: true
+}));
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -59,6 +59,14 @@ router.post('/', function(req, res, next) {
     });
 });
 
+router.get('/', function(req, res, next) {
+  Promise.all([
+    Country.find()
+  ]).then(function(results){
+    return res.json(results);
+  }).catch(next);
+});
+
 // return a country
 router.get('/:country', function(req, res, next) {
     return res.json({country: req.country.toJSONFor()});

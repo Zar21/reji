@@ -9,7 +9,6 @@ var http = require('http'),
     errorhandler = require('errorhandler'),
     mongoose = require('mongoose'),
     swaggerUi = require('swagger-ui-express');
-
 //// Swagger ////
 var swaggerDocument = require('./swagger.json');
 swaggerDocument.host="localhost:3001"

@@ -65,6 +65,13 @@ router.post('/', function(req, res, next) {
     }).catch(next);
 });
 
+router.get('/', function(req, res, next) {
+  Promise.all([
+    City.find().populate({ path: 'country'})
+  ]).then(function(results){
+    return res.json(results);
+  }).catch(next);
+});
 // return a city
 router.get('/:city', function(req, res, next) {
     Promise.all([

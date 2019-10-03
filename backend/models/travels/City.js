@@ -22,13 +22,13 @@ CitySchema.pre('validate', function(next){
 });
 
 CitySchema.methods.slugify = function() {
-  this.slug = slug(this.title) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
+  this.slug = slug(this.name);
 };
 
 CitySchema.methods.toJSONFor = function(country){
   return {
     slug: this.slug,
-    title: this.title,
+    name: this.name,
     description: this.description,
     latitude: this.latitude,
     longitude: this.longitude,

@@ -12,7 +12,7 @@ function ProductConfig($stateProvider) {
       product: function(Products, $state, $stateParams) {
         return Products.get($stateParams.slug).then(
           (product) => product,
-          (err) => $state.go('app.home')
+          (err) => $state.go('app.shop')
         )
       }
     }

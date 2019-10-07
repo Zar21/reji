@@ -1,20 +1,20 @@
-import { buildSchema } from "graphql";
+import { gql } from 'apollo-server-express';
 
-const schema = buildSchema(`
-     type Query {
-         message: String
-         restaurant(slug: String!): Restaurant
-         restaurants: [Restaurant]
-     }
-     type Restaurant {
-         id: ID!
-         slug: String!
-         title: String
-         description: String
-         price: Int
-         createdAt: String
-         updatedAt: String
-     }
- `);
+const typeDefs = gql`
+    type Query {
+        message: String
+        restaurant(slug: String!): Restaurant
+        restaurants: [Restaurant]
+    }
+    type Restaurant {
+        id: ID!
+        slug: String!
+        title: String
+        description: String
+        price: Int
+        createdAt: String
+        updatedAt: String
+    }
+`;
 
-export default schema;
+export default typeDefs;

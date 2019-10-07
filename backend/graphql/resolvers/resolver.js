@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 const Restaurant = mongoose.model('Restaurant');
 
-const resolver = {
-  restaurant: (args) => {
-    let slug = args.slug;
-    return Restaurant.findOne({slug: slug});
-  },
-  restaurants: () => {
-    return Restaurant.find();
-  },
-  message: () => 'Hello World!'
+const resolvers = {
+  Query: {
+      restaurant: (root, {slug}) => {
+          return Restaurant.findOne({slug: slug});
+      },
+      restaurants: () => {
+          return Restaurant.find();
+      },
+      message: () => 'Hello World!'
+  }
 }
 
-export default resolver;
+export default resolvers;

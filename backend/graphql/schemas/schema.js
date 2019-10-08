@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server-express';
+// https://graphql.org/learn/queries/
 
 const typeDefs = gql`
     scalar Date
@@ -18,7 +19,9 @@ const typeDefs = gql`
         slug: String!
         title: String
         description: String
-        price: Int
+        reservePrice: Int,
+        city: String,
+        streetAddress: String
         createdAt: Date
         updatedAt: Date
     }

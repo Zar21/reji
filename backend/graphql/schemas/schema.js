@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
+    scalar Date
     type Query {
         message: String
         restaurant(slug: String!): Restaurant
@@ -12,8 +13,8 @@ const typeDefs = gql`
         title: String
         description: String
         price: Int
-        createdAt: String
-        updatedAt: String
+        createdAt: Date
+        updatedAt: Date
     }
 `;
 

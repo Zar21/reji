@@ -16,10 +16,37 @@ mongoose
 require('../models/travels/Country')
 require('../models/travels/City')
 require('../models/restaurants/Restaurant');
+require('../models/products/Product');
 
 var Country = mongoose.model('Country');
 var City = mongoose.model('City');
 let Restaurant = mongoose.model('Restaurant');
+let Product = mongoose.model('Product');
+
+const generateProducts = () => {
+	let products = [];
+	let i = 0;
+
+	while (i < 50) {
+		const title = faker.fake('{{commerce.productName}}');
+		const description = faker.fake('{{commerce.productAdjective}}') + " " + faker.fake('{{commerce.productMaterial}}' + " " + faker.fake('{{commerce.color}}'));
+		const price = faker.fake('{{commerce.price}}');
+		const image = "http://lorempixel.com/200/200/technics/";
+
+		const product = {
+			title,
+			description,
+			price,
+			image
+		}
+
+		if (products.filter(value => value.title == product.title).length == 0) {
+			products.push(product)
+			i++
+		}
+	}
+	return products;
+}
 
 // Fake data generation functions
 const generateCountries = () => {
@@ -51,11 +78,13 @@ const generateCities = (countriesIds) => {
 		const latitude = faker.fake('{{address.latitude}}')
 		const longitude = faker.fake('{{address.longitude}}')
 		const country = faker.random.arrayElement(countriesIds)
+		const image = "http://lorempixel.com/200/200/city/";
 		const city = {
 			name,
 			latitude,
 			longitude,
-			country
+			country,
+			image
 		}
 		//This if check if some city are already in the array
 		if (cities.filter(value => value.name == city.name).length == 0) {
@@ -77,13 +106,15 @@ const generateRestaurants = (citiesIDs) => {
 		const reservePrice = faker.fake('{{commerce.price}}');
 		const city = faker.random.arrayElement(citiesIDs)
 		const streetAddress = faker.fake('{{address.streetAddress}}');
+		const image = "http://lorempixel.com/200/200/nightlife/";
 
 		const restaurant = {
 			title,
 			description,
 			reservePrice,
 			city,
-			streetAddress
+			streetAddress,
+			image
 		}
 		//This if check if some restaurant are already in the array
 		if (restaurants.filter(value => value.title == restaurant.title).length == 0) {
@@ -98,6 +129,8 @@ const generateRestaurants = (citiesIDs) => {
 fastify.ready().then(
 	async () => {
 		try {
+			const products = await Product.insertMany(generateProducts())
+
 			const countries = await Country.insertMany(generateCountries())
 
 			const countriesIds = countries.map(x => x._id)
@@ -107,10 +140,11 @@ fastify.ready().then(
 			const restaurants = await Restaurant.insertMany(generateRestaurants(citiesIds))
 
 			console.log(`
-      Data successfully added:
+	  Data successfully added:
+		- ${products.length} products added.	  
 		- ${countries.length} countries added.
 		- ${cities.length} cities added.
-		- ${restaurants.length} cities added.
+		- ${restaurants.length} restaurants added.
       `)
 		} catch (err) {
 			throw boom.boomify(err)

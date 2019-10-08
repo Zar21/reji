@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 var slug = require('slug');
+require('./Country');
+
 var Country = mongoose.model('Country');
 
 var CitySchema = new mongoose.Schema({

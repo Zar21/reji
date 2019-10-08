@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server-express';
+// https://graphql.org/learn/queries/
 
 const typeDefs = gql`
     scalar Date
@@ -12,15 +13,17 @@ const typeDefs = gql`
         hotels: [Hotel]
         room(slug: String!): Room
         rooms: [Room]
+        city(slug: String!): City
+        cities: [City]
     }
     type Restaurant {
         id: ID!
         slug: String!
         title: String
         description: String
-        price: Int
-        createdAt: Date
-        updatedAt: Date
+        reservePrice: Int,
+        city: City
+        streetAddress: String
     }
     type Product {
         id: ID!
@@ -50,6 +53,14 @@ const typeDefs = gql`
         beds: Int
         equipment: [String]
         occupied: Boolean
+    }
+    type City {
+        id: ID!
+        slug: String!
+        name: String
+        latitude: Float
+        longitude: Float
+        country: String
     }
 `;
 

@@ -11,7 +11,8 @@ var RetaurantSchema = new mongoose.Schema({
   description: String,
   reservePrice: Number,
   city: { type: mongoose.Schema.Types.ObjectId, ref: 'City' },
-	streetAddress: String
+  streetAddress: String,
+  image: String
 }, {timestamps: true});
 
 
@@ -37,7 +38,8 @@ RetaurantSchema.methods.toJSONFor = function(city){
     city: city.toJSONFor(),
     streetAddress: this.streetAddress,
     createdAt: this.createdAt,
-    updatedAt: this.updatedAt
+    updatedAt: this.updatedAt,
+    image: this.image
   };
 };
 

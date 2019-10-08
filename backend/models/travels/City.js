@@ -12,6 +12,7 @@ var CitySchema = new mongoose.Schema({
   latitude: Number,
   longitude: Number,
   country: { type: mongoose.Schema.Types.ObjectId, ref: 'Country' },
+  image: String
 }, {timestamps: true});
 
 CitySchema.plugin(uniqueValidator, {message: 'is already taken'});
@@ -36,7 +37,8 @@ CitySchema.methods.toJSONFor = function(country){
     longitude: this.longitude,
     country: country.toJSONFor(),
     createdAt: this.createdAt,
-    updatedAt: this.updatedAt
+    updatedAt: this.updatedAt,
+    image: this.image
   };
 };
 

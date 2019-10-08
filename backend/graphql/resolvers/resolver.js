@@ -44,7 +44,54 @@ const resolvers = {
     city: (parent) => {
       return City.findOne({_id: parent.city});
     }
+  },
+  Mutation: {
+    createRestaurant: (root, {input}) => {
+      const restaurant = new Restaurant(input);
+
+      restaurant.save();
+      return restaurant;
+    }
   }
 }
 
 export default resolvers;
+
+
+
+/*
+
+// Example of mutation
+
+mutation createRestaurants {
+  createRestaurant(input:{
+    title:"mutationTest"
+  }) {
+    id
+    title
+    slug
+  }
+}
+
+*/
+
+/*
+
+// Example of query
+// query keyword is optional but good practice
+// maybe relevant when implementing in code
+
+query getRestaurants{
+  restaurant (slug:"barrows-turner-and-stroman-o2gjnx") {
+    id
+    title
+    slug
+    description
+    streetAddress
+    city {
+      id
+      slug
+    }
+  }
+}
+*/

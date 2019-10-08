@@ -16,6 +16,10 @@ const typeDefs = gql`
         city(slug: String!): City
         cities: [City]
     }
+    type Mutation {
+        createRestaurant(input: RestaurantInput): Restaurant
+        updateRestaurant(slug: String!, input: RestaurantInput): Restaurant
+    }
     type Restaurant {
         id: ID!
         slug: String!
@@ -23,6 +27,13 @@ const typeDefs = gql`
         description: String
         reservePrice: Int,
         city: City
+        streetAddress: String
+    }
+    input RestaurantInput {
+        title: String!
+        description: String
+        reservePrice: Int,
+        city: String
         streetAddress: String
     }
     type Product {

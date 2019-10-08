@@ -47,6 +47,9 @@ require('./models/Article');
 require('./models/Comment');
 require('./config/passport');
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 require('./models/products/Product');
 require('./models/restaurants/Restaurant');
 require('./models/travels/Country');

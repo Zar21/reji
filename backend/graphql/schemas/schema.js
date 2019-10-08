@@ -13,6 +13,8 @@ const typeDefs = gql`
         hotels: [Hotel]
         room(slug: String!): Room
         rooms: [Room]
+        city(slug: String!): City
+        cities: [City]
     }
     type Restaurant {
         id: ID!
@@ -20,10 +22,8 @@ const typeDefs = gql`
         title: String
         description: String
         reservePrice: Int,
-        city: String,
+        city: City
         streetAddress: String
-        createdAt: Date
-        updatedAt: Date
     }
     type Product {
         id: ID!
@@ -53,6 +53,14 @@ const typeDefs = gql`
         beds: Int
         equipment: [String]
         occupied: Boolean
+    }
+    type City {
+        id: ID!
+        slug: String!
+        name: String
+        latitude: Float
+        longitude: Float
+        country: String
     }
 `;
 

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 var slug = require('slug');
 var city = mongoose.model("City");
-var room = mongoose.model("Room");
+// var room = mongoose.model("Room");
 
 
 var HotelSchema = new mongoose.Schema({
@@ -10,13 +10,11 @@ var HotelSchema = new mongoose.Schema({
   name: String,
   description: String,
   city: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
-  inDate: String,
-  outDate: String,
   stars: Number,
   reviewScore: Number,
   features: [String],
-  rooms: Number, //TODO: change to an array of Rooms
-  services: String
+  rooms: Number, //TODO: change to an array of Roomsgit 
+  services: [String]
 }, { timestamps: true });
 
 HotelSchema.plugin(uniqueValidator, { message: 'is already taken' });
@@ -38,8 +36,6 @@ HotelSchema.methods.toJSONFor = function () {
     name: this.name,
     description: this.description,
     city: this.city,
-    inDate: this.inDate,
-    outDate: this.outDate,
     stars: this.stars,
     reviewScore: this.reviewScore,
     features: this.features,

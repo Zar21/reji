@@ -4,7 +4,7 @@ var Hotel = mongoose.model('Hotel');
 // var User = mongoose.model('User');
 // var auth = require('../../auth');
 var city = mongoose.model("City");
-var room = mongoose.model("Room");
+// var room = mongoose.model("Room");
 
 // Preload product objects on routes with ':product'
 router.param('hotel', function (req, res, next, slug) {

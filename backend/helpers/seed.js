@@ -12,6 +12,7 @@ mongoose
 	.then(() => console.log('MongoDB connected...'))
 	.catch(err => console.log(err))
 
+<<<<<<< HEAD
 
 // IMPORT MODELS
 // travels
@@ -25,6 +26,43 @@ var Country = mongoose.model('Country');
 var City = mongoose.model('City');
 // hotels
 var hotel = mongoose.model("Hotel");
+=======
+// Get Data Models
+require('../models/travels/Country')
+require('../models/travels/City')
+require('../models/restaurants/Restaurant');
+require('../models/products/Product');
+
+var Country = mongoose.model('Country');
+var City = mongoose.model('City');
+let Restaurant = mongoose.model('Restaurant');
+let Product = mongoose.model('Product');
+
+const generateProducts = () => {
+	let products = [];
+	let i = 0;
+
+	while (i < 50) {
+		const title = faker.fake('{{commerce.productName}}');
+		const description = faker.fake('{{commerce.productAdjective}}') + " " + faker.fake('{{commerce.productMaterial}}' + " " + faker.fake('{{commerce.color}}'));
+		const price = faker.fake('{{commerce.price}}');
+		const image = "http://lorempixel.com/200/200/technics/";
+
+		const product = {
+			title,
+			description,
+			price,
+			image
+		}
+
+		if (products.filter(value => value.title == product.title).length == 0) {
+			products.push(product)
+			i++
+		}
+	}
+	return products;
+}
+>>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
 
 // Fake data generation functions
 const generateCountries = () => {
@@ -38,8 +76,15 @@ const generateCountries = () => {
 			name
 		}
 		//This if check if some country are already in the array 
+<<<<<<< HEAD
 		if (countries.filter(value => value.name == country.name).length == 0) { countries.push(country) }
 		i++
+=======
+		if (countries.filter(value => value.name == country.name).length == 0) {
+			countries.push(country)
+			i++
+		}
+>>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
 	}
 
 	return countries
@@ -54,22 +99,25 @@ const generateCities = (countriesIds) => {
 		const latitude = faker.fake('{{address.latitude}}')
 		const longitude = faker.fake('{{address.longitude}}')
 		const country = faker.random.arrayElement(countriesIds)
+		const image = "http://lorempixel.com/200/200/city/";
 		const city = {
 			name,
 			latitude,
 			longitude,
-			country
+			country,
+			image
 		}
 		//This if check if some city are already in the array
 		if (cities.filter(value => value.name == city.name).length == 0) {
 			cities.push(city)
+			i++
 		}
-		i++
 	}
 
 	return cities
 }
 
+<<<<<<< HEAD
 // HOTELS FAKE DATA
 // TODO:jordi: test this
 // const generateHotels = (cities) => {
@@ -110,22 +158,68 @@ const generateCities = (countriesIds) => {
 
 // 	return hotels;
 // }
+=======
+const generateRestaurants = (citiesIDs) => {
+	let restaurants = []
+	let i = 0
+
+	while (i < 50) {
+		const title = faker.fake('{{company.companyName}}');
+		const description = faker.fake('{{company.catchPhrase}}');
+		const reservePrice = faker.fake('{{commerce.price}}');
+		const city = faker.random.arrayElement(citiesIDs)
+		const streetAddress = faker.fake('{{address.streetAddress}}');
+		const image = "http://lorempixel.com/200/200/nightlife/";
+
+		const restaurant = {
+			title,
+			description,
+			reservePrice,
+			city,
+			streetAddress,
+			image
+		}
+		//This if check if some restaurant are already in the array
+		if (restaurants.filter(value => value.title == restaurant.title).length == 0) {
+			restaurants.push(restaurant)
+			i++
+		}
+	}
+
+	return restaurants;
+}
+>>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
 
 fastify.ready().then(
 	async () => {
 		try {
+			const products = await Product.insertMany(generateProducts())
+
 			const countries = await Country.insertMany(generateCountries())
+
 			const countriesIds = countries.map(x => x._id)
 			const cities = await City.insertMany(generateCities(countriesIds))
+<<<<<<< HEAD
 			// hotels
 			// const cities_to_use_in_hotels = cities.map(x => x._id)
 			// console.log(generateHotels(cities_to_use_in_hotels));
 			// const hotels = await hotel.insertMany(generateHotels(cities_to_use_in_hotels))
+=======
+
+			const citiesIds = cities.map(x => x._id)
+			const restaurants = await Restaurant.insertMany(generateRestaurants(citiesIds))
+
+>>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
 			console.log(`
-      Data successfully added:
+	  Data successfully added:
+		- ${products.length} products added.	  
 		- ${countries.length} countries added.
 		- ${cities.length} cities added.
+<<<<<<< HEAD
 		- ${hotels.length} hotels added.
+=======
+		- ${restaurants.length} restaurants added.
+>>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
       `)
 		} catch (err) {
 			throw boom.boomify(err)

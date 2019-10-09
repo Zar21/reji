@@ -1,13 +1,20 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 var slug = require('slug');
+require('../travels/City');
+
+var City = mongoose.model('City');
 
 var RetaurantSchema = new mongoose.Schema({
   slug: {type: String, lowercase: true, unique: true},
   title: String,
   description: String,
-  price: Number,
+  reservePrice: Number,
+  city: { type: mongoose.Schema.Types.ObjectId, ref: 'City' },
+  streetAddress: String,
+  image: String
 }, {timestamps: true});
+
 
 RetaurantSchema.plugin(uniqueValidator, {message: 'is already taken'});
 
@@ -22,14 +29,17 @@ RetaurantSchema.methods.slugify = function() {
   this.slug = slug(this.title) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
 };
 
-RetaurantSchema.methods.toJSONFor = function(){
+RetaurantSchema.methods.toJSONFor = function(city){
   return {
     slug: this.slug,
     title: this.title,
     description: this.description,
-    price: this.price,
+    reservePrice: this.reservePrice,
+    city: city.toJSONFor(),
+    streetAddress: this.streetAddress,
     createdAt: this.createdAt,
-    updatedAt: this.updatedAt
+    updatedAt: this.updatedAt,
+    image: this.image
   };
 };
 

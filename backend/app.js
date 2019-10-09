@@ -15,6 +15,7 @@ swaggerDocument.host="localhost:3001"
 
 var isProduction = process.env.NODE_ENV === 'production';
 
+
 // Create global app object
 var app = express();
 
@@ -46,6 +47,9 @@ require('./models/Article');
 require('./models/Comment');
 require('./config/passport');
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 require('./models/products/Product');
 require('./models/restaurants/Restaurant');
 require('./models/travels/Country');
@@ -56,6 +60,7 @@ require('./models/hotels/Hotel');
 app.use(require('./routes'));
 //// Swagger ////
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

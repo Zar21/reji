@@ -76,15 +76,10 @@ const generateCountries = () => {
 			name
 		}
 		//This if check if some country are already in the array 
-<<<<<<< HEAD
-		if (countries.filter(value => value.name == country.name).length == 0) { countries.push(country) }
-		i++
-=======
 		if (countries.filter(value => value.name == country.name).length == 0) {
 			countries.push(country)
 			i++
 		}
->>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
 	}
 
 	return countries
@@ -117,7 +112,6 @@ const generateCities = (countriesIds) => {
 	return cities
 }
 
-<<<<<<< HEAD
 // HOTELS FAKE DATA
 // TODO:jordi: test this
 // const generateHotels = (cities) => {
@@ -158,7 +152,6 @@ const generateCities = (countriesIds) => {
 
 // 	return hotels;
 // }
-=======
 const generateRestaurants = (citiesIDs) => {
 	let restaurants = []
 	let i = 0
@@ -188,7 +181,6 @@ const generateRestaurants = (citiesIDs) => {
 
 	return restaurants;
 }
->>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
 
 fastify.ready().then(
 	async () => {
@@ -199,27 +191,21 @@ fastify.ready().then(
 
 			const countriesIds = countries.map(x => x._id)
 			const cities = await City.insertMany(generateCities(countriesIds))
-<<<<<<< HEAD
 			// hotels
 			// const cities_to_use_in_hotels = cities.map(x => x._id)
 			// console.log(generateHotels(cities_to_use_in_hotels));
 			// const hotels = await hotel.insertMany(generateHotels(cities_to_use_in_hotels))
-=======
 
 			const citiesIds = cities.map(x => x._id)
 			const restaurants = await Restaurant.insertMany(generateRestaurants(citiesIds))
 
->>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
 			console.log(`
 	  Data successfully added:
 		- ${products.length} products added.	  
 		- ${countries.length} countries added.
 		- ${cities.length} cities added.
-<<<<<<< HEAD
 		- ${hotels.length} hotels added.
-=======
 		- ${restaurants.length} restaurants added.
->>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
       `)
 		} catch (err) {
 			throw boom.boomify(err)

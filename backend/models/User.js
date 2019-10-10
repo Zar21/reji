@@ -13,8 +13,9 @@ var UserSchema = new mongoose.Schema({
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   hash: String,
   salt: String,
-  social: {type:String,unique:true}
+  social: {type: String, trim: true, index: true, unique: true, sparse: true}
 }, {timestamps: true});
+// db.users.dropIndexes()
 
 UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
 

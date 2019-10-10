@@ -15,6 +15,8 @@ const typeDefs = gql`
         rooms: [Room]
         city(slug: String!): City
         cities: [City]
+        country(slug: String!): Country
+        countries: [Country]
     }
     type Mutation {
         createRestaurant(input: RestaurantInput): Restaurant
@@ -72,6 +74,12 @@ const typeDefs = gql`
         latitude: Float
         longitude: Float
         country: String
+    }
+    type Country {
+        id: ID!
+        slug: String!
+        name: String
+        description: String
     }
 `;
 

@@ -4,6 +4,7 @@ const Product = mongoose.model('Product');
 const Hotel = mongoose.model('Hotel');
 const Room = mongoose.model('Room');
 const City = mongoose.model('City');
+const Country = mongoose.model('Country');
 
 const resolvers = {
   Query: {
@@ -36,6 +37,12 @@ const resolvers = {
       },
       cities: () => {
         return City.find();
+      },
+      country: (root, {slug}) => {
+        return Country.findOne({slug: slug});
+      },
+      countries: () => {
+        return Country.find();
       },
       message: () => 'Hello World!'
   },

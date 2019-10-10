@@ -73,6 +73,16 @@ const typeDefs = gql`
         longitude: Float
         country: String
     }
+    type User {
+        id: ID!
+        social: String
+        username: String
+        email: String
+        image: String
+        bio: String
+        hash: String
+        salt: String
+    }
 `;
 
 export default typeDefs;

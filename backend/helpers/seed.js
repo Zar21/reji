@@ -12,31 +12,21 @@ mongoose
 	.then(() => console.log('MongoDB connected...'))
 	.catch(err => console.log(err))
 
-<<<<<<< HEAD
-
-// IMPORT MODELS
-// travels
-require('../models/travels/Country')
-require('../models/travels/City')
-// hotels
-require("../models/hotels/Hotel");
-
-// CREATE MODELS
-var Country = mongoose.model('Country');
-var City = mongoose.model('City');
-// hotels
-var hotel = mongoose.model("Hotel");
-=======
 // Get Data Models
 require('../models/travels/Country')
 require('../models/travels/City')
 require('../models/restaurants/Restaurant');
 require('../models/products/Product');
+// hotels
+require("../models/hotels/Hotel");
 
 var Country = mongoose.model('Country');
 var City = mongoose.model('City');
 let Restaurant = mongoose.model('Restaurant');
 let Product = mongoose.model('Product');
+
+// hotels
+var hotel = mongoose.model("Hotel");
 
 const generateProducts = () => {
 	let products = [];
@@ -62,7 +52,6 @@ const generateProducts = () => {
 	}
 	return products;
 }
->>>>>>> 789aecafb5b250c55b9d64a1cedbc32efc4743b1
 
 // Fake data generation functions
 const generateCountries = () => {

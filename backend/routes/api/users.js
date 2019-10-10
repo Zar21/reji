@@ -101,6 +101,12 @@ router.get('/auth/github/callback',
   passport.authenticate('github',{
   successRedirect : 'http://localhost:3000/#!/auth/sociallogin',
   failureRedirect: '/' }
-  )); 
-   
+  ));
+
+router.get('/auth/google', passport.authenticate('google'));
+router.get('/auth/google/callback',
+  passport.authenticate('google',{
+  successRedirect : 'http://localhost:3000/#!/auth/sociallogin',
+  failureRedirect: '/' }
+  ));
 module.exports = router;

@@ -1,0 +1,20 @@
+<restaurant-preview class="col-md-3"
+  restaurant="restaurant"
+  ng-repeat="restaurant in $ctrl.list track by $index">
+</restaurant-preview>
+
+<div class="restaurant-preview"
+  ng-hide="!$ctrl.loading">
+  Loading restaurants...
+</div>
+
+<div class="restaurant-preview"
+  ng-show="!$ctrl.loading && !$ctrl.list.length">
+  No restaurants are here... yet.
+</div>
+<br>
+<list-pagination class="col-md-12"
+ total-pages="$ctrl.listConfig.totalPages"
+ current-page="$ctrl.listConfig.currentPage"
+ ng-hide="$ctrl.listConfig.totalPages <= 1">
+</list-pagination>

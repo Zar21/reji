@@ -20,6 +20,8 @@ import './editor';
 import './contact';
 import './product';
 import './shop';
+import './restaurant';
+import './restaurant-shop';
 import toaster from 'angularjs-toaster';
 
 // Create and bootstrap application
@@ -38,6 +40,8 @@ const requires = [
   'app.contact',
   'app.product',
   'app.shop',
+  'app.restaurant',
+  'app.restaurantshop',
   toaster
 ];
 

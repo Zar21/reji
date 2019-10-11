@@ -35,5 +35,13 @@ componentsModule.component('productPreview', ProductPreview);
 import ProductList from './product-helpers/product-list.component';
 componentsModule.component('productList', ProductList);
 
+import RestaurantMeta from './restaurant-helpers/restaurant-meta.component';
+componentsModule.component('restaurantMeta', RestaurantMeta);
+
+import RestaurantPreview from './restaurant-helpers/restaurant-preview.component';
+componentsModule.component('restaurantPreview', RestaurantPreview);
+
+import RestaurantList from './restaurant-helpers/restaurant-list.component';
+componentsModule.component('restaurantList', RestaurantList);
 
 export default componentsModule;

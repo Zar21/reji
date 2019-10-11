@@ -35,12 +35,14 @@ RetaurantSchema.methods.toJSONFor = function(city){
     title: this.title,
     description: this.description,
     reservePrice: this.reservePrice,
-    city: city.toJSONFor(),
+   
     streetAddress: this.streetAddress,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     image: this.image
   };
 };
+
+ // city: city.toJSONFor(),
 
 mongoose.model('Restaurant', RetaurantSchema);

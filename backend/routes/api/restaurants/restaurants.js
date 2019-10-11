@@ -2,6 +2,8 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Restaurant = mongoose.model('Restaurant');
 var User = mongoose.model('User');
+const City = mongoose.model('City');
+const Country = mongoose.model('Country');
 var auth = require('../../auth');
 
 // Preload restaurant objects on routes with ':restaurant'
@@ -16,7 +18,7 @@ router.param('restaurant', function(req, res, next, slug) {
     }).catch(next);
 });
 
-router.get('/feed', function(req, res, next) {
+router.get('/', function(req, res, next) {
   var limit = 20;
   var offset = 0;
 
@@ -40,8 +42,26 @@ router.get('/feed', function(req, res, next) {
 
     return res.json({
       restaurants: restaurants.map(function(restaurant){
+        /*
+        City.findById(restaurant.city).then(function(city){
+          if (!city) { return res.sendStatus(401); }
+          
+            Country.findById(city.country).then(function(country){
+              if (!country) { return res.sendStatus(401); }
+
+              city.country = country;
+              restaurant.city = city;
+
+              console.log(restaurant.city);
+ 
+              return restaurant.toJSONFor(restaurant.city);
+            }).catch(next);
+
+        }).catch(next);
+        */
         return restaurant.toJSONFor();
       }),
+
       restaurantsCount: restaurantsCount
     });
   });

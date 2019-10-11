@@ -1,0 +1,7 @@
+<div style="text-align: center" class="restaurant-preview">
+  <a ui-sref="app.restaurant({ slug: $ctrl.restaurant.slug })" class="preview-link">
+    <img height="200px" width="200px" ng-src="{{$ctrl.restaurant.image}}">
+    <h4><span ng-bind="$ctrl.restaurant.title"></span> <span ng-bind="$ctrl.restaurant.reservePrice"></span>€</h4>
+    <p ng-bind="$ctrl.restaurant.description"></p>
+  </a>
+</div>

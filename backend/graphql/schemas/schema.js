@@ -30,6 +30,7 @@ const typeDefs = gql`
         reservePrice: Int,
         city: City
         streetAddress: String
+        image: String
     }
     input RestaurantInput {
         title: String!

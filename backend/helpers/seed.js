@@ -18,7 +18,7 @@ require('../models/travels/City')
 require('../models/restaurants/Restaurant');
 require('../models/products/Product');
 // hotels
-require("../models/hotels/Hotel");
+// require("../models/hotels/Hotel");
 
 var Country = mongoose.model('Country');
 var City = mongoose.model('City');
@@ -26,7 +26,7 @@ let Restaurant = mongoose.model('Restaurant');
 let Product = mongoose.model('Product');
 
 // hotels
-var hotel = mongoose.model("Hotel");
+// var hotel = mongoose.model("Hotel");
 
 const generateProducts = () => {
 	let products = [];
@@ -193,9 +193,9 @@ fastify.ready().then(
 		- ${products.length} products added.	  
 		- ${countries.length} countries added.
 		- ${cities.length} cities added.
-		- ${hotels.length} hotels added.
 		- ${restaurants.length} restaurants added.
-      `)
+		`)
+		// - ${hotels.length} hotels added.
 		} catch (err) {
 			throw boom.boomify(err)
 		}

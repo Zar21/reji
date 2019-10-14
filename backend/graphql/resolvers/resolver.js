@@ -52,6 +52,11 @@ const resolvers = {
       return City.findOne({_id: parent.city});
     }
   },
+  City: {
+    country: (parent) => {
+      return Country.findOne({_id: parent.country});
+    }
+  },
   Mutation: {
     createRestaurant: (root, {input}) => {
       const restaurant = new Restaurant(input);

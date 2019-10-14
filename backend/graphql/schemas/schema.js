@@ -74,7 +74,7 @@ const typeDefs = gql`
         name: String
         latitude: Float
         longitude: Float
-        country: String
+        country: Country
     }
     type Country {
         id: ID!

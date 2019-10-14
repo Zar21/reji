@@ -35,35 +35,59 @@ router.get('/', function(req, res, next) {
       .limit(Number(limit))
       .skip(Number(offset))
       .exec(),
-    Restaurant.count()
+    Restaurant.count(),
+    City.find(),
+    Country.find()
   ]).then(function(results){
     var restaurants = results[0];
     var restaurantsCount = results[1];
+    var cities = results[2];
+    var countries = results[3];
 
+    
     return res.json({
       restaurants: restaurants.map(function(restaurant){
+        
         /*
-        City.findById(restaurant.city).then(function(city){
-          if (!city) { return res.sendStatus(401); }
-          
-            Country.findById(city.country).then(function(country){
-              if (!country) { return res.sendStatus(401); }
+        let city;
+        for (let i = 0; i < cities.length; i++) {
+          const element = cities[i];
+          if (String(element._id) == String(restaurant.city)){
+            city = element;
 
-              city.country = country;
-              restaurant.city = city;
+            let country;
+            for (let i = 0; i < countries.length; i++) {
+              const element = countries[i];
+              if (String(element._id) == String(city.country)){
+                country = element;
 
-              console.log(restaurant.city);
- 
-              return restaurant.toJSONFor(restaurant.city);
-            }).catch(next);
-
-        }).catch(next);
+                city.country = new Country(country);
+                restaurant.city = new City(city);
+                
+                console.log(restaurant);
+              } 
+            }
+          } 
+        }
         */
-        return restaurant.toJSONFor();
-      }),
 
+        // async function getJson(restaurant) {
+        //   let city = await City.findById(restaurant.city);
+
+        //   let country = await Country.findById(city.country);
+      
+        //   city.country = country;
+        //   restaurant.city = city;
+
+        //   return restaurant;
+        // }
+        // restaurant = getJson(restaurant);
+
+        return restaurant.toJSONFor(restaurant.city);
+      }),
       restaurantsCount: restaurantsCount
     });
+
   });
 });
 

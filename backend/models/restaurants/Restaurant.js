@@ -35,7 +35,7 @@ RetaurantSchema.methods.toJSONFor = function(city){
     title: this.title,
     description: this.description,
     reservePrice: this.reservePrice,
-   
+    
     streetAddress: this.streetAddress,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,

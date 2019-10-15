@@ -5,6 +5,9 @@ class RestaurantShopCtrl {
     this.appName = AppConstants.appName;
     this._$scope = $scope;
 
+    this.listConfig = {
+      type: User.current ? 'feed' : 'all'
+    };
   }
 }
 

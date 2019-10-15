@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 
   Promise.all([
     Restaurant.find()
-      .limit(Number())
+      .limit(Number(limit))
       .skip(Number(offset))
       .exec(),
     Restaurant.count(),

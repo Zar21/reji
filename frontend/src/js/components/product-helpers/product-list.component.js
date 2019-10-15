@@ -63,7 +63,6 @@ class ProductListCtrl {
       .then(
         (res) => {
           this.loading = false;
-
           // Update list and total pages
           this.list = res.products;
 

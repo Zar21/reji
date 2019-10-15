@@ -28,7 +28,7 @@ CitySchema.methods.slugify = function() {
   this.slug = slug(this.name);
 };
 
-CitySchema.methods.toJSONFor = function(country){
+CitySchema.methods.toJSONFor = function(country){  
   return {
     slug: this.slug,
     name: this.name,

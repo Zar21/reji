@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 
   Promise.all([
     Restaurant.find()
-      .limit(Number())
+      .limit(Number(limit))
       .skip(Number(offset))
       .exec(),
     Restaurant.count(),
@@ -114,7 +114,19 @@ router.post('/', auth.required, function(req, res, next) {
 
 // return a restaurant
 router.get('/:restaurant', function(req, res, next) {
-    return res.json({restaurant: req.restaurant.toJSONFor()});
+  City.findById(req.restaurant.city).then(function(city){
+    if (!city) { return res.sendStatus(401); }
+  
+    Country.findById(city.country).then(function(country){
+      if (!country) { return res.sendStatus(401); }
+
+      city.country = country;
+      req.restaurant.city = city;
+      
+      return res.json({restaurant: req.restaurant.toJSONFor(req.restaurant.city,city.country)});
+    }).catch(next);
+  }).catch(next);
+  
 });
 
 // update restaurant

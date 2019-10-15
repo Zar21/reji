@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 
   Promise.all([
     Restaurant.find()
-      .limit(Number(limit))
+      .limit(Number())
       .skip(Number(offset))
       .exec(),
     Restaurant.count(),
@@ -49,41 +49,46 @@ router.get('/', function(req, res, next) {
       restaurants: restaurants.map(function(restaurant){
         
         /*
+        City.findById(restaurant.city).then(function(city){
+          if (!city) { return res.sendStatus(401); }
+        
+          Country.findById(city.country).then(function(country){
+            if (!country) { return res.sendStatus(401); }
+
+            city.country = country;
+            restaurant.city = city;
+            
+            return restaurant.toJSONFor(restaurant.city,city.country);
+          }).catch(next);
+        }).catch(next);
+          
+        */
+
+
+        
         let city;
         for (let i = 0; i < cities.length; i++) {
           const element = cities[i];
+
           if (String(element._id) == String(restaurant.city)){
             city = element;
 
             let country;
             for (let i = 0; i < countries.length; i++) {
               const element = countries[i];
+
               if (String(element._id) == String(city.country)){
                 country = element;
 
-                city.country = new Country(country);
-                restaurant.city = new City(city);
+                city.country = country;
+                restaurant.city = city;                
                 
-                console.log(restaurant);
-              } 
-            }
-          } 
+                return restaurant.toJSONFor(restaurant.city,city.country);
+              }
+            } 
+          }
         }
-        */
 
-        // async function getJson(restaurant) {
-        //   let city = await City.findById(restaurant.city);
-
-        //   let country = await Country.findById(city.country);
-      
-        //   city.country = country;
-        //   restaurant.city = city;
-
-        //   return restaurant;
-        // }
-        // restaurant = getJson(restaurant);
-
-        return restaurant.toJSONFor(restaurant.city);
       }),
       restaurantsCount: restaurantsCount
     });

@@ -16,7 +16,7 @@ router.param('city', function(req, res, next, slug) {
 });
 
 /*router.get('/feed', auth.required, function(req, res, next) {
-  var limit = 20;
+  var limit = 8;
   var offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){

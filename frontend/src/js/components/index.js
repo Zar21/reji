@@ -44,4 +44,14 @@ componentsModule.component('restaurantPreview', RestaurantPreview);
 import RestaurantList from './restaurant-helpers/restaurant-list.component';
 componentsModule.component('restaurantList', RestaurantList);
 
+// hotels
+import HotelsMeta from './hotels-helpers/hotels-meta.component';
+componentsModule.component('hotelsMeta', HotelsMeta);
+
+import HotelsPreview from './hotels-helpers/hotels-preview.component';
+componentsModule.component('hotelsPreview', HotelsPreview);
+
+import HotelsList from './hotels-helpers/hotels-list.component';
+componentsModule.component('hotelsList', HotelsList);
+
 export default componentsModule;

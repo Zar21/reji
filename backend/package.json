@@ -6,12 +6,13 @@
   "scripts": {
     "mongo:start": "docker run --name realworld-mongo -p 27017:27017 mongo & sleep 5",
     "start": "node ./app.js",
-    "dev": "nodemon --exec babel-node ./app.js;",
+    "dev": "if test $(sudo service mongod status | grep inactive | wc -l) -eq 1; then sudo service mongod start; fi; nodemon --exec babel-node ./app.js;",
     "test": "newman run ./tests/api-tests.postman.json -e ./tests/env-api-tests.postman.json",
     "stop": "lsof -ti :3000 | xargs kill",
     "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo",
     "jasmine": "jasmine",
     "seed": "node ./helpers/seed.js"
+    
   },
   "repository": {
     "type": "git",

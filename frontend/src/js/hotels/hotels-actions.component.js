@@ -5,29 +5,15 @@ class HotelsActionsCtrl {
     this._Hotels = Hotels;
     this._$state = $state;
 
-    if (User.current) {
-      this.canModify = (User.current.username === this.product.author.username);
-    } else {
-      this.canModify = false;
-    }
-
-  }
-
-  deleteProduct() {
-    this.isDeleting = true;
-    this._Products.destroy(this.product.slug).then(
-      (success) => this._$state.go('app.home'),
-      (err) => this._$state.go('app.home')
-    )
   }
 }
 
-let ProductActions = {
+let HotelsActions = {
   bindings: {
-    product: '='
+    hotels: '='
   },
-  controller: ProductActionsCtrl,
-  templateUrl: 'product/product-actions.html'
+  controller: HotelsActionsCtrl,
+  templateUrl: 'hotels/hotels-actions.html'
 };
 
-export default ProductActions;
+export default HotelsActions;

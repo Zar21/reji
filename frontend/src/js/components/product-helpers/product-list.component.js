@@ -55,7 +55,7 @@ class ProductListCtrl {
 
     // Add the offset filter
     //queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
-    queryConfig.filters.offset = 0;
+    queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
     // Run the query
     this._Products

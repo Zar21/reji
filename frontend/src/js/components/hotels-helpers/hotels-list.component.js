@@ -1,8 +1,8 @@
-class RestaurantListCtrl {
-  constructor(Restaurants, $scope) {
+class HotelsListCtrl {
+  constructor(Hotels, $scope) {
     'ngInject';
 
-    this._Restaurants = Restaurants;
+    this._Hotels = Hotels;
 
     this.setListTo(this.listConfig);
 
@@ -55,34 +55,32 @@ class RestaurantListCtrl {
 
     // Add the offset filter
     //queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
-    queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));;
+    queryConfig.filters.offset = 0;
 
     // Run the query
-    this._Restaurants
+    this._Hotels
       .query(queryConfig)
       .then(
         (res) => {
           this.loading = false;
 
           // Update list and total pages
-          this.list = res.restaurants;
-          console.log(res.restaurants);
-          
+          this.list = res.hotels;
 
-          this.listConfig.totalPages = Math.ceil(res.restaurantsCount / this.limit);
+          this.listConfig.totalPages = Math.ceil(res.hotelsCount / this.limit);
         }
       );
   }
 
 }
 
-let RestaurantList = {
+let HotelsList = {
   bindings: {
     limit: '=',
     listConfig: '='
   },
-  controller: RestaurantListCtrl,
-  templateUrl: 'components/restaurant-helpers/restaurant-list.html'
+  controller: HotelsListCtrl,
+  templateUrl: 'components/hotels-helpers/hotels-list.html'
 };
 
-export default RestaurantList;
+export default HotelsList;

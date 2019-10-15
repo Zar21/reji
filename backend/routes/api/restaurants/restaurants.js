@@ -19,7 +19,7 @@ router.param('restaurant', function(req, res, next, slug) {
 });
 
 router.get('/', function(req, res, next) {
-  var limit = 20;
+  var limit = 8;
   var offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){

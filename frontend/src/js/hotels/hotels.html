@@ -8,8 +8,6 @@
 
       <div class="hotels-meta">
         <!-- Show author info + favorite & follow buttons -->
-        <hotels-actions hotels="$ctrl.hotels"></product-actions>
-
       </div>
 
     </div>
@@ -17,69 +15,27 @@
 
 
 
-  <!-- Main view. Contains product html and comments -->
+  <!-- Main view. Contains hotels html and comments -->
   <div class="container page">
 
     <!-- Article's HTML & tags rendered here -->
     <div class="row product-content">
       <div class="col-xs-12">
-
-        <div ng-bind-html="::$ctrl.product.body"></div>
-
-        <ul class="tag-list">
-          <li class="tag-default tag-pill tag-outline"
-            ng-repeat="tag in ::$ctrl.product.tagList">
-            {{ tag }}
-          </li>
-        </ul>
-
+        <img style="float: right;" ng-src="{{$ctrl.hotels.image}}" />
+        <div style="float: left;">
+          <h3 ><span ng-bind="::$ctrl.hotels.reservePrice"></span>€</h3>
+          <p ><span ng-bind="$ctrl.hotels.description" class="description"></span></p>
+        </div>
       </div>
     </div>
 
     <hr />
 
-    <div class="product-actions">
+    <div class="hotels-actions">
 
       <!-- Show author info + favorite & follow buttons -->
-      <product-actions product="$ctrl.product"></product-actions>
+      <hotels-actions hotels="$ctrl.hotels"></hotels-actions>
 
-    </div>
-
-    <!-- Comments section -->
-    <div class="row">
-      <div class="col-xs-12 col-md-8 offset-md-2">
-
-        <div show-authed="true">
-          <list-errors from="$crl.commentForm.errors"></list-errors>
-          <form class="card comment-form" ng-submit="$ctrl.addComment()">
-            <fieldset ng-disabled="$ctrl.commentForm.isSubmitting">
-              <div class="card-block">
-                <textarea class="form-control"
-                  placeholder="Write a comment..."
-                  rows="3"
-                  ng-model="$ctrl.commentForm.body"></textarea>
-              </div>
-              <div class="card-footer">
-                <img ng-src="{{::$ctrl.currentUser.image}}" class="comment-author-img" />
-                <button class="btn btn-sm btn-primary" type="submit">
-                 Post Comment
-                </button>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-
-        <div show-authed="false">
-          <a ui-sref="app.login">Sign in</a> or <a ui-sref="app.register">sign up</a> to add comments on this product.
-        </div>
-
-        <comment ng-repeat="cmt in $ctrl.comments"
-          data="cmt"
-          delete-cb="$ctrl.deleteComment(cmt.id, $index)">
-        </comment>
-
-
-      </div>
     </div>
 
   </div>

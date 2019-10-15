@@ -31,4 +31,7 @@ servicesModule.service('Products', ProductsService);
 import RestaurantsService from './restaurant.service';
 servicesModule.service('Restaurants', RestaurantsService);
 
+import HotelsService from './hotels.service';
+servicesModule.service('Hotels', HotelsService);
+
 export default servicesModule;

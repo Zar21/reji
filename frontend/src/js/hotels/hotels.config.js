@@ -1,4 +1,4 @@
-function ProductConfig($stateProvider) {
+function HotelsConfig($stateProvider) {
   'ngInject';
 
   $stateProvider
@@ -9,10 +9,10 @@ function ProductConfig($stateProvider) {
     templateUrl: 'hotels/hotels.html',
     title: 'Hotels',
     resolve: {
-      hotel: function(Hotels, $state, $stateParams) {
+      hotels: function(Hotels, $state, $stateParams) {
         return Hotels.get($stateParams.slug).then(
-          (hotel) => hotel,
-          (err) => $state.go('app.home')
+          (hotels) => hotels,
+          (err) => $state.go('app.hotels_shop')
         )
       }
     }
@@ -20,4 +20,4 @@ function ProductConfig($stateProvider) {
 
 };
 
-export default ProductConfig;
+export default HotelsConfig;

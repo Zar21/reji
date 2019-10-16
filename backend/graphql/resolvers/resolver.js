@@ -46,11 +46,6 @@ const resolvers = {
       countries: () => {
         return Country.find();
       },
-      // https://codeburst.io/graphql-pagination-by-example-part-1-15ec3313ae08
-      // https://codeburst.io/graphql-pagination-by-example-part-2-2803802ef23a
-      pageRestaurants: (root, {count, offset}) => {
-        return Restaurant.find().skip(offset).limit(count);
-      },
       message: () => 'Hello World!'
   },
   // https://reactgo.com/nested-resolvers-relationaldata-graphql/

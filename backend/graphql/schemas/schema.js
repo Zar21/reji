@@ -17,7 +17,6 @@ const typeDefs = gql`
         cities: [City]
         country(slug: String!): Country
         countries: [Country]
-        pageRestaurants(count: Int, offset: Int): [Restaurant]
     }
     type Mutation {
         createRestaurant(input: RestaurantInput): Restaurant

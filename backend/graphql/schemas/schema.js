@@ -6,7 +6,7 @@ const typeDefs = gql`
     type Query {
         message: String
         restaurant(slug: String!): Restaurant
-        restaurants: [Restaurant]
+        restaurants(limit: Int, offset: Int): [Restaurant]
         product(slug: String!): Product
         products: [Product]
         hotel(slug: String!): Hotel

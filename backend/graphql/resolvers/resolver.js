@@ -11,8 +11,10 @@ const resolvers = {
       restaurant: (root, {slug}) => {
         return Restaurant.findOne({slug: slug});
       },
-      restaurants: () => {
-        return Restaurant.find();
+      // https://codeburst.io/graphql-pagination-by-example-part-1-15ec3313ae08
+      // https://codeburst.io/graphql-pagination-by-example-part-2-2803802ef23a
+      restaurants: (root, {limit, offset}) => {
+        return Restaurant.find().skip(offset).limit(limit);
       },
       product: (root, {slug}) => {
         return Product.findOne({slug: slug});

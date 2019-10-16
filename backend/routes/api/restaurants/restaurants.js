@@ -44,52 +44,62 @@ router.get('/', function(req, res, next) {
     var cities = results[2];
     var countries = results[3];
 
-    
-    return res.json({
-      restaurants: restaurants.map(function(restaurant){
+    let restaurantsMap = restaurants.map(function(restaurant){
         
-        /*
-        City.findById(restaurant.city).then(function(city){
-          if (!city) { return res.sendStatus(401); }
-        
-          Country.findById(city.country).then(function(country){
-            if (!country) { return res.sendStatus(401); }
+      /*
+      City.findById(restaurant.city).then(function(city){
+        if (!city) { return res.sendStatus(401); }
+      
+        Country.findById(city.country).then(function(country){
+          if (!country) { return res.sendStatus(401); }
 
-            city.country = country;
-            restaurant.city = city;
-            
-            return restaurant.toJSONFor(restaurant.city,city.country);
-          }).catch(next);
-        }).catch(next);
+          city.country = country;
+          restaurant.city = city;
           
-        */
-
-
+          return restaurant.toJSONFor(restaurant.city,city.country);
+        }).catch(next);
+      }).catch(next);
         
-        let city;
-        for (let i = 0; i < cities.length; i++) {
-          const element = cities[i];
+      */
 
-          if (String(element._id) == String(restaurant.city)){
-            city = element;
 
-            let country;
-            for (let i = 0; i < countries.length; i++) {
-              const element = countries[i];
+      
+      let city;
+      for (let i = 0; i < cities.length; i++) {
+        const element = cities[i];
 
-              if (String(element._id) == String(city.country)){
-                country = element;
+        if (String(element._id) == String(restaurant.city)){
+          city = element;
 
-                city.country = country;
-                restaurant.city = city;                
-                
-                return restaurant.toJSONFor(restaurant.city,city.country);
-              }
-            } 
-          }
+          let country;
+          for (let i = 0; i < countries.length; i++) {
+            const element = countries[i];
+
+            if (String(element._id) == String(city.country)){
+              country = element;
+
+              city.country = country;
+              restaurant.city = city;
+              
+              return restaurant.toJSONFor(restaurant.city,city.country);
+            }
+          } 
         }
+      }
 
-      }),
+    });
+
+    // restaurantsMap = restaurantsMap.filter((value) => {
+    //   if (value != undefined) {
+    //     return value;
+    //   }
+    // })
+    
+    // console.log(restaurantsMap);
+    
+
+    return res.json({
+      restaurants: restaurantsMap,
       restaurantsCount: restaurantsCount
     });
 

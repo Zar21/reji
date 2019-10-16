@@ -45,58 +45,30 @@ router.get('/', function(req, res, next) {
     var countries = results[3];
 
     let restaurantsMap = restaurants.map(function(restaurant){
-        
-      /*
-      City.findById(restaurant.city).then(function(city){
-        if (!city) { return res.sendStatus(401); }
       
-        Country.findById(city.country).then(function(country){
-          if (!country) { return res.sendStatus(401); }
+      for (let i = 0; i < cities.length; i++) {
+        const city = cities[i];
+        
+        if (String(city._id) == String(restaurant.city)){
 
-          city.country = country;
           restaurant.city = city;
           
-          return restaurant.toJSONFor(restaurant.city,city.country);
-        }).catch(next);
-      }).catch(next);
-        
-      */
-
-
-      
-      let city;
-      for (let i = 0; i < cities.length; i++) {
-        const element = cities[i];
-
-        if (String(element._id) == String(restaurant.city)){
-          city = element;
-
-          let country;
           for (let i = 0; i < countries.length; i++) {
-            const element = countries[i];
+            const country = countries[i];
 
-            if (String(element._id) == String(city.country)){
-              country = element;
-
-              city.country = country;
-              restaurant.city = city;
-              
-              return restaurant.toJSONFor(restaurant.city,city.country);
+            if (restaurant.city.country._id) {
+              return restaurant.toJSONFor(restaurant.city,restaurant.city.country);
+            } else {
+              if (String(country._id) == String(restaurant.city.country)){
+                restaurant.city.country = country;
+                
+                return restaurant.toJSONFor(restaurant.city,restaurant.city.country);
+              }
             }
           } 
         }
       }
-
     });
-
-    // restaurantsMap = restaurantsMap.filter((value) => {
-    //   if (value != undefined) {
-    //     return value;
-    //   }
-    // })
-    
-    // console.log(restaurantsMap);
-    
 
     return res.json({
       restaurants: restaurantsMap,

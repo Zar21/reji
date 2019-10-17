@@ -1,84 +1,32 @@
 import { gql } from 'apollo-server-express';
 // https://graphql.org/learn/queries/
 
-const typeDefs = gql`
+const Query = gql`
     scalar Date
     type Query {
         message: String
+
         restaurant(slug: String!): Restaurant
         restaurants(limit: Int, offset: Int): [Restaurant]
-        product(slug: String!): Product
-        products: [Product]
+
+        adventure(slug: String!): Adventure
+        adventures: [Adventure]
+
         hotel(slug: String!): Hotel
         hotels: [Hotel]
+
         room(slug: String!): Room
         rooms: [Room]
+
         city(slug: String!): City
         cities: [City]
+        
         country(slug: String!): Country
         countries: [Country]
     }
     type Mutation {
         createRestaurant(input: RestaurantInput): Restaurant
         updateRestaurant(slug: String!, input: RestaurantInput): Restaurant
-    }
-    type Restaurant {
-        id: ID!
-        slug: String!
-        title: String
-        description: String
-        reservePrice: Int,
-        city: City
-        streetAddress: String
-        image: String
-    }
-    input RestaurantInput {
-        title: String!
-        description: String
-        reservePrice: Int,
-        city: String
-        streetAddress: String
-    }
-    type Product {
-        id: ID!
-        slug: String!
-        title: String
-        description: String
-        price: Int
-        createdAt: Date
-        updatedAt: Date
-    }
-    type Hotel {
-        id: ID!
-        slug: String!
-        name: String
-        description: String
-        city: City
-        stars: Int
-        reviewScore: Int
-        features: [String]
-        rooms: Int
-        services: [String]
-    }
-    type Room {
-        id: ID!
-        beds: Int
-        equipment: [String]
-        occupied: Boolean
-    }
-    type City {
-        id: ID!
-        slug: String!
-        name: String
-        latitude: Float
-        longitude: Float
-        country: Country
-    }
-    type Country {
-        id: ID!
-        slug: String!
-        name: String
-        description: String
     }
     type User {
         id: ID!
@@ -91,5 +39,23 @@ const typeDefs = gql`
         salt: String
     }
 `;
+
+
+import Restaurant from "../../graphql/schemas/restaurants/restaurant.schema";
+import Country from "../../graphql/schemas/travels/country.schema";
+import City from "../../graphql/schemas/travels/city.schema";
+import Hotel from "../../graphql/schemas/hotels/hotel.schema";
+import Room from "../../graphql/schemas/hotels/room.schema";
+import Adventure from "../../graphql/schemas/adventures/adventure.schema";
+
+const typeDefs = [
+    Query,
+    Restaurant,
+    Country,
+    City,
+    Hotel,
+    Room,
+    Adventure
+];
 
 export default typeDefs;

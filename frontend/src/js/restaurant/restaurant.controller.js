@@ -1,5 +1,3 @@
-import marked from 'marked';
-
 class RestaurantCtrl {
   constructor(restaurant, User, Comments, $sce, $rootScope) {
     'ngInject';

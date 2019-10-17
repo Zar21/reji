@@ -54,4 +54,7 @@ componentsModule.component('hotelsPreview', HotelsPreview);
 import HotelsList from './hotels-helpers/hotels-list.component';
 componentsModule.component('hotelsList', HotelsList);
 
+import SearchBar from './searchbar/searchbar.component';
+componentsModule.component('searchBar', SearchBar);
+
 export default componentsModule;

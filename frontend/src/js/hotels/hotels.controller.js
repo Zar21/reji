@@ -5,6 +5,11 @@ class HotelsCtrl {
     this.appName = AppConstants.appName;
     this._$scope = $scope;
 
+    // Set current list to either feed or all, depending on auth status.
+    this.listConfig = {
+      type: User.current ? 'feed' : 'all'
+    };
+
   }
 }
 

@@ -107,7 +107,7 @@ const generateHotels = (cities) => {
 	let hotels = [];
 	let i = 0;
 
-	for (let i = 0; i < 2; i++) {
+	for (let i = 0; i < 50; i++) {
 		const name = faker.fake("{{lorem.slug}}");
 		const description = faker.fake("{{lorem.sentence}}");
 		const city = faker.random.arrayElement(cities);
@@ -132,7 +132,6 @@ const generateHotels = (cities) => {
 		const hotel = {
 			name, description, city, stars, reviewScore, features, rooms, services, image
 		}
-		console.log(hotel);
 
 		if (hotels.filter(value => value.name == hotel.name).length == 0) {
 			hotels.push(hotel);
@@ -176,15 +175,15 @@ fastify.ready().then(
 		try {
 			const products = await Product.insertMany(generateProducts())
 			
-			console.log(Country);
+			
 			const countries = await Country.insertMany(generateCountries())
 
 			const countriesIds = countries.map(x => x._id)
-			const citiesIds = cities.map(x => x._id)
 			
 			const cities = await City.insertMany(generateCities(countriesIds))
+			const citiesIds = cities.map(x => x._id)
 			// hotels
-			const hotels = await hotel.insertMany(generateHotels(cities_to_use_in_hotels))
+			const hotels = await hotel.insertMany(generateHotels(citiesIds))
 
 			const restaurants = await Restaurant.insertMany(generateRestaurants(citiesIds))
 

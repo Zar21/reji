@@ -23,6 +23,8 @@ import './shop';
 import './restaurant';
 import './restaurant-shop';
 import './travels';
+import './hotels';
+import './hotel';
 import toaster from 'angularjs-toaster';
 
 // Create and bootstrap application
@@ -44,6 +46,8 @@ const requires = [
   'app.restaurant',
   'app.restaurantshop',
   'app.travels',
+  'app.hotels',
+  'app.hotel',
   toaster
 ];
 

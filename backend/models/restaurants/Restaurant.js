@@ -29,13 +29,13 @@ RetaurantSchema.methods.slugify = function() {
   this.slug = slug(this.title) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
 };
 
-RetaurantSchema.methods.toJSONFor = function(city){
+RetaurantSchema.methods.toJSONFor = function(city,country){
   return {
     slug: this.slug,
     title: this.title,
     description: this.description,
     reservePrice: this.reservePrice,
-    
+    city: city.toJSONFor(country),
     streetAddress: this.streetAddress,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
@@ -43,6 +43,5 @@ RetaurantSchema.methods.toJSONFor = function(city){
   };
 };
 
- // city: city.toJSONFor(),
 
 mongoose.model('Restaurant', RetaurantSchema);

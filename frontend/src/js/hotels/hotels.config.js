@@ -1,23 +1,15 @@
-function ProductConfig($stateProvider) {
+function HotelsConfig($stateProvider) {
   'ngInject';
 
   $stateProvider
   .state('app.hotels', {
-    url: '/hotels/:slug',
+    url: '/hotels',
     controller: 'HotelsCtrl',
     controllerAs: '$ctrl',
     templateUrl: 'hotels/hotels.html',
-    title: 'Hotels',
-    resolve: {
-      hotel: function(Hotels, $state, $stateParams) {
-        return Hotels.get($stateParams.slug).then(
-          (hotel) => hotel,
-          (err) => $state.go('app.home')
-        )
-      }
-    }
+    title: 'Hotels'
   });
 
 };
 
-export default ProductConfig;
+export default HotelsConfig;

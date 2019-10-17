@@ -19,7 +19,7 @@ router.param('restaurant', function(req, res, next, slug) {
 });
 
 router.get('/', function(req, res, next) {
-  var limit = 20;
+  var limit = 8;
   var offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){
@@ -44,47 +44,34 @@ router.get('/', function(req, res, next) {
     var cities = results[2];
     var countries = results[3];
 
-    
-    return res.json({
-      restaurants: restaurants.map(function(restaurant){
+    let restaurantsMap = restaurants.map(function(restaurant){
+      
+      for (let i = 0; i < cities.length; i++) {
+        const city = cities[i];
         
-        /*
-        let city;
-        for (let i = 0; i < cities.length; i++) {
-          const element = cities[i];
-          if (String(element._id) == String(restaurant.city)){
-            city = element;
+        if (String(city._id) == String(restaurant.city)){
 
-            let country;
-            for (let i = 0; i < countries.length; i++) {
-              const element = countries[i];
-              if (String(element._id) == String(city.country)){
-                country = element;
+          restaurant.city = city;
+          
+          for (let i = 0; i < countries.length; i++) {
+            const country = countries[i];
 
-                city.country = new Country(country);
-                restaurant.city = new City(city);
+            if (restaurant.city.country._id) {
+              return restaurant.toJSONFor(restaurant.city,restaurant.city.country);
+            } else {
+              if (String(country._id) == String(restaurant.city.country)){
+                restaurant.city.country = country;
                 
-                console.log(restaurant);
-              } 
+                return restaurant.toJSONFor(restaurant.city,restaurant.city.country);
+              }
             }
           } 
         }
-        */
+      }
+    });
 
-        // async function getJson(restaurant) {
-        //   let city = await City.findById(restaurant.city);
-
-        //   let country = await Country.findById(city.country);
-      
-        //   city.country = country;
-        //   restaurant.city = city;
-
-        //   return restaurant;
-        // }
-        // restaurant = getJson(restaurant);
-
-        return restaurant.toJSONFor(restaurant.city);
-      }),
+    return res.json({
+      restaurants: restaurantsMap,
       restaurantsCount: restaurantsCount
     });
 
@@ -109,7 +96,19 @@ router.post('/', auth.required, function(req, res, next) {
 
 // return a restaurant
 router.get('/:restaurant', function(req, res, next) {
-    return res.json({restaurant: req.restaurant.toJSONFor()});
+  City.findById(req.restaurant.city).then(function(city){
+    if (!city) { return res.sendStatus(401); }
+  
+    Country.findById(city.country).then(function(country){
+      if (!country) { return res.sendStatus(401); }
+
+      city.country = country;
+      req.restaurant.city = city;
+      
+      return res.json({restaurant: req.restaurant.toJSONFor(req.restaurant.city,city.country)});
+    }).catch(next);
+  }).catch(next);
+  
 });
 
 // update restaurant

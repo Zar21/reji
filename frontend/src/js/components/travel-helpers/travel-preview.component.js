@@ -1,8 +1,8 @@
-let ProductPreview = {
+let TravelPreview = {
   bindings: {
-    product: '='
+    travel: '='
   },
-  templateUrl: 'components/product-helpers/product-preview.html'
+  templateUrl: 'components/travel-helpers/travel-preview.html'
 };
 
-export default ProductPreview;
+export default TravelPreview;

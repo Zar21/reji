@@ -13,8 +13,9 @@ var HotelSchema = new mongoose.Schema({
   stars: Number,
   reviewScore: Number,
   features: [String],
-  rooms: Number, //TODO: change to an array of Roomsgit 
-  services: [String]
+  rooms: Number, //TODO: change to an array of Rooms
+  services: [String],
+  image: String
 }, { timestamps: true });
 
 HotelSchema.plugin(uniqueValidator, { message: 'is already taken' });
@@ -27,7 +28,7 @@ HotelSchema.pre('validate', function (next) {
 });
 
 HotelSchema.methods.slugify = function () {
-  this.slug = slug(this.name) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
+  this.slug = slug(this.name);
 };
 
 HotelSchema.methods.toJSONFor = function () {
@@ -40,7 +41,8 @@ HotelSchema.methods.toJSONFor = function () {
     reviewScore: this.reviewScore,
     features: this.features,
     rooms: this.rooms,
-    services: this.services
+    services: this.services,
+    image: this.image
   };
 };
 

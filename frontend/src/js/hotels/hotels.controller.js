@@ -1,4 +1,4 @@
-class TravelsCtrl {
+class HotelsCtrl {
   constructor(User, Tags, AppConstants, $scope) {
     'ngInject';
 
@@ -8,4 +8,4 @@ class TravelsCtrl {
   }
 }
 
-export default TravelsCtrl;
+export default HotelsCtrl;

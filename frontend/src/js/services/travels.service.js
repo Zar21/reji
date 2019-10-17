@@ -49,7 +49,7 @@ export default class Travels {
     }
   
     //get all travels
-    getAll() {
+    /*getAll() {
       let deferred = this.$q.defer();
       this._$http({
         url: this._AppConstants.api + "/graphql?query={travels{id name destination {name country {name}}exit {name country {name}}}}",
@@ -61,6 +61,17 @@ export default class Travels {
       );
     
         return deferred.promise;
+      }*/
+
+      getAll() {
+        // Create the $http object for this request
+        let request = {
+          //url: this._AppConstants.api + '/products' + ((config.type === 'feed') ? '/feed' : ''),
+          url: this._AppConstants.api + "/graphql?query={travels{id name destination {name country {name}}exit {name country {name}}}}",
+          method: 'GET',
+          //params: config.filters ? config.filters : null
+        };
+        return this._$http(request).then((res) => res.data);
       }
     /*destroy(slug) {
       return this._$http({

@@ -1,40 +1,23 @@
-class TravelListCtrl {
-  constructor(Travels, $scope) {
+class HotelsListCtrl {
+  constructor(Hotels, $scope) {
     'ngInject';
 
-    this._Travels = Travels;
-    this.getAll();
-    //this.setListTo(this.listConfig);
+    this._Hotels = Hotels;
 
-    //Pagination will be implemented when we install the prisma server
-    /*$scope.$on('setListTo', (ev, newList) => {
+    this.setListTo(this.listConfig);
+
+
+    $scope.$on('setListTo', (ev, newList) => {
       this.setListTo(newList);
     });
 
     $scope.$on('setPageTo', (ev, pageNumber) => {
       this.setPageTo(pageNumber);
-    });*/
+    });
 
   }
 
-  getAll() {
-    this.loading = true;
-    this._Travels
-      .getAll()
-      .then(
-        (res) => {
-          console.log(res);
-          this.loading = false;
-
-          // Update list and total pages
-          this.list = res.data.travels;
-
-          //this.listConfig.totalPages = Math.ceil(res.productsCount / this.limit);
-        }
-      );
-  }
-
-  /*setListTo(newList) {
+  setListTo(newList) {
     // Set the current list to an empty array
     this.list = [];
 
@@ -75,29 +58,29 @@ class TravelListCtrl {
     queryConfig.filters.offset = 0;
 
     // Run the query
-    this._Products
+    this._Hotels
       .query(queryConfig)
       .then(
         (res) => {
           this.loading = false;
 
           // Update list and total pages
-          this.list = res.products;
+          this.list = res.hotels;
 
-          this.listConfig.totalPages = Math.ceil(res.productsCount / this.limit);
+          this.listConfig.totalPages = Math.ceil(res.hotelsCount / this.limit);
         }
       );
-  }*/
+  }
 
 }
 
-let TravelList = {
+let HotelsList = {
   bindings: {
     limit: '=',
     listConfig: '='
   },
-  controller: TravelListCtrl,
-  templateUrl: 'components/travel-helpers/travel-list.html'
+  controller: HotelsListCtrl,
+  templateUrl: 'components/hotels-helpers/hotels-list.html'
 };
 
-export default TravelList;
+export default HotelsList;

@@ -4,16 +4,13 @@ import angular from 'angular';
 let hotelsModule = angular.module('app.hotels', []);
 
 // Include our UI-Router config settings
-import HotelConfig from './hotels.config';
-hotelsModule.config(HotelConfig);
+import HotelsConfig from './hotels.config';
+hotelsModule.config(HotelsConfig);
 
 
 // Controllers
-import ProductCtrl from './product.controller';
-hotelsModule.controller('ProductCtrl', ProductCtrl);
-
-import ProductActions from './product-actions.component';
-hotelsModule.component('productActions', ProductActions);
+import HotelsCtrl from './hotels.controller';
+hotelsModule.controller('HotelsCtrl', HotelsCtrl);
 
 
 export default hotelsModule;

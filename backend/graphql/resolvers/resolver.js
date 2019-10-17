@@ -5,6 +5,7 @@ const Hotel = mongoose.model('Hotel');
 const Room = mongoose.model('Room');
 const City = mongoose.model('City');
 const Country = mongoose.model('Country');
+const Travel = mongoose.model('Travel');
 
 const resolvers = {
   Query: {
@@ -44,6 +45,12 @@ const resolvers = {
       countries: () => {
         return Country.find();
       },
+      travel: (root, {slug}) => {
+        return Travel.findOne({slug: slug})
+      },
+      travels: () => {
+        return Travel.find();
+      },
       message: () => 'Hello World!'
   },
   // https://reactgo.com/nested-resolvers-relationaldata-graphql/
@@ -55,6 +62,14 @@ const resolvers = {
   City: {
     country: (parent) => {
       return Country.findOne({_id: parent.country});
+    }
+  },
+  Travel: {
+    destination: (parent) => {
+      return City.findOne({_id: parent.destination});
+    },
+    exit: (parent) => {
+      return City.findOne({_id: parent.exit});
     }
   },
   Mutation: {

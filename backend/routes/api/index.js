@@ -10,6 +10,7 @@ router.use('/products', require('./products/products'));
 router.use('/hotels', require('./hotels/hotels'));
 router.use('/cities', require('./travels/cities'));
 router.use('/countries', require('./travels/countries'));
+router.use('/travels', require('./travels/travels'));
 router.use('/restaurants', require('./restaurants/restaurants'));
 // router.use('/graphql', require('./graphql'));
 // require('./graphql');

@@ -1,0 +1,7 @@
+<div style="text-align: center" class="product-preview">
+  <a ui-sref="app.product({ slug: $ctrl.product.slug })" class="preview-link">
+    <img height="200px" width="200px" ng-src="{{$ctrl.product.image}}">
+    <h4><span ng-bind="$ctrl.product.title"></span> <span ng-bind="$ctrl.product.price"></span>€</h4>
+    <p ng-bind="$ctrl.product.description"></p>
+  </a>
+</div>

@@ -17,6 +17,8 @@ const typeDefs = gql`
         cities: [City]
         country(slug: String!): Country
         countries: [Country]
+        travel(slug: String!): Travel
+        travels: [Travel]
     }
     type Mutation {
         createRestaurant(input: RestaurantInput): Restaurant
@@ -81,6 +83,15 @@ const typeDefs = gql`
         slug: String!
         name: String
         description: String
+    }
+    type Travel {
+        id: ID!
+        slug: String!
+        name: String
+        description: String
+        destination: City
+        exit: City
+        price: Float
     }
     type User {
         id: ID!

@@ -31,4 +31,6 @@ servicesModule.service('Products', ProductsService);
 import RestaurantsService from './restaurant.service';
 servicesModule.service('Restaurants', RestaurantsService);
 
+import TravelsService from './travels.service';
+servicesModule.service('Travels', TravelsService);
 export default servicesModule;

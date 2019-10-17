@@ -1,8 +1,8 @@
-class ProductListCtrl {
-  constructor(Products, $scope) {
+class AdventureListCtrl {
+  constructor(Adventures, $scope) {
     'ngInject';
 
-    this._Products = Products;
+    this._Adventures = Adventures;
 
     this.setListTo(this.listConfig);
 
@@ -58,28 +58,28 @@ class ProductListCtrl {
     queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
     // Run the query
-    this._Products
+    this._Adventures
       .query(queryConfig)
       .then(
         (res) => {
           this.loading = false;
           // Update list and total pages
-          this.list = res.products;
+          this.list = res.adventures;
 
-          this.listConfig.totalPages = Math.ceil(res.productsCount / this.limit);
+          this.listConfig.totalPages = Math.ceil(res.adventuresCount / this.limit);
         }
       );
   }
 
 }
 
-let ProductList = {
+let AdventureList = {
   bindings: {
     limit: '=',
     listConfig: '='
   },
-  controller: ProductListCtrl,
-  templateUrl: 'components/product-helpers/product-list.html'
+  controller: AdventureListCtrl,
+  templateUrl: 'components/adventure-helpers/adventure-list.html'
 };
 
-export default ProductList;
+export default AdventureList;

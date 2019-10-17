@@ -25,8 +25,8 @@ servicesModule.service('Tags', TagsService);
 import ContactService from './contact.service';
 servicesModule.service('Contact', ContactService);
 
-import ProductsService from './products.service';
-servicesModule.service('Products', ProductsService);
+import AdventuresService from './adventures.service';
+servicesModule.service('Adventures', AdventuresService);
 
 import RestaurantsService from './restaurant.service';
 servicesModule.service('Restaurants', RestaurantsService);

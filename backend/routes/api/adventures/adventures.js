@@ -1,19 +1,17 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
-var Hotel = mongoose.model('Hotel');
+var Adventure = mongoose.model('Adventure');
 var User = mongoose.model('User');
 var auth = require('../../auth');
-var city = mongoose.model("City");
-// var room = mongoose.model("Room");
 
 // Preload adventure objects on routes with ':adventure'
-router.param('hotel', function (req, res, next, slug) {
-  Hotel.findOne({ slug: slug })
-    .then(function (hotel) {
-      console.log(hotel);
-      if (!hotel) { return res.sendStatus(404); }
+router.param('adventure', function(req, res, next, slug) {
+  Adventure.findOne({ slug: slug})
+    .populate('author')
+    .then(function (adventure) {
+      if (!adventure) { return res.sendStatus(404); }
 
-      req.hotel = hotel;
+      req.adventure = adventure;
 
       return next();
     }).catch(next);
@@ -32,63 +30,44 @@ router.get('/', function(req, res, next) {
   }
 
   Promise.all([
-    Hotel.find()
+    Adventure.find()
       .limit(Number(limit))
       .skip(Number(offset))
       .exec(),
-    Hotel.count()
+    Adventure.count()
   ]).then(function(results){
-    var hotels = results[0];
-    var hotelsCount = results[1];
+    var adventures = results[0];
+    var adventuresCount = results[1];
 
     return res.json({
-      hotels: hotels.map(function(hotels){
-        return hotels.toJSONFor();
+      adventures: adventures.map(function(adventure){
+        return adventure.toJSONFor();
       }),
-      hotelsCount: hotelsCount
+      adventuresCount: adventuresCount
     });
   });
 });
 
 
+//POST WILL ONLY BE AVAILABLE TO ADMINS
+router.post('/', auth.required, function(req, res, next) {
+  User.findById(req.payload.id).then(function(user){
+    if (!user) { return res.sendStatus(401); }
 
+    var adventure = new Adventure(req.body.adventure);
 
+    adventure.author = user;
 
-
-// * POST WILL ONLY BE AVAILABLE TO ADMINS
-router.post('/', function (req, res, next) {
-
-    console.log(req.body);
-    city.findOne({"slug": req.body.hotel.city}).then(function(city){
-      console.log(city);
-      if (!city) {
-        req.body.hotel.city = null;
-      }
-      var hotel = new Hotel(req.body.hotel);
-
-      hotel.city = city._id;
-
-      return hotel.save().then(function () {
-
-        return res.json({ hotel: hotel.toJSONFor() });
-      });
-
-    }).catch(next);
-
-    
-    // console.log(hotel);
-
-    
-  // }).catch(next);
-  
+    return adventure.save().then(function(){
+      console.log(adventure.author);
+      return res.json({adventure: adventure.toJSONFor(user)});
+    });
+  }).catch(next);
 });
 
-
-
-
-// return a hotel
-router.get('/:hotel', function(req, res, next) {
-  return res.json({hotel: req.hotel.toJSONFor()});
+// return a adventure
+router.get('/:adventure', function(req, res, next) {
+  return res.json({adventure: req.adventure.toJSONFor()});
 });
 
 // update adventure

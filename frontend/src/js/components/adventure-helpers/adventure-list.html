@@ -1,16 +1,16 @@
-<product-preview class="col-md-3"
-  product="product"
-  ng-repeat="product in $ctrl.list">
-</product-preview>
+<adventure-preview class="col-md-3"
+  adventure="adventure"
+  ng-repeat="adventure in $ctrl.list">
+</adventure-preview>
 
-<div class="product-preview"
+<div class="adventure-preview"
   ng-hide="!$ctrl.loading">
-  Loading products...
+  Loading adventures...
 </div>
 
-<div class="product-preview"
+<div class="adventure-preview"
   ng-show="!$ctrl.loading && !$ctrl.list.length">
-  No products are here... yet.
+  No adventures are here... yet.
 </div>
 <br>
 <list-pagination class="col-md-12"

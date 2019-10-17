@@ -2,7 +2,7 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Country = mongoose.model('Country');
 
-// Preload product objects on routes with ':product'
+// Preload adventure objects on routes with ':adventure'
 router.param('country', function(req, res, next, slug) {
   Country.findOne({ slug: slug})
     .then(function (country) {
@@ -40,7 +40,7 @@ router.param('country', function(req, res, next, slug) {
       var citiesCount = results[1];
 
       return res.json({
-        cities: cities.map(function(product){
+        cities: cities.map(function(adventure){
           return cities.toJSONFor(user);
         }),
         citiesCount: citiesCount

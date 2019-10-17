@@ -67,8 +67,6 @@ class RestaurantListCtrl {
           // Update list and total pages
           this.list = res.restaurants;
           console.log(res.restaurants);
-          
-
           this.listConfig.totalPages = Math.ceil(res.restaurantsCount / this.limit);
         }
       );

@@ -6,7 +6,7 @@ router.use('/profiles', require('./profiles'));
 router.use('/articles', require('./articles'));
 router.use('/tags', require('./tags'));
 router.use('/contact', require('./contact'));
-router.use('/products', require('./products/products'));
+router.use('/adventures', require('./adventures/adventures'));
 router.use('/hotels', require('./hotels/hotels'));
 router.use('/cities', require('./travels/cities'));
 router.use('/countries', require('./travels/countries'));

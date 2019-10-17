@@ -4,9 +4,9 @@
   <div class="banner">
     <div class="container">
 
-      <h1 ng-bind="::$ctrl.restaurant.title"></h1>
+      <h1 ng-bind="::$ctrl.adventure.title"></h1>
 
-      <div class="restaurant-meta">
+      <div class="adventure-meta">
         <!-- Show author info + favorite & follow buttons -->
       </div>
 
@@ -15,26 +15,26 @@
 
 
 
-  <!-- Main view. Contains restaurant html and comments -->
+  <!-- Main view. Contains adventure html and comments -->
   <div class="container page">
 
     <!-- Article's HTML & tags rendered here -->
     <div class="row adventure-content">
       <div class="col-xs-12">
-        <img style="float: right;" ng-src="{{$ctrl.restaurant.image}}" />
+        <img style="float: right;" ng-src="{{$ctrl.adventure.image}}" />
         <div style="float: left;">
-          <h3 ><span ng-bind="::$ctrl.restaurant.reservePrice"></span>€</h3>
-          <p ><span ng-bind="$ctrl.restaurant.description" class="description"></span></p>
+          <h3 ><span ng-bind="::$ctrl.adventure.price"></span>€</h3>
+          <p ><span ng-bind="$ctrl.adventure.description" class="description"></span></p>
         </div>
       </div>
     </div>
 
     <hr />
 
-    <div class="restaurant-actions">
+    <div class="adventure-actions">
 
       <!-- Show author info + favorite & follow buttons -->
-      <restaurant-actions restaurant="$ctrl.restaurant"></restaurant-actions>
+      <adventure-actions adventure="$ctrl.adventure"></adventure-actions>
 
     </div>
 

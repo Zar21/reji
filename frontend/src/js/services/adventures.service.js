@@ -1,4 +1,4 @@
-export default class Products {
+export default class Adventures {
     constructor(AppConstants, $http, $q) {
       'ngInject';
   
@@ -20,8 +20,8 @@ export default class Products {
     query(config) {
       // Create the $http object for this request
       let request = {
-        //url: this._AppConstants.api + '/products' + ((config.type === 'feed') ? '/feed' : ''),
-        url: this._AppConstants.api + '/products/',
+        //url: this._AppConstants.api + '/adventures' + ((config.type === 'feed') ? '/feed' : ''),
+        url: this._AppConstants.api + '/adventures/',
         method: 'GET',
         params: config.filters ? config.filters : null
       };
@@ -32,15 +32,15 @@ export default class Products {
       let deferred = this._$q.defer();
   
       if (!slug.replace(" ", "")) {
-        deferred.reject("Product slug is empty");
+        deferred.reject("Adventure slug is empty");
         return deferred.promise;
       }
   
       this._$http({
-        url: this._AppConstants.api + '/products/' + slug,
+        url: this._AppConstants.api + '/adventures/' + slug,
         method: 'GET'
       }).then(
-        (res) => deferred.resolve(res.data.product),
+        (res) => deferred.resolve(res.data.adventure),
         (err) => deferred.reject(err)
       );
   
@@ -49,40 +49,40 @@ export default class Products {
   
     destroy(slug) {
       return this._$http({
-        url: this._AppConstants.api + '/products/' + slug,
+        url: this._AppConstants.api + '/adventures/' + slug,
         method: 'DELETE'
       })
     }
   
-    save(product) {
+    save(adventure) {
       let request = {};
   
-      if (product.slug) {
-        request.url = `${this._AppConstants.api}/products/${product.slug}`;
+      if (adventure.slug) {
+        request.url = `${this._AppConstants.api}/adventures/${adventure.slug}`;
         request.method = 'PUT';
-        delete product.slug;
+        delete adventure.slug;
   
       } else {
-        request.url = `${this._AppConstants.api}/products/`;
+        request.url = `${this._AppConstants.api}/adventures/`;
         request.method = 'POST';
       }
   
-      request.data = { product: product };
+      request.data = { adventure: adventure };
   
-      return this._$http(request).then((res) => res.data.product);
+      return this._$http(request).then((res) => res.data.adventure);
     }
   
   
     favorite(slug) {
       return this._$http({
-        url: this._AppConstants.api + '/products/' + slug + '/favorite',
+        url: this._AppConstants.api + '/adventures/' + slug + '/favorite',
         method: 'POST'
       })
     }
   
     unfavorite(slug) {
       return this._$http({
-        url: this._AppConstants.api + '/products/' + slug + '/favorite',
+        url: this._AppConstants.api + '/adventures/' + slug + '/favorite',
         method: 'DELETE'
       })
     }

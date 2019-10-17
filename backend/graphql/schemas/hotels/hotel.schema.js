@@ -1,6 +1,10 @@
 import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
+    extend type Query {
+        hotel(slug: String!): Hotel
+        hotels: [Hotel]
+    }
     type Hotel {
         id: ID!
         slug: String!

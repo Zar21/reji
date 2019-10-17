@@ -1,45 +1,19 @@
 import { gql } from 'apollo-server-express';
-// https://graphql.org/learn/queries/
+/* 
+    Note: In the current version of GraphQL, you can’t have an empty type even if you intend to extend it later. 
+    So we need to make sure the Mutation type has at least one field — in this case we can add a fake _empty field. 
+    Hopefully in future versions it will be possible to have an empty type to be extended later.
+*/
 
 const Query = gql`
     scalar Date
     type Query {
         message: String
-
-        restaurant(slug: String!): Restaurant
-        restaurants(limit: Int, offset: Int): [Restaurant]
-
-        adventure(slug: String!): Adventure
-        adventures: [Adventure]
-
-        hotel(slug: String!): Hotel
-        hotels: [Hotel]
-
-        room(slug: String!): Room
-        rooms: [Room]
-
-        city(slug: String!): City
-        cities: [City]
-        
-        country(slug: String!): Country
-        countries: [Country]
     }
     type Mutation {
-        createRestaurant(input: RestaurantInput): Restaurant
-        updateRestaurant(slug: String!, input: RestaurantInput): Restaurant
-    }
-    type User {
-        id: ID!
-        social: String
-        username: String
-        email: String
-        image: String
-        bio: String
-        hash: String
-        salt: String
+        _empty: String
     }
 `;
-
 
 import Restaurant from "../../graphql/schemas/restaurants/restaurant.schema";
 import Country from "../../graphql/schemas/travels/country.schema";
@@ -47,6 +21,7 @@ import City from "../../graphql/schemas/travels/city.schema";
 import Hotel from "../../graphql/schemas/hotels/hotel.schema";
 import Room from "../../graphql/schemas/hotels/room.schema";
 import Adventure from "../../graphql/schemas/adventures/adventure.schema";
+import User from "../../graphql/schemas/users/user.schema";
 
 const typeDefs = [
     Query,
@@ -55,7 +30,8 @@ const typeDefs = [
     City,
     Hotel,
     Room,
-    Adventure
+    Adventure,
+    User
 ];
 
 export default typeDefs;

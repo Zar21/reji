@@ -1,54 +1,22 @@
-// useless
-/*
-var router = require('express').Router();
+// https://graphql.org/learn/queries/ 
 
-// import schemas from '../../graphql/schemas/schema.js';
-// import resolvers from '../../graphql/resolvers/resolver.js';
+/* Pagination
+ https://codeburst.io/graphql-pagination-by-example-part-1-15ec3313ae08
+ https://codeburst.io/graphql-pagination-by-example-part-2-2803802ef23a */
 
-// https://dev.to/amanhimself/creating-a-graphql-server-with-nodejs-17a3
-const mongoose = require('mongoose');
-const Restaurant = mongoose.model('Restaurant');
-import { gql } from 'apollo-server-express';
+/* Nested resolvers
+ https://reactgo.com/nested-resolvers-relationaldata-graphql/ */
+
+/* Modularising
+ https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2 */
+
 import { ApolloServer } from "apollo-server-express"
-
-
-
-const typeDefs = gql`
-    type Query {
-        message: String
-        restaurant(slug: String!): Restaurant
-        restaurants: [Restaurant]
-    }
-    type Restaurant {
-        id: ID!
-        slug: String!
-        title: String
-        description: String
-        price: Int
-        createdAt: String
-        updatedAt: String
-    }
-`;
-
-const resolvers = {
-    Query: {
-        restaurant: (args) => {
-            let slug = args.slug;
-            return Restaurant.findOne({slug: slug});
-        },
-        restaurants: () => {
-            return Restaurant.find();
-        },
-        message: () => 'Hello World!'
-    }
-}
+import typeDefs from "../../graphql/schemas/schema";
+import resolvers from "../../graphql/resolvers/resolver";
 
 const SERVER = new ApolloServer({
     typeDefs,
     resolvers
 });
-SERVER.applyMiddleware({ app: router, path:'/graphql' });
-// console.log(router);
 
-module.exports = router;
-*/
+export default SERVER;

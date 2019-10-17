@@ -18,8 +18,8 @@ import './auth';
 import './settings';
 import './editor';
 import './contact';
-import './product';
-import './shop';
+import './adventure';
+import './adventure-shop';
 import './restaurant';
 import './restaurant-shop';
 import './hotels';
@@ -41,8 +41,8 @@ const requires = [
   'app.settings',
   'app.editor',
   'app.contact',
-  'app.product',
-  'app.shop',
+  'app.adventure',
+  'app.adventure-shop',
   'app.restaurant',
   'app.restaurantshop',
   'app.hotels',

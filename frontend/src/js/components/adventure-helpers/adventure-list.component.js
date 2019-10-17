@@ -1,8 +1,8 @@
-class RestaurantListCtrl {
-  constructor(Restaurants, $scope) {
+class AdventureListCtrl {
+  constructor(Adventures, $scope) {
     'ngInject';
 
-    this._Restaurants = Restaurants;
+    this._Adventures = Adventures;
 
     this.setListTo(this.listConfig);
 
@@ -58,29 +58,28 @@ class RestaurantListCtrl {
     queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
     // Run the query
-    this._Restaurants
+    this._Adventures
       .query(queryConfig)
       .then(
         (res) => {
           this.loading = false;
-
           // Update list and total pages
-          this.list = res.restaurants;
-          console.log(res.restaurants);
-          this.listConfig.totalPages = Math.ceil(res.restaurantsCount / this.limit);
+          this.list = res.adventures;
+
+          this.listConfig.totalPages = Math.ceil(res.adventuresCount / this.limit);
         }
       );
   }
 
 }
 
-let RestaurantList = {
+let AdventureList = {
   bindings: {
     limit: '=',
     listConfig: '='
   },
-  controller: RestaurantListCtrl,
-  templateUrl: 'components/restaurant-helpers/restaurant-list.html'
+  controller: AdventureListCtrl,
+  templateUrl: 'components/adventure-helpers/adventure-list.html'
 };
 
-export default RestaurantList;
+export default AdventureList;

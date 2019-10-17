@@ -23,8 +23,15 @@
       <div class="col-xs-12">
         <img style="float: right;" ng-src="{{$ctrl.hotel.image}}" />
         <div style="float: left;">
-          <h3 ><span ng-bind="::$ctrl.hotel.name"></span>€</h3>
+          <h3 ><span ng-bind="::$ctrl.hotel.name"></span></h3>
           <p ><span ng-bind="$ctrl.hotel.description" class="description"></span></p>
+
+          
+          <p><b>Stars: </b> <span ng-bind="::$ctrl.hotel.stars"></span></p>
+          <p><b>Review score: </b> <span ng-bind="::$ctrl.hotel.reviewScore"></span></p>
+          <p><b>Features: </b> <span ng-bind="::$ctrl.hotel.features"></span></p>
+          <p><b>Rooms: </b> <span ng-bind="::$ctrl.hotel.rooms"></span></p>
+          <p><b>Services: </b> <span ng-bind="::$ctrl.hotel.services"></span></p>
         </div>
       </div>
     </div>

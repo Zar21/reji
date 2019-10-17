@@ -10,6 +10,7 @@ var city = mongoose.model("City");
 router.param('hotel', function (req, res, next, slug) {
   Hotel.findOne({ slug: slug })
     .then(function (hotel) {
+      console.log(hotel);
       if (!hotel) { return res.sendStatus(404); }
 
       req.hotel = hotel;
@@ -17,8 +18,9 @@ router.param('hotel', function (req, res, next, slug) {
       return next();
     }).catch(next);
 });
+
 router.get('/', function(req, res, next) {
-  var limit = 20;
+  var limit = 8;
   var offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){
@@ -84,9 +86,9 @@ router.post('/', function (req, res, next) {
 
 
 
-// return a product
+// return a hotel
 router.get('/:hotel', function(req, res, next) {
-  return res.json({hotel: req.hotels.toJSONFor()});
+  return res.json({hotel: req.hotel.toJSONFor()});
 });
 
 // update product

@@ -9,8 +9,8 @@ function HotelConfig($stateProvider) {
     templateUrl: 'hotel/hotel.html',
     title: 'Hotel',
     resolve: {
-      hotel: function(Hotel, $state, $stateParams) {
-        return Hotel.get($stateParams.slug).then(
+      hotel: function(Hotels, $state, $stateParams) {
+        return Hotels.get($stateParams.slug).then(
           (hotel) => hotel,
           (err) => $state.go('app.hotels')
         )

@@ -7,7 +7,6 @@ let hotelsModule = angular.module('app.hotels', []);
 import HotelsConfig from './hotels.config';
 hotelsModule.config(HotelsConfig);
 
-
 // Controllers
 import HotelsCtrl from './hotels.controller';
 hotelsModule.controller('HotelsCtrl', HotelsCtrl);

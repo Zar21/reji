@@ -32,7 +32,7 @@ export default class Hotels {
       let deferred = this._$q.defer();
   
       if (!slug.replace(" ", "")) {
-        deferred.reject("Product slug is empty");
+        deferred.reject("Hotel slug is empty");
         return deferred.promise;
       }
   
@@ -40,7 +40,7 @@ export default class Hotels {
         url: this._AppConstants.api + '/hotels/' + slug,
         method: 'GET'
       }).then(
-        (res) => deferred.resolve(res.data.product),
+        (res) => deferred.resolve(res.data.hotel),
         (err) => deferred.reject(err)
       );
   
@@ -54,22 +54,22 @@ export default class Hotels {
       })
     }
   
-    save(product) {
+    save(hotel) {
       let request = {};
   
-      if (product.slug) {
-        request.url = `${this._AppConstants.api}/hotels/${product.slug}`;
+      if (hotel.slug) {
+        request.url = `${this._AppConstants.api}/hotels/${hotel.slug}`;
         request.method = 'PUT';
-        delete product.slug;
+        delete hotel.slug;
   
       } else {
         request.url = `${this._AppConstants.api}/hotels/`;
         request.method = 'POST';
       }
   
-      request.data = { product: product };
+      request.data = { hotel: hotel };
   
-      return this._$http(request).then((res) => res.data.product);
+      return this._$http(request).then((res) => res.data.hotel);
     }
   
   

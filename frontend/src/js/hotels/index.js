@@ -12,8 +12,5 @@ hotelsModule.config(HotelsConfig);
 import HotelsCtrl from './hotels.controller';
 hotelsModule.controller('HotelsCtrl', HotelsCtrl);
 
-import HotelsActions from './hotels-actions.component';
-hotelsModule.component('hotelsActions', HotelsActions);
-
 
 export default hotelsModule;

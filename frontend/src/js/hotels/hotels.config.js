@@ -3,19 +3,11 @@ function HotelsConfig($stateProvider) {
 
   $stateProvider
   .state('app.hotels', {
-    url: '/hotels/:slug',
+    url: '/hotels',
     controller: 'HotelsCtrl',
     controllerAs: '$ctrl',
     templateUrl: 'hotels/hotels.html',
-    title: 'Hotels',
-    resolve: {
-      hotels: function(Hotels, $state, $stateParams) {
-        return Hotels.get($stateParams.slug).then(
-          (hotels) => hotels,
-          (err) => $state.go('app.hotels_shop')
-        )
-      }
-    }
+    title: 'Hotels'
   });
 
 };

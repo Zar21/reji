@@ -1,16 +1,11 @@
-// import marked from 'marked';
-
 class HotelsCtrl {
-  constructor(hotels, User, Tags, Comments, $sce, $rootScope) {
+  constructor(User, Tags, AppConstants, $scope) {
     'ngInject';
 
-    this.hotels = hotels;
-    this._Comments = Comments;
-
-    $rootScope.setPageTitle(this.hotels.title);
+    this.appName = AppConstants.appName;
+    this._$scope = $scope;
 
   }
 }
-
 
 export default HotelsCtrl;

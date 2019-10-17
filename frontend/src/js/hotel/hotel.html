@@ -1,0 +1,45 @@
+<div class="product-page">
+
+  <!-- Banner for product title, action buttons -->
+  <div class="banner">
+    <div class="container">
+
+      <h1 ng-bind="::$ctrl.hotel.title"></h1>
+
+      <div class="hotel-meta">
+        <!-- Show author info + favorite & follow buttons -->
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- Main view. Contains hotel html and comments -->
+  <div class="container page">
+
+    <!-- Article's HTML & tags rendered here -->
+    <div class="row product-content">
+      <div class="col-xs-12">
+        <img style="float: right;" ng-src="{{$ctrl.hotel.image}}" />
+        <div style="float: left;">
+          <h3 ><span ng-bind="::$ctrl.hotel.name"></span>€</h3>
+          <p ><span ng-bind="$ctrl.hotel.description" class="description"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="hotel-actions">
+
+      <!-- Show author info + favorite & follow buttons -->
+      <hotel-actions hotel="$ctrl.hotel"></hotel-actions>
+
+    </div>
+
+  </div>
+
+
+
+</div>

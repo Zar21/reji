@@ -1,45 +1,39 @@
-<div class="product-page">
+<div class="hotels-page">
 
-  <!-- Banner for product title, action buttons -->
-  <div class="banner">
+  <!-- Splash banner that only shows when not logged in -->
+  <div class="banner" show-authed="false">
     <div class="container">
-
-      <h1 ng-bind="::$ctrl.hotels.title"></h1>
-
-      <div class="hotels-meta">
-        <!-- Show author info + favorite & follow buttons -->
-      </div>
-
+      <h1 class="logo-font" ng-bind="::$ctrl.appName | lowercase"></h1>
+      <p>You can find different products that could be useful on your trips</p>
     </div>
   </div>
 
-
-
-  <!-- Main view. Contains hotels html and comments -->
   <div class="container page">
+    <div class="row">
 
-    <!-- Article's HTML & tags rendered here -->
-    <div class="row product-content">
-      <div class="col-xs-12">
-        <img style="float: right;" ng-src="{{$ctrl.hotels.image}}" />
-        <div style="float: left;">
-          <h3 ><span ng-bind="::$ctrl.hotels.reservePrice"></span>€</h3>
-          <p ><span ng-bind="$ctrl.hotels.description" class="description"></span></p>
+
+      <!-- Main view - contains tabs & article list -->
+      <div class="col-md-12">
+        <!-- Tabs for toggling between feed, article lists -->
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active">
+
+
+            <li class="nav-item" ng-show="$ctrl.listConfig.filters.tag">
+              <a href="" class="nav-link active">
+                <i class="ion-pound"></i> {{$ctrl.listConfig.filters.tag}}
+              </a>
+            </li>
+
+          </ul>
         </div>
+
+        <!-- List the current articles -->
+        <hotels-list class="row col-md-12" limit="10" list-config="$ctrl.listConfig"></hotels-list>
+
       </div>
+      <!-- End the row & container divs -->
     </div>
-
-    <hr />
-
-    <div class="hotels-actions">
-
-      <!-- Show author info + favorite & follow buttons -->
-      <hotels-actions hotels="$ctrl.hotels"></hotels-actions>
-
-    </div>
-
   </div>
-
-
 
 </div>

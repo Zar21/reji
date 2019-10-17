@@ -12,46 +12,11 @@ mongoose
 	.then(() => console.log('MongoDB connected...'))
 	.catch(err => console.log(err))
 
-// Get Data Models
-require('../models/travels/Country')
-require('../models/travels/City')
-require('../models/restaurants/Restaurant');
-require('../models/products/Product');
 // hotels
 require("../models/hotels/Hotel");
 
-var Country = mongoose.model('Country');
-var City = mongoose.model('City');
-let Restaurant = mongoose.model('Restaurant');
-let Product = mongoose.model('Product');
-
 // hotels
 var hotel = mongoose.model("Hotel");
-
-const generateProducts = () => {
-	let products = [];
-	let i = 0;
-
-	while (i < 50) {
-		const title = faker.fake('{{commerce.productName}}');
-		const description = faker.fake('{{commerce.productAdjective}}') + " " + faker.fake('{{commerce.productMaterial}}' + " " + faker.fake('{{commerce.color}}'));
-		const price = faker.fake('{{commerce.price}}');
-		const image = "http://lorempixel.com/200/200/technics/";
-
-		const product = {
-			title,
-			description,
-			price,
-			image
-		}
-
-		if (products.filter(value => value.title == product.title).length == 0) {
-			products.push(product)
-			i++
-		}
-	}
-	return products;
-}
 
 // Fake data generation functions
 const generateCountries = () => {
@@ -141,50 +106,19 @@ const generateHotels = (cities) => {
 
 	return hotels;
 }
-const generateRestaurants = (citiesIDs) => {
-	let restaurants = []
-	let i = 0
-
-	while (i < 50) {
-		const title = faker.fake('{{company.companyName}}');
-		const description = faker.fake('{{company.catchPhrase}}');
-		const reservePrice = faker.fake('{{commerce.price}}');
-		const city = faker.random.arrayElement(citiesIDs)
-		const streetAddress = faker.fake('{{address.streetAddress}}');
-		const image = "http://lorempixel.com/200/200/nightlife/";
-
-		const restaurant = {
-			title,
-			description,
-			reservePrice,
-			city,
-			streetAddress,
-			image
-		}
-		//This if check if some restaurant are already in the array
-		if (restaurants.filter(value => value.title == restaurant.title).length == 0) {
-			restaurants.push(restaurant)
-			i++
-		}
-	}
-
-	return restaurants;
-}
-
 fastify.ready().then(
 	async () => {
 		try {
 			const products = await Product.insertMany(generateProducts())
-			
-			console.log(Country);
+
 			const countries = await Country.insertMany(generateCountries())
 
 			const countriesIds = countries.map(x => x._id)
-			const citiesIds = cities.map(x => x._id)
-			
+            const citiesIds = cities.map(x => x._id)
+            
 			const cities = await City.insertMany(generateCities(countriesIds))
 			// hotels
-			const hotels = await hotel.insertMany(generateHotels(cities_to_use_in_hotels))
+			const hotels = await hotel.insertMany(generateHotels(citiesIds))
 
 			const restaurants = await Restaurant.insertMany(generateRestaurants(citiesIds))
 

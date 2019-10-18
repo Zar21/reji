@@ -10,6 +10,8 @@
 /* Modularising
  https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2 */
 
+// https://www.apollographql.com/docs/apollo-server/security/authentication/
+
 import { ApolloServer } from "apollo-server-express"
 import typeDefs from "../../graphql/schemas/schema";
 import resolvers from "../../graphql/resolvers/resolver";

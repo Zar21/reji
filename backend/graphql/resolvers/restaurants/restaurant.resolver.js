@@ -13,6 +13,9 @@ const resolvers = {
         allRestaurants: () => {
           let restaurants = Restaurant.find();
           return restaurants;
+        },
+        restaurantsCount: () => {
+          return Restaurant.count();
         }
     },
     Mutation: {

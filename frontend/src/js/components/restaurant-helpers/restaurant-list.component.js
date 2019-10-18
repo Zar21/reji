@@ -54,7 +54,6 @@ class RestaurantListCtrl {
     }
 
     // Add the offset filter
-    //queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
     queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
     // Run the query
@@ -66,7 +65,7 @@ class RestaurantListCtrl {
 
           // Update list and total pages
           this.list = res.restaurants;
-          console.log(res.restaurants);
+          console.log(res);
           this.listConfig.totalPages = Math.ceil(res.restaurantsCount / this.limit);
         }
       );

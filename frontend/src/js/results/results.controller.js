@@ -1,12 +1,11 @@
 class ResultsCtrl {
-  constructor(results, User, Comments, $sce, $rootScope) {
+  constructor(User, Comments, $sce, $rootScope, hotels, city) {
     'ngInject';
-
-    this.results = results;
     this._Comments = Comments;
-
-    $rootScope.setPageTitle(this.results.title);
-
+    this.hotels = hotels;
+    $rootScope.setPageTitle("Hola");
+    console.log(hotels);
+    console.log(city);
   }
 }
 

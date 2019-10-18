@@ -46,7 +46,17 @@ export default class Hotels {
   
       return deferred.promise;
     }
-  
+    //graphql request to get all hotels
+    getAll() {
+      let request = {
+        //url: this._AppConstants.api + '/products' + ((config.type === 'feed') ? '/feed' : ''),
+        url: this._AppConstants.api + "/graphql?query={hotels{slug name description city{slug name latitude longitude country{slug name description}}stars reviewScore features image rooms services}}",
+        method: 'GET',
+        //params: config.filters ? config.filters : null
+      };
+      return this._$http(request).then((res) => res.data);
+    }
+
     destroy(slug) {
       return this._$http({
         url: this._AppConstants.api + '/hotels/' + slug,

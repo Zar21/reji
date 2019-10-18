@@ -1,3 +1,6 @@
 <div>
     <h1>results page</h1>
+    <p ng-repeat="hotel in hotels | filter:hotel.city.slug">
+        {{hotel.name}}    
+    </p>
 </div>

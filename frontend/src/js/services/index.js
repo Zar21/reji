@@ -37,4 +37,7 @@ servicesModule.service('Travels', TravelsService);
 import HotelsService from './hotels.service';
 servicesModule.service('Hotels', HotelsService);
 
+import CitiesService from './cities.service';
+servicesModule.service('Cities', CitiesService);
+
 export default servicesModule;

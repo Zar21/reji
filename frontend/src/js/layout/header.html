@@ -5,10 +5,15 @@
       ui-sref="app.home"
       ng-bind="::$ctrl.appName | lowercase">
     </a>
+    
 
     <!-- Show this for logged out users -->
     <ul show-authed="false"
       class="nav navbar-nav pull-xs-right">
+      <li class="nav-item">
+          <search-bar></search-bar>
+      </li>
+      
 
       <li class="nav-item">
         <a class="nav-link"
@@ -37,8 +42,8 @@
       <li class="nav-item">
         <a class="nav-link"
           ui-sref-active="active"
-          ui-sref="app.shop">
-          Shop
+          ui-sref="app.adventure-shop">
+          Adventures
         </a>
       </li>
 
@@ -83,8 +88,8 @@
       <li class="nav-item">
         <a class="nav-link"
           ui-sref-active="active"
-          ui-sref="app.shop">
-          Shop
+          ui-sref="app.adventure-shop">
+          Adventures
         </a>
       </li>
 

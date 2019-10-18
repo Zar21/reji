@@ -50,7 +50,7 @@ require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./models/products/Product');
+require('./models/adventures/Adventure');
 require('./models/restaurants/Restaurant');
 require('./models/travels/Country');
 require('./models/travels/City');

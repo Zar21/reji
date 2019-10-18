@@ -6,10 +6,11 @@ var auth = require('../../auth');
 var city = mongoose.model("City");
 // var room = mongoose.model("Room");
 
-// Preload product objects on routes with ':product'
+// Preload adventure objects on routes with ':adventure'
 router.param('hotel', function (req, res, next, slug) {
   Hotel.findOne({ slug: slug })
     .then(function (hotel) {
+      console.log(hotel);
       if (!hotel) { return res.sendStatus(404); }
 
       req.hotel = hotel;
@@ -17,8 +18,9 @@ router.param('hotel', function (req, res, next, slug) {
       return next();
     }).catch(next);
 });
+
 router.get('/', function(req, res, next) {
-  var limit = 20;
+  var limit = 8;
   var offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){
@@ -84,34 +86,34 @@ router.post('/', function (req, res, next) {
 
 
 
-// return a product
+// return a hotel
 router.get('/:hotel', function(req, res, next) {
-  return res.json({hotel: req.hotels.toJSONFor()});
+  return res.json({hotel: req.hotel.toJSONFor()});
 });
 
-// update product
+// update adventure
 /* UPDATE WILL ONLY BE AVAILABLE TO ADMINS
-router.put('/:product', auth.required, function(req, res, next) {
+router.put('/:adventure', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
-    if(req.product.author._id.toString() === req.payload.id.toString()){
-      if(typeof req.body.product.title !== 'undefined'){
-        req.product.title = req.body.product.title;
+    if(req.adventure.author._id.toString() === req.payload.id.toString()){
+      if(typeof req.body.adventure.title !== 'undefined'){
+        req.adventure.title = req.body.adventure.title;
       }
 
-      if(typeof req.body.product.description !== 'undefined'){
-        req.product.description = req.body.product.description;
+      if(typeof req.body.adventure.description !== 'undefined'){
+        req.adventure.description = req.body.adventure.description;
       }
 
-      if(typeof req.body.product.body !== 'undefined'){
-        req.product.body = req.body.product.body;
+      if(typeof req.body.adventure.body !== 'undefined'){
+        req.adventure.body = req.body.adventure.body;
       }
 
-      if(typeof req.body.product.tagList !== 'undefined'){
-        req.product.tagList = req.body.product.tagList
+      if(typeof req.body.adventure.tagList !== 'undefined'){
+        req.adventure.tagList = req.body.adventure.tagList
       }
 
-      req.product.save().then(function(product){
-        return res.json({product: product.toJSONFor(user)});
+      req.adventure.save().then(function(adventure){
+        return res.json({adventure: adventure.toJSONFor(user)});
       }).catch(next);
     } else {
       return res.sendStatus(403);
@@ -119,14 +121,14 @@ router.put('/:product', auth.required, function(req, res, next) {
   });
 });
 */
-// delete product
+// delete adventure
 /*DELETE WILL ONLY BE AVAILABLE TO ADMINS
-router.delete('/:product', auth.required, function(req, res, next) {
+router.delete('/:adventure', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
 
-    if(req.product.author._id.toString() === req.payload.id.toString()){
-      return req.product.remove().then(function(){
+    if(req.adventure.author._id.toString() === req.payload.id.toString()){
+      return req.adventure.remove().then(function(){
         return res.sendStatus(204);
       });
     } else {

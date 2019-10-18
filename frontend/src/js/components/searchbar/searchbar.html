@@ -1,0 +1,11 @@
+<div>
+    <form>
+        City:
+        <input type="search" id="city" ng-model="$ctrl.data.city_input" placeholder="City" />
+        Input date:
+        <input type="search" ng-model="$ctrl.data.indate" placeholder="input date" />
+        Output date:
+        <input type="search" ng-model="$ctrl.data.outdate" placeholder="output date" />
+        <button  ui-sref="app.results({city: {{'$ctrl.data.city_input'}}, indate: {{'$ctrl.data.indate'}}, outdate: {{'$ctrl.data.outdate'}}})">Search</button>
+    </form>
+</div>

@@ -1,10 +1,10 @@
-<div class="product-page">
+<div class="adventure-page">
 
-  <!-- Banner for product title, action buttons -->
+  <!-- Banner for adventure title, action buttons -->
   <div class="banner">
     <div class="container">
 
-      <h1 ng-bind="::$ctrl.hotel.title"></h1>
+      <h1 ng-bind="::$ctrl.hotel.name"></h1>
 
       <div class="hotel-meta">
         <!-- Show author info + favorite & follow buttons -->
@@ -19,12 +19,19 @@
   <div class="container page">
 
     <!-- Article's HTML & tags rendered here -->
-    <div class="row product-content">
+    <div class="row adventure-content">
       <div class="col-xs-12">
         <img style="float: right;" ng-src="{{$ctrl.hotel.image}}" />
         <div style="float: left;">
-          <h3 ><span ng-bind="::$ctrl.hotel.name"></span>€</h3>
+          <h3 ><span ng-bind="::$ctrl.hotel.name"></span></h3>
           <p ><span ng-bind="$ctrl.hotel.description" class="description"></span></p>
+
+          
+          <p><b>Stars: </b> <span ng-bind="::$ctrl.hotel.stars"></span></p>
+          <p><b>Review score: </b> <span ng-bind="::$ctrl.hotel.reviewScore"></span></p>
+          <p><b>Features: </b> <span ng-bind="::$ctrl.hotel.features"></span></p>
+          <p><b>Rooms: </b> <span ng-bind="::$ctrl.hotel.rooms"></span></p>
+          <p><b>Services: </b> <span ng-bind="::$ctrl.hotel.services"></span></p>
         </div>
       </div>
     </div>

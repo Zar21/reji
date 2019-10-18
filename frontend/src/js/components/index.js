@@ -26,14 +26,14 @@ componentsModule.component('articlePreview', ArticlePreview);
 import ArticleList from './article-helpers/article-list.component';
 componentsModule.component('articleList', ArticleList);
 
-import ProductMeta from './product-helpers/product-meta.component';
-componentsModule.component('productMeta', ProductMeta);
+import AdventureMeta from './adventure-helpers/adventure-meta.component';
+componentsModule.component('adventureMeta', AdventureMeta);
 
-import ProductPreview from './product-helpers/product-preview.component';
-componentsModule.component('productPreview', ProductPreview);
+import AdventurePreview from './adventure-helpers/adventure-preview.component';
+componentsModule.component('adventurePreview', AdventurePreview);
 
-import ProductList from './product-helpers/product-list.component';
-componentsModule.component('productList', ProductList);
+import AdventureList from './adventure-helpers/adventure-list.component';
+componentsModule.component('adventureList', AdventureList);
 
 import RestaurantMeta from './restaurant-helpers/restaurant-meta.component';
 componentsModule.component('restaurantMeta', RestaurantMeta);
@@ -64,5 +64,7 @@ componentsModule.component('travelPreview', TravelPreview);
 
 import TravelList from './travel-helpers/travel-list.component';
 componentsModule.component('travelList', TravelList);
+import SearchBar from './searchbar/searchbar.component';
+componentsModule.component('searchBar', SearchBar);
 
 export default componentsModule;

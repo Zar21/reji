@@ -16,20 +16,20 @@ mongoose
 require('../models/travels/Country')
 require('../models/travels/City')
 require('../models/restaurants/Restaurant');
-require('../models/products/Product');
+require('../models/adventures/Adventure');
 // hotels
 require("../models/hotels/Hotel");
 
 var Country = mongoose.model('Country');
 var City = mongoose.model('City');
 let Restaurant = mongoose.model('Restaurant');
-let Product = mongoose.model('Product');
+let Adventure = mongoose.model('Adventure');
 
 // hotels
 var hotel = mongoose.model("Hotel");
 
-const generateProducts = () => {
-	let products = [];
+const generateAdventures = () => {
+	let adventures = [];
 	let i = 0;
 
 	while (i < 50) {
@@ -38,19 +38,19 @@ const generateProducts = () => {
 		const price = faker.fake('{{commerce.price}}');
 		const image = "http://lorempixel.com/200/200/technics/";
 
-		const product = {
+		const adventure = {
 			title,
 			description,
 			price,
 			image
 		}
 
-		if (products.filter(value => value.title == product.title).length == 0) {
-			products.push(product)
+		if (adventures.filter(value => value.title == adventure.title).length == 0) {
+			adventures.push(adventure)
 			i++
 		}
 	}
-	return products;
+	return adventures;
 }
 
 // Fake data generation functions
@@ -107,7 +107,7 @@ const generateHotels = (cities) => {
 	let hotels = [];
 	let i = 0;
 
-	for (let i = 0; i < 2; i++) {
+	for (let i = 0; i < 50; i++) {
 		const name = faker.fake("{{lorem.slug}}");
 		const description = faker.fake("{{lorem.sentence}}");
 		const city = faker.random.arrayElement(cities);
@@ -132,7 +132,6 @@ const generateHotels = (cities) => {
 		const hotel = {
 			name, description, city, stars, reviewScore, features, rooms, services, image
 		}
-		console.log(hotel);
 
 		if (hotels.filter(value => value.name == hotel.name).length == 0) {
 			hotels.push(hotel);
@@ -174,23 +173,16 @@ const generateRestaurants = (citiesIDs) => {
 fastify.ready().then(
 	async () => {
 		try {
-			const products = await Product.insertMany(generateProducts())
-			
-			console.log(Country);
+			const adventures = await Adventure.insertMany(generateAdventures())
 			const countries = await Country.insertMany(generateCountries())
-
 			const countriesIds = countries.map(x => x._id)
-			const citiesIds = cities.map(x => x._id)
-			
 			const cities = await City.insertMany(generateCities(countriesIds))
-			// hotels
-			const hotels = await hotel.insertMany(generateHotels(cities_to_use_in_hotels))
-
+			const citiesIds = cities.map(x => x._id)
+			const hotels = await hotel.insertMany(generateHotels(citiesIds))
 			const restaurants = await Restaurant.insertMany(generateRestaurants(citiesIds))
-
 			console.log(`
 	  Data successfully added:
-		- ${products.length} products added.	  
+		- ${adventures.length} adventures added.	  
 		- ${countries.length} countries added.
 		- ${cities.length} cities added.
 		- ${restaurants.length} restaurants added.

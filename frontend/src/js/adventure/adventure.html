@@ -1,0 +1,45 @@
+<div class="adventure-page">
+
+  <!-- Banner for adventure title, action buttons -->
+  <div class="banner">
+    <div class="container">
+
+      <h1 ng-bind="::$ctrl.adventure.title"></h1>
+
+      <div class="adventure-meta">
+        <!-- Show author info + favorite & follow buttons -->
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- Main view. Contains adventure html and comments -->
+  <div class="container page">
+
+    <!-- Article's HTML & tags rendered here -->
+    <div class="row adventure-content">
+      <div class="col-xs-12">
+        <img style="float: right;" ng-src="{{$ctrl.adventure.image}}" />
+        <div style="float: left;">
+          <h3 ><span ng-bind="::$ctrl.adventure.price"></span>€</h3>
+          <p ><span ng-bind="$ctrl.adventure.description" class="description"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="adventure-actions">
+
+      <!-- Show author info + favorite & follow buttons -->
+      <adventure-actions adventure="$ctrl.adventure"></adventure-actions>
+
+    </div>
+
+  </div>
+
+
+
+</div>

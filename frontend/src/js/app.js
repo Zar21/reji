@@ -18,13 +18,14 @@ import './auth';
 import './settings';
 import './editor';
 import './contact';
-import './product';
-import './shop';
+import './adventure';
+import './adventure-shop';
 import './restaurant';
 import './restaurant-shop';
 import './travels';
 import './hotels';
 import './hotel';
+import './results';
 import toaster from 'angularjs-toaster';
 
 // Create and bootstrap application
@@ -41,13 +42,14 @@ const requires = [
   'app.settings',
   'app.editor',
   'app.contact',
-  'app.product',
-  'app.shop',
+  'app.adventure',
+  'app.adventure-shop',
   'app.restaurant',
   'app.restaurantshop',
   'app.travels',
   'app.hotels',
   'app.hotel',
+  'app.results',
   toaster
 ];
 

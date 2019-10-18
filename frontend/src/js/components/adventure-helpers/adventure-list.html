@@ -1,0 +1,20 @@
+<adventure-preview class="col-md-3"
+  adventure="adventure"
+  ng-repeat="adventure in $ctrl.list">
+</adventure-preview>
+
+<div class="adventure-preview"
+  ng-hide="!$ctrl.loading">
+  Loading adventures...
+</div>
+
+<div class="adventure-preview"
+  ng-show="!$ctrl.loading && !$ctrl.list.length">
+  No adventures are here... yet.
+</div>
+<br>
+<list-pagination class="col-md-12"
+ total-pages="$ctrl.listConfig.totalPages"
+ current-page="$ctrl.listConfig.currentPage"
+ ng-hide="$ctrl.listConfig.totalPages <= 1">
+</list-pagination>

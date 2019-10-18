@@ -1,31 +1,45 @@
 export default class Restaurants {
-    constructor(AppConstants, $http, $q) {
+    constructor(AppConstants, $http, $q,GraphQLClient) {
       'ngInject';
   
       this._AppConstants = AppConstants;
       this._$http = $http;
       this._$q = $q;
-  
+      this._GQL = GraphQLClient;
   
     }
-  
-    /*
-      Config object spec:
-  
-      {
-        type: String [REQUIRED] - Accepts "all", "feed"
-        filters: Object that serves as a key => value of URL params (i.e. {author:"ericsimons"} )
-      }
-    */
+
     query(config) {
-      // Create the $http object for this request
-      let request = {
-        //url: this._AppConstants.api + '/restaurants' + ((config.type === 'feed') ? '/feed' : ''),
-        url: this._AppConstants.api + '/restaurants/',
-        method: 'GET',
-        params: config.filters ? config.filters : null
-      };
-      return this._$http(request).then((res) => res.data);
+      if (!config.filters.offset) {
+        config.filters.offset = 0;
+      }
+      if (!config.filters.limit) {
+        config.filters.limit = 8;
+      }
+      let query = `
+        query getRestaurantsAndCount {
+          restaurants(limit:${config.filters.limit},offset:${config.filters.offset}) {
+            id
+            title
+            slug
+            description
+            streetAddress
+            reservePrice
+            city {
+                id
+                slug
+                name
+                country {
+                id
+                slug
+                name
+                }
+            }
+          }
+          restaurantsCount
+        }
+      `;
+      return this._GQL.get(query);
     }
   
     get(slug) {

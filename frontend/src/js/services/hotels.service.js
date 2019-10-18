@@ -18,6 +18,7 @@ export default class Hotels {
       }
     */
     query(config) {
+      console.log(config);
       // Create the $http object for this request
       let request = {
         //url: this._AppConstants.api + '/hotels' + ((config.type === 'feed') ? '/feed' : ''),

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Adventure = mongoose.model('Adventure');
+//const City = mongoose.model('City');
 
 const resolvers = {
     Query: {
@@ -10,11 +11,6 @@ const resolvers = {
         return Adventure.find();
       }
     },
-    Hotel: {
-      city: (parent) => {
-        return City.findOne({_id: parent.city});
-      }
-    }
 };
 
 export default resolvers;

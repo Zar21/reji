@@ -4,6 +4,7 @@ const typeDefs = gql`
     extend type Query {
         restaurant(slug: String!): Restaurant
         restaurants(limit: Int, offset: Int): [Restaurant]
+        allRestaurants: [Restaurant]
     }
     extend type Mutation {
         createRestaurant(input: RestaurantInput): Restaurant

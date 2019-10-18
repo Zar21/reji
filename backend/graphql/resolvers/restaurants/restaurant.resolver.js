@@ -9,6 +9,10 @@ const resolvers = {
         },
         restaurants: (root, {limit, offset}) => {
           return Restaurant.find().skip(offset).limit(limit);
+        },
+        allRestaurants: () => {
+          let restaurants = Restaurant.find();
+          return restaurants;
         }
     },
     Mutation: {

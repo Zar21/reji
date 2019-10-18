@@ -22,6 +22,7 @@ import Hotel from "../../graphql/schemas/hotels/hotel.schema";
 import Room from "../../graphql/schemas/hotels/room.schema";
 import Adventure from "../../graphql/schemas/adventures/adventure.schema";
 import User from "../../graphql/schemas/users/user.schema";
+import Travel from "../../graphql/schemas/travels/travel.schema"
 
 const typeDefs = [
     Query,
@@ -31,7 +32,8 @@ const typeDefs = [
     Hotel,
     Room,
     Adventure,
-    User
+    User,
+    Travel
 ];
 
 export default typeDefs;

@@ -13,7 +13,7 @@ import HotelResolvers from "../../graphql/resolvers/hotels/hotel.resolver";
 import RoomResolvers from "../../graphql/resolvers/hotels/room.resolver";
 import AdventureResolvers from "../../graphql/resolvers/adventures/adventures.resolver";
 import UserResolvers from "../../graphql/resolvers/users/user.resolver";
-
+import TravelResolvers from "../../graphql/resolvers/travels/travel.resolver";
 const resolvers = merge(
   QueryResolvers,
   RestaurantResolvers,
@@ -22,7 +22,8 @@ const resolvers = merge(
   HotelResolvers,
   RoomResolvers,
   AdventureResolvers,
-  UserResolvers
+  UserResolvers,
+  TravelResolvers
 );
 
 export default resolvers;

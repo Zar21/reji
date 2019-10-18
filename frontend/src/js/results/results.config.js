@@ -3,21 +3,28 @@ function ResultsConfig($stateProvider) {
   
     $stateProvider
     .state('app.results', {
-      url: '/results/:city/:input/:output',
+      url: '/results/:city/:indate/:outdate',
       controller: 'ResultsCtrl',
       controllerAs: '$ctrl',
       templateUrl: 'results/results.html',
       title: 'Results',
       resolve: {
-        results: function($state, $stateParams) {
+        hotels: function($state, $stateParams) {
             console.log($stateParams);
-            return "";
-        //   return Results.get($stateParams.slug).then(
-        //     (results) => results,
-        //     (err) => $state.go('app.home')
-        //   )
+          return Hotels.get($stateParams.slug).then(
+            (results) => results,
+            (err) => $state.go('app.home')
+          )
 
-        }
+        },
+        city: function($state, $stateParams) {
+          console.log($stateParams);
+        // return Hotels.get($stateParams.slug).then(
+        //   (results) => results,
+        //   (err) => $state.go('app.home')
+        // )
+
+      }
       }
     });
   

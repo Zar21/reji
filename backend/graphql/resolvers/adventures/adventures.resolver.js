@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Adventure = mongoose.model('Adventure');
+const City = mongoose.model('City');
+
 
 const resolvers = {
     Query: {

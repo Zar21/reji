@@ -14,6 +14,7 @@ const typeDefs = gql`
         stars: Int
         reviewScore: Int
         features: [String]
+        image: String
         rooms: Int
         services: [String]
     }

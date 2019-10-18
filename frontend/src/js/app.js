@@ -22,6 +22,7 @@ import './adventure';
 import './adventure-shop';
 import './restaurant';
 import './restaurant-shop';
+import './travels';
 import './hotels';
 import './hotel';
 import './results';
@@ -45,6 +46,7 @@ const requires = [
   'app.adventure-shop',
   'app.restaurant',
   'app.restaurantshop',
+  'app.travels',
   'app.hotels',
   'app.hotel',
   'app.results',

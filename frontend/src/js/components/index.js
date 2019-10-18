@@ -54,6 +54,16 @@ componentsModule.component('hotelsPreview', HotelsPreview);
 import HotelsList from './hotels-helpers/hotels-list.component';
 componentsModule.component('hotelsList', HotelsList);
 
+// travels
+
+import TravelMeta from './travel-helpers/travel-meta.component';
+componentsModule.component('travelMeta', TravelMeta);
+
+import TravelPreview from './travel-helpers/travel-preview.component';
+componentsModule.component('travelPreview', TravelPreview);
+
+import TravelList from './travel-helpers/travel-list.component';
+componentsModule.component('travelList', TravelList);
 import SearchBar from './searchbar/searchbar.component';
 componentsModule.component('searchBar', SearchBar);
 

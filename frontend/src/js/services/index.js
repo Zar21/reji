@@ -31,6 +31,9 @@ servicesModule.service('Adventures', AdventuresService);
 import RestaurantsService from './restaurant.service';
 servicesModule.service('Restaurants', RestaurantsService);
 
+import TravelsService from './travels.service';
+servicesModule.service('Travels', TravelsService);
+
 import HotelsService from './hotels.service';
 servicesModule.service('Hotels', HotelsService);
 

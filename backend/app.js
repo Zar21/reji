@@ -54,6 +54,7 @@ require('./models/adventures/Adventure');
 require('./models/restaurants/Restaurant');
 require('./models/travels/Country');
 require('./models/travels/City');
+require('./models/travels/Travel');
 require('./models/hotels/Room');
 require('./models/hotels/Hotel');
 

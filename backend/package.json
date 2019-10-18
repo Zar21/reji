@@ -12,7 +12,8 @@
     "stop": "lsof -ti :3000 | xargs kill",
     "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo",
     "jasmine": "jasmine",
-    "seed": "node ./helpers/seed.js"
+    "seed": "node ./helpers/seed.js",
+    "clear": "mongo < clearCollections.js"
   },
   "repository": {
     "type": "git",

@@ -12,6 +12,7 @@ const typeDefs = gql`
         latitude: Float
         longitude: Float
         country: Country
+        image: String
     }
 `;
 

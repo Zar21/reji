@@ -17,11 +17,11 @@ export default class Cities {
       }
   
       this._$http({
-        url: this._AppConstants.api + "/graphql?query={city(slug:\"" + slug + "\"){slug}}",
+        url: this._AppConstants.api + "/graphql?query={city(slug:\"" + slug + "\"){slug name latitude longitude country{slug name description}}}",
         method: 'GET'
       }).then(
         (res) =>
-          deferred.resolve(res.data.data.travel),
+          deferred.resolve(res.data.data.city),
         (err) => deferred.reject(err)
       );
   

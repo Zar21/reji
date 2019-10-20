@@ -1,6 +1,53 @@
-<div>
-    <h1>results page</h1>
-    <p ng-repeat="hotel in hotels | filter:hotel.city.slug">
-        {{hotel.name}}    
-    </p>
-</div>
+<div class="hotels-page">
+
+    <!-- Splash banner that only shows when not logged in -->
+    <div class="banner" show-authed="false">
+        <div class="container">
+        <h1 class="logo-font"> Hotels in {{$ctrl.city.name}}</h1>
+        <p>{{$ctrl.city.name}}, {{$ctrl.city.country.name}} </p>
+        </div>
+    </div>
+    
+    <div class="container page">
+        <div class="row">
+    
+    
+        <!-- Main view - contains tabs & article list -->
+        <div class="col-md-12">
+            <!-- Tabs for toggling between feed, article lists -->
+            <div class="feed-toggle">
+            <ul class="nav nav-pills outline-active">
+    
+    
+                <li class="nav-item" ng-show="$ctrl.listConfig.filters.tag">
+                <a href="" class="nav-link active">
+                    <i class="ion-pound"></i> {{$ctrl.listConfig.filters.tag}}
+                </a>
+                </li>
+    
+            </ul>
+            </div>
+    
+            <div ng-repeat="hotel in $ctrl.hotels | filter: {city: $ctrl.city}" style="text-align: center" class="hotels-preview">
+                <!-- Each hotel template -->
+                <a ui-sref="app.hotel({ slug: hotel.slug })" class="preview-link">
+                    <img height="200px" width="200px" ng-src="{{hotel.image}}">
+                    <h4><span ng-bind="hotel.name"></span></h4>
+                    <p ng-bind="hotel.description"></p>
+                </a>
+            </div>
+
+            <!-- <div ng-repeat="restaurant in $ctrl.restaurants | filter: {city: $ctrl.city}" style="text-align: center" class="restaurants-preview">
+                <a ui-sref="app.restaurants({ slug: restaurant.slug })" class="preview-link">
+                    <img height="200px" width="200px" ng-src="{{restaurant.image}}">
+                    <h4><span ng-bind="restaurant.name"></span></h4>
+                    <p ng-bind="restaurant.description"></p>
+                </a>
+            </div> -->
+    
+        </div>
+        <!-- End the row & container divs -->
+        </div>
+    </div>
+    
+    </div>

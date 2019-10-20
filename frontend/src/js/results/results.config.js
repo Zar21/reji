@@ -11,20 +11,12 @@ function ResultsConfig($stateProvider) {
       resolve: {
         hotels: function($state, $stateParams, Hotels) {
             return Hotels.getAll();
-          /*return Hotels.get($stateParams.slug).then(
-            (results) => results,
-            (err) => $state.go('app.home')
-          )*/
-          return "";
-
         },
+        // restaurants: function($state, $stateParams, Restaurants) {
+        //   return Hotels.getAll();
+        // },
         city: function($state, $stateParams, Cities) {
-          console.log($stateParams);
           return Cities.get($stateParams.city);
-        // return Hotels.get($stateParams.slug).then(
-        //   (results) => results,
-        //   (err) => $state.go('app.home')
-        // )
 
       }
       }

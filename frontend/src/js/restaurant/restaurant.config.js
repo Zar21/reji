@@ -11,7 +11,7 @@ function RestaurantConfig($stateProvider) {
     resolve: {
       restaurant: function(Restaurants, $state, $stateParams) {
         return Restaurants.get($stateParams.slug).then(
-          (restaurant) => restaurant,
+          (data) => data.restaurant,
           (err) => $state.go('app.restaurantshop')
         )
       }

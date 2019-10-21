@@ -5,10 +5,10 @@ const City = mongoose.model('City');
 const resolvers = {
     Query: {
         hotel: (root, {slug}) => {
-            return Hotel.findOne({slug: slug});
+            return Hotel.findOne({slug: slug}).exec();
         },
         hotels: () => {
-            return Hotel.find();
+            return Hotel.find().exec();
         },
         hotelsResults: async function(root, {slug}) {
           let city = await City.findOne({slug: slug});
@@ -17,8 +17,7 @@ const resolvers = {
     },
     Hotel: {
       city: (parent) => {
-        console.log(parent)
-        return City.findOne({_id: parent.city});
+        return City.findOne({_id: parent.city}).exec();
       }
     }
 };

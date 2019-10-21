@@ -4,6 +4,7 @@ const typeDefs = gql`
     extend type Query {
         hotel(slug: String!): Hotel
         hotels: [Hotel]
+        hotelsResults(slug: String!): [Hotel]
     }
     type Hotel {
         id: ID!

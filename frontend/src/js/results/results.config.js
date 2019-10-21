@@ -10,14 +10,14 @@ function ResultsConfig($stateProvider) {
       title: 'Results',
       resolve: {
         hotels: function($state, $stateParams, Hotels) {
-            return Hotels.getAll();
+            return Hotels.getHotelsByCity($stateParams.city);
+            //return Hotels.getAll();
         },
         // restaurants: function($state, $stateParams, Restaurants) {
         //   return Hotels.getAll();
         // },
         city: function($state, $stateParams, Cities) {
           return Cities.get($stateParams.city);
-
       }
       }
     });

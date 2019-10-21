@@ -10,9 +10,14 @@ const resolvers = {
         hotels: () => {
             return Hotel.find();
         },
+        hotelsResults: async function(root, {slug}) {
+          let city = await City.findOne({slug: slug});
+          return Hotel.find({city: city._id});
+        }
     },
     Hotel: {
       city: (parent) => {
+        console.log(parent)
         return City.findOne({_id: parent.city});
       }
     }

@@ -28,7 +28,7 @@
             </ul>
             </div>
     
-            <div ng-repeat="hotel in $ctrl.hotels | filter: {city: $ctrl.city}" style="text-align: center" class="hotels-preview">
+            <div ng-repeat="hotel in $ctrl.hotels" style="text-align: center" class="hotels-preview">
                 <!-- Each hotel template -->
                 <a ui-sref="app.hotel({ slug: hotel.slug })" class="preview-link">
                     <img height="200px" width="200px" ng-src="{{hotel.image}}">

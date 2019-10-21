@@ -5,10 +5,10 @@ const Adventure = mongoose.model('Adventure');
 const resolvers = {
     Query: {
       adventure: (root, {slug}) => {
-        return Adventure.findOne({slug: slug});
+        return Adventure.findOne({slug: slug}).exec();
       },
       adventures: () =>  {
-        return Adventure.find();
+        return Adventure.find().exec();
       }
     },
 };

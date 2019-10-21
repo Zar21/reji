@@ -4,10 +4,10 @@ const Country = mongoose.model('Country');
 const resolvers = {
     Query: {
       country: (root, {slug}) => {
-        return Country.findOne({slug: slug});
+        return Country.findOne({slug: slug}).exec();
       },
       countries: () => {
-        return Country.find();
+        return Country.find().exec();
       },
     }
 };

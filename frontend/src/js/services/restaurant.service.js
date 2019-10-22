@@ -76,6 +76,23 @@ export default class Restaurants {
       return this._GQL.get(query);
     }
   
+    getRestaurantsByCity(city) {
+      let query = `
+        query {
+          restaurantsResults(slug:"${city}") {
+              id
+              slug
+              title
+              description
+              reservePrice
+              streetAddress
+              image
+            }
+        }
+      `;
+      return this._GQL.get(query);
+    }
+
     destroy(slug) {
       return this._$http({
         url: this._AppConstants.api + '/restaurants/' + slug,

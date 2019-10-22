@@ -12,6 +12,10 @@ const resolvers = {
         },
         restaurantsCount: () => {
           return Restaurant.count().exec();
+        },
+        restaurantsResults: async function(root, {slug}) {
+          let city = await City.findOne({slug: slug});
+          return Restaurant.find({city: city._id});
         }
     },
     Mutation: {

@@ -5,6 +5,7 @@ const typeDefs = gql`
         restaurant(slug: String!): Restaurant
         restaurants(limit: Int, offset: Int): [Restaurant]
         restaurantsCount: Int
+        restaurantsResults(slug: String!): [Restaurant]
     }
     extend type Mutation {
         createRestaurant(input: RestaurantInput): Restaurant

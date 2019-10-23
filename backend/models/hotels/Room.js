@@ -7,7 +7,8 @@ var RoomSchema = new mongoose.Schema({
     // hotel: { type: mongoose.Schema.Types.ObjectId, ref: "Hotel" },
     beds: Number,
     equipment: [String],
-    occupied: Boolean
+    occupied: Boolean,
+    price: Number
 }, {
     timestamps: true,
     usePushEach: true

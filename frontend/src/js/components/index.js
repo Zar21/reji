@@ -64,7 +64,12 @@ componentsModule.component('travelPreview', TravelPreview);
 
 import TravelList from './travel-helpers/travel-list.component';
 componentsModule.component('travelList', TravelList);
+
+// searchbar
 import SearchBar from './searchbar/searchbar.component';
 componentsModule.component('searchBar', SearchBar);
+
+import Suggestions from './searchbar/suggestions.component';
+componentsModule.component('suggestions', Suggestions);
 
 export default componentsModule;

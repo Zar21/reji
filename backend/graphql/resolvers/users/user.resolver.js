@@ -4,10 +4,10 @@ const User = mongoose.model('User');
 const resolvers = {
     Query: {
       user: (root, {username}) => {
-        return User.findOne({username: username});
+        return User.findOne({username: username}).exec();
       },
       users: () => {
-        return User.find();
+        return User.find().exec();
       },
     }
 };

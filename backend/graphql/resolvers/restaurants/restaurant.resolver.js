@@ -5,30 +5,31 @@ const City = mongoose.model('City');
 const resolvers = {
     Query: {
         restaurant: (root, {slug}) => {
-          return Restaurant.findOne({slug: slug});
+          return Restaurant.findOne({slug: slug}).exec();
         },
         restaurants: (root, {limit, offset}) => {
-          return Restaurant.find().skip(offset).limit(limit);
-        },
-        allRestaurants: () => {
-          let restaurants = Restaurant.find();
-          return restaurants;
+          return Restaurant.find().skip(offset).limit(limit).exec();
         },
         restaurantsCount: () => {
-          return Restaurant.count();
+          return Restaurant.count().exec();
+        },
+        restaurantsResults: async function(root, {slug}) {
+          let city = await City.findOne({slug: slug});
+          return Restaurant.find({city: city._id});
         }
     },
     Mutation: {
         createRestaurant: (root, {input}) => {
             const restaurant = new Restaurant(input);
     
+            // no .exec();
             restaurant.save();
             return restaurant;
         }
     },
     Restaurant: {
         city: (parent) => {
-            return City.findOne({_id: parent.city});
+            return City.findOne({_id: parent.city}).exec();
         }
     }
 };

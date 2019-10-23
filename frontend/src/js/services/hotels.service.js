@@ -1,11 +1,11 @@
 export default class Hotels {
-    constructor(AppConstants, $http, $q) {
+    constructor(AppConstants, $http, $q, GraphQLClient) {
       'ngInject';
   
       this._AppConstants = AppConstants;
       this._$http = $http;
       this._$q = $q;
-  
+      this._GQL = GraphQLClient;
   
     }
   
@@ -57,7 +57,25 @@ export default class Hotels {
       };
       return this._$http(request).then((res) => res.data);
     }
-
+    getHotelsByCity(city) {
+      let query = `
+        query {
+            hotelsResults(slug:"${city}") {
+              id
+              slug
+              name
+              description
+              stars
+              reviewScore
+              features
+              image
+              rooms
+              services
+            }
+        }
+      `;
+      return this._GQL.get(query);
+    }
     destroy(slug) {
       return this._$http({
         url: this._AppConstants.api + '/hotels/' + slug,

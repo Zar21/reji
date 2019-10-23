@@ -26,14 +26,14 @@ export default class Restaurants {
             streetAddress
             reservePrice
             city {
+              id
+              slug
+              name
+              country {
                 id
                 slug
                 name
-                country {
-                id
-                slug
-                name
-                }
+              }
             }
           }
           restaurantsCount
@@ -47,20 +47,52 @@ export default class Restaurants {
   
       if (!slug.replace(" ", "")) {
         deferred.reject("Restaurant slug is empty");
+        
         return deferred.promise;
       }
   
-      this._$http({
-        url: this._AppConstants.api + '/restaurants/' + slug,
-        method: 'GET'
-      }).then(
-        (res) => deferred.resolve(res.data.restaurant),
-        (err) => deferred.reject(err)
-      );
-  
-      return deferred.promise;
+      let query = `
+        query getRestaurant {
+          restaurant(slug:"${slug}") {
+            id
+            title
+            slug
+            description
+            streetAddress
+            reservePrice
+            city {
+              id
+              slug
+              name
+              country {
+                id
+                slug
+                name
+              }
+            }
+          }
+        }
+      `;
+      return this._GQL.get(query);
     }
   
+    getRestaurantsByCity(city) {
+      let query = `
+        query {
+          restaurantsResults(slug:"${city}") {
+              id
+              slug
+              title
+              description
+              reservePrice
+              streetAddress
+              image
+            }
+        }
+      `;
+      return this._GQL.get(query);
+    }
+
     destroy(slug) {
       return this._$http({
         url: this._AppConstants.api + '/restaurants/' + slug,

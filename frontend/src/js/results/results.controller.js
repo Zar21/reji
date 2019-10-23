@@ -1,14 +1,15 @@
 class ResultsCtrl {
-  constructor(User, Comments, $sce, $rootScope, $scope, hotels, city) {
+  constructor(User, Comments, $sce, $rootScope, $scope, hotels, restaurants, city, NgMap) {
     'ngInject';
     $rootScope.setPageTitle("Hotels in " + city.name);
-
-    this.hotels = hotels.data.hotels;
+    this.hotels = hotels.hotelsResults;
+    console.log(restaurants);
+    this.restaurants = restaurants.restaurantsResults;
     this.city = city;
 
-    console.log(city);
-    
-
+    NgMap.getMap().then((map) => {
+      this.map = map;
+    });
   }
 }
 

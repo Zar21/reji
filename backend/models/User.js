@@ -10,11 +10,15 @@ var UserSchema = new mongoose.Schema({
   bio: String,
   image: String,
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
+  favoriteAdventures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Adventure' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   hash: String,
   salt: String,
   social: {type: String, trim: true, index: true, unique: true, sparse: true}
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  usePushEach: true
+});
 // db.users.dropIndexes()
 
 UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
@@ -73,8 +77,27 @@ UserSchema.methods.unfavorite = function(id){
   return this.save();
 };
 
+UserSchema.methods.favoriteAdventure = function(id){
+  if(this.favoriteAdventures.indexOf(id) === -1){
+    this.favoriteAdventures.push(id);
+  }
+
+  return this.save();
+};
+
+UserSchema.methods.unfavoriteAdventure = function(id){
+  this.favoriteAdventures.remove(id);
+  return this.save();
+};
+
 UserSchema.methods.isFavorite = function(id){
   return this.favorites.some(function(favoriteId){
+    return favoriteId.toString() === id.toString();
+  });
+};
+
+UserSchema.methods.isFavoriteAdventure = function(id){
+  return this.favoriteAdventures.some(function(favoriteId){
     return favoriteId.toString() === id.toString();
   });
 };

@@ -4,7 +4,10 @@ const City = mongoose.model('City');
 
 const resolvers = {
     Query: {
-        restaurant: (root, {slug}) => {
+        restaurant: (root, {slug},context) => {
+          // example for authentication
+          if (!context.user) throw new context.AuthenticationError('You must be logged in');
+          
           return Restaurant.findOne({slug: slug}).exec();
         },
         restaurants: (root, {limit, offset}) => {

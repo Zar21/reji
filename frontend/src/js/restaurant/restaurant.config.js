@@ -9,10 +9,16 @@ function RestaurantConfig($stateProvider) {
     templateUrl: 'restaurant/restaurant.html',
     title: 'Restaurant',
     resolve: {
-      restaurant: function(Restaurants, $state, $stateParams) {
+      restaurant: function(Restaurants, $state, $stateParams,toaster) {
         return Restaurants.get($stateParams.slug).then(
-          (data) => data.restaurant,
-          (err) => $state.go('app.restaurantshop')
+          (data) => {
+            return data.restaurant;
+          },
+          (err) => {
+            toaster.pop('error', 'Error', err);
+            console.log(err);
+            $state.go('app.restaurantshop')
+          }
         )
       }
     }

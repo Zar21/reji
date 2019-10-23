@@ -73,7 +73,7 @@ export default class Restaurants {
           }
         }
       `;
-      return this._GQL.get(query);
+      return this._GQL.getAuth(query);
     }
   
     destroy(slug) {

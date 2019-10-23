@@ -28,6 +28,7 @@ import './hotels';
 import './hotel';
 import './results';
 import toaster from 'angularjs-toaster';
+import 'ngmap';
 
 // Create and bootstrap application
 const requires = [
@@ -52,7 +53,8 @@ const requires = [
   'app.hotels',
   'app.hotel',
   'app.results',
-  toaster
+  toaster,
+  'ngMap'
 ];
 
 // Mount on window for testing

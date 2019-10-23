@@ -96,3 +96,18 @@ input::-webkit-input-placeholder {
 #demo-2 input::-webkit-input-placeholder {
 	color: transparent;
 }
+
+.restaurantsList, .hotelsList {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.restaurantsList > div, .hotelsList > div {
+		flex: 25%;
+}
+
+.results-page h2 {
+	text-align: center;
+	margin-bottom: 20px;
+}

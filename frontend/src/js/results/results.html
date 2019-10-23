@@ -1,4 +1,4 @@
-<div class="hotels-page">
+<div class="results-page">
 
     <!-- Splash banner that only shows when not logged in -->
     <div class="banner" show-authed="false">
@@ -27,24 +27,41 @@
     
             </ul>
             </div>
-    
-            <div ng-repeat="hotel in $ctrl.hotels" style="text-align: center" class="hotels-preview">
-                <!-- Each hotel template -->
-                <a ui-sref="app.hotel({ slug: hotel.slug })" class="preview-link">
-                    <img height="200px" width="200px" ng-src="{{hotel.image}}">
-                    <h4><span ng-bind="hotel.name"></span></h4>
-                    <p ng-bind="hotel.description"></p>
-                </a>
+            <h2 ng-show="$ctrl.hotels.length != 0">Hotels</h2>
+            <div class="hotelsList">
+                <div ng-repeat="hotel in $ctrl.hotels" style="text-align: center" class="hotels-preview">
+                    <!-- Each hotel template -->
+                    <a ui-sref="app.hotel({ slug: hotel.slug })" class="preview-link">
+                        <img height="200px" width="200px" ng-src="{{hotel.image}}">
+                        <h4><span ng-bind="hotel.name"></span></h4>
+                        <p ng-bind="hotel.description"></p>
+                    </a>
+                </div>
             </div>
+            <h2 ng-show="$ctrl.restaurants.length != 0">Restaurants</h2>
+            <div class="restaurantsList">
+                <div ng-repeat="restaurant in $ctrl.restaurants" style="text-align: center" class="restaurants-preview">
+                    <a ui-sref="app.restaurants({ slug: restaurant.slug })" class="preview-link">
+                        <img height="200px" width="200px" ng-src="{{restaurant.image}}">
+                        <h4><span ng-bind="restaurant.name"></span></h4>
+                        <p ng-bind="restaurant.description"></p>
+                    </a>
+                </div>
+            </div> 
+            <div map-lazy-load="https://maps.google.com/maps/api/js">
+                <ng-map center="[{{$ctrl.city.latitude}}, {{$ctrl.city.longitude}}]" zoom="15">
+                    <marker no-watcher="true"
+                            title="{{$ctrl.city.name}}"
+                            position="{{$ctrl.city.latitude}},{{$ctrl.city.longitude}}">
+                    </marker>
 
-            <!-- <div ng-repeat="restaurant in $ctrl.restaurants | filter: {city: $ctrl.city}" style="text-align: center" class="restaurants-preview">
-                <a ui-sref="app.restaurants({ slug: restaurant.slug })" class="preview-link">
-                    <img height="200px" width="200px" ng-src="{{restaurant.image}}">
-                    <h4><span ng-bind="restaurant.name"></span></h4>
-                    <p ng-bind="restaurant.description"></p>
-                </a>
-            </div> -->
-    
+                    <!--<info-window id="myInfoWindow">
+                        <div class="infoWindowDiv" ng-non-bindable="true" ng-click="openDetails()">
+                          <h4>{{$ctrl.city.name}}</h4>
+                        </div>
+                    </info-window>-->
+                </ng-map>
+            </div>
         </div>
         <!-- End the row & container divs -->
         </div>

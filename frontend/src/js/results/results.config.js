@@ -9,16 +9,15 @@ function ResultsConfig($stateProvider) {
       templateUrl: 'results/results.html',
       title: 'Results',
       resolve: {
-        hotels: function($state, $stateParams, Hotels) {
-            return Hotels.getHotelsByCity($stateParams.city);
-            //return Hotels.getAll();
+        hotels: function($state, $stateParams, Hotels, Slug) {
+            return Hotels.getHotelsByCity(Slug.slugify($stateParams.city));
         },
-        // restaurants: function($state, $stateParams, Restaurants) {
-        //   return Hotels.getAll();
-        // },
-        city: function($state, $stateParams, Cities) {
-          return Cities.get($stateParams.city);
-      }
+        restaurants: function($state, $stateParams, Restaurants, Slug) {
+          return Restaurants.getRestaurantsByCity(Slug.slugify($stateParams.city));
+        },
+        city: function($state, $stateParams, Cities, Slug) {
+          return Cities.get(Slug.slugify($stateParams.city));
+        }
       }
     });
   

@@ -1,4 +1,9 @@
 <div style="text-align: center" class="adventure-preview">
+  <favorite-btn
+    adventure="$ctrl.adventure"
+    class="pull-xs-right">
+    {{$ctrl.adventure.favoritesCount}}
+  </favorite-btn>
   <a ui-sref="app.adventure({ slug: $ctrl.adventure.slug })" class="preview-link">
     <img height="200px" width="200px" ng-src="{{$ctrl.adventure.image}}">
     <h4><span ng-bind="$ctrl.adventure.title"></span> <span ng-bind="$ctrl.adventure.price"></span>€</h4>

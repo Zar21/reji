@@ -65,7 +65,7 @@ class AdventureListCtrl {
           this.loading = false;
           // Update list and total pages
           this.list = res.adventures;
-
+          console.log(this.list);
           this.listConfig.totalPages = Math.ceil(res.adventuresCount / this.limit);
         }
       );

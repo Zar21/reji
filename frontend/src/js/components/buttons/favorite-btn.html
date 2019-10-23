@@ -2,6 +2,18 @@
   ng-class="{ 'disabled' : $ctrl.isSubmitting,
               'btn-outline-primary': !$ctrl.article.favorited,
               'btn-primary': $ctrl.article.favorited }"
-  ng-click="$ctrl.submit()">
-  <i class="ion-heart"></i> <ng-transclude></ng-transclude>
+  ng-click="$ctrl.submitArticle()"
+  ng-show="$ctrl.article != undefined">
+  <i class="ion-heart"></i>
+  <ng-transclude></ng-transclude>
+</button>
+
+<button class="btn btn-sm"
+  ng-class="{ 'disabled' : $ctrl.isSubmitting,
+              'btn-outline-primary': !$ctrl.adventure.favorited,
+              'btn-primary': $ctrl.adventure.favorited }"
+  ng-click="$ctrl.submitAdventure()"
+  ng-show="$ctrl.adventure != undefined">
+  <i class="ion-heart"></i>
+  <ng-transclude></ng-transclude>
 </button>

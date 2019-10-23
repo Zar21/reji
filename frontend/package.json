@@ -5,6 +5,7 @@
   "author": "Thinkster",
   "license": "MIT",
   "dependencies": {
+    "angucomplete-alt": "^3.0.0",
     "angular": "^1.5.0-rc.2",
     "angular-ui-router": "^0.4.2",
     "angularjs-toaster": "^3.0.0",
@@ -27,6 +28,7 @@
     "gulp-util": "^3.0.7",
     "marked": "^0.3.5",
     "merge-stream": "^1.0.0",
+    "ngmap": "^1.18.5",
     "request": "^2.88.0",
     "vinyl-source-stream": "^1.1.0"
   },

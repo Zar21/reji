@@ -16,7 +16,10 @@ var HotelSchema = new mongoose.Schema({
   rooms: Number, //TODO: change to an array of Rooms
   services: [String],
   image: String
-}, { timestamps: true });
+}, {
+  timestamps: true,
+  usePushEach: true
+});
 
 HotelSchema.plugin(uniqueValidator, { message: 'is already taken' });
 

@@ -10,15 +10,41 @@
 /* Modularising
  https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2 */
 
-// https://www.apollographql.com/docs/apollo-server/security/authentication/
+/* Authentication
+ https://www.apollographql.com/docs/apollo-server/security/authentication/
+ https://www.apollographql.com/docs/apollo-server/data/errors/ */
 
-import { ApolloServer } from "apollo-server-express"
+import { ApolloServer, AuthenticationError } from "apollo-server-express"
 import typeDefs from "../../graphql/schemas/schema";
 import resolvers from "../../graphql/resolvers/resolver";
 
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+// var auth = require('../auth');
+
 const SERVER = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: async ({ req }) => {
+        // get the user token from the headers
+        const token = req.headers.authorization || null;
+        let user = null;
+        // auth.required.then((results) => {
+        //     console.log(results);
+        // });
+
+        // auth.required(req);
+
+        // console.log(req.payload);
+        
+        
+        if (token) {
+            user = await User.findOne({username: 'admin'});
+        } // else do nothing and let user be null
+
+        // add the user to the context
+        return { user, AuthenticationError };
+    }
 });
 
 export default SERVER;

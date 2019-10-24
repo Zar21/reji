@@ -9,7 +9,10 @@ var RoomSchema = new mongoose.Schema({
     equipment: [String],
     occupied: Boolean,
     price: Number
-}, { timestamps: true });
+}, {
+    timestamps: true,
+    usePushEach: true
+});
 
 RoomSchema.plugin(uniqueValidator, { message: 'is already taken' });
 

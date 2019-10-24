@@ -1,24 +1,23 @@
 class SuggestionsCtrl {
     constructor($scope, Cities){
       'ngInject';
-      this._Cities = Cities;
       $scope.cities = "";
-      this.getCities().then((cities)=>{
+      // getcities
+      Cities.getAll().then((cities)=>{
         $scope.cities = cities.data.cities;
       });
-      $scope.selectedCountry = "";
-      
-      
+      $scope.selectedCity = "";
 
     }
-  getCities() {
-      return this._Cities.getAll();
+    inputChanged(){
+      console.log(this.$parent.$index);
+      
     }
   }
   
   let Suggestions= {
     // bindings: {
-    //   product: '='
+    //   city: '='
     // },
     transclude: true,
     controller: SuggestionsCtrl,

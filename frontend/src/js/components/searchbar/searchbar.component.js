@@ -1,8 +1,9 @@
 class SearchBarCtrl {
   constructor($scope){
     'ngInject';
+    console.log(this.hero);
   }
-
+  
 }
 
 

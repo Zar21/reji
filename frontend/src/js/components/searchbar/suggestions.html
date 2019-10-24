@@ -1,9 +1,11 @@
 <angucomplete-alt id="ex1"
               placeholder="Search countries"
+              ng-model="$ctrl.data.city_input"
               pause="100"
-              selected-object="selectedCountry"
+              selected-object="selectedCity"
               local-data="cities"
               search-fields="name"
               title-field="name"
               minlength="2"
-              input-class="form-control form-control-small"/>
+              input-class="form-control form-control-small"
+              input-changed="inputChanged"/>

@@ -19,11 +19,13 @@ require('../models/restaurants/Restaurant');
 require('../models/adventures/Adventure');
 // hotels
 require("../models/hotels/Hotel");
+require("../models/User");
 
 var Country = mongoose.model('Country');
 var City = mongoose.model('City');
 let Restaurant = mongoose.model('Restaurant');
 let Adventure = mongoose.model('Adventure');
+let User = mongoose.model('User');
 
 // hotels
 var hotel = mongoose.model("Hotel");
@@ -42,7 +44,8 @@ const generateAdventures = () => {
 			title,
 			description,
 			price,
-			image
+			image,
+			favoritesCount: 0
 		}
 
 		if (adventures.filter(value => value.title == adventure.title).length == 0) {
@@ -64,7 +67,7 @@ const generateCountries = () => {
 		const country = {
 			name
 		}
-		//This if check if some country are already in the array 
+		//This if check if some country are already in the array
 		if (countries.filter(value => value.name == country.name).length == 0) {
 			countries.push(country)
 			i++

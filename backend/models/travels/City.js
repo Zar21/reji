@@ -13,7 +13,10 @@ var CitySchema = new mongoose.Schema({
   longitude: Number,
   country: { type: mongoose.Schema.Types.ObjectId, ref: 'Country' },
   image: String
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  usePushEach: true
+});
 
 CitySchema.plugin(uniqueValidator, {message: 'is already taken'});
 

@@ -1,12 +1,25 @@
 <div>
     <form>
         City:
-        <input type="search" id="city" ng-model="$ctrl.data.city_input" placeholder="City" />
+        <!-- <input type="search" ng-click="ctrl.showMenu($event)" id="city" ng-model="$ctrl.data.city_input" class="md-primary md-raised demo-menu-open-button" placeholder="City" /> -->
+        <!--<suggestions></suggestions>-->
+        <angucomplete-alt id="ex1"
+              placeholder="Search countries"
+              ng-model="$ctrl.data.city_input"
+              pause="100"
+              selected-object="$ctrl.selectedCity"
+              local-data="$ctrl.cities"
+              search-fields="name"
+              title-field="name"
+              minlength="2"
+              input-class="form-control form-control-small"
+              input-changed="inputChanged"></angucomplete-alt>
+
         Input date:
         <input type="search" ng-model="$ctrl.data.indate" placeholder="input date" />
         Output date:
         <input type="search" ng-model="$ctrl.data.outdate" placeholder="output date" />
-        <button  ui-sref="app.results({city: {{'$ctrl.data.city_input'}}, 
+        <button  ui-sref="app.results({city: {{'$ctrl.selectedCity.originalObject.name'}}, 
                                        indate: {{'$ctrl.data.indate'}},
                                        outdate: {{'$ctrl.data.outdate'}}})">Search</button>
     </form>

@@ -17,7 +17,7 @@ router.param('adventure', function(req, res, next, slug) {
     }).catch(next);
 });
 
-router.get('/', function(req, res, next) {
+router.get('/', auth.optional, function(req, res, next) {
   var limit = 8;
   var offset = 0;
 
@@ -39,11 +39,31 @@ router.get('/', function(req, res, next) {
     var adventures = results[0];
     var adventuresCount = results[1];
 
-    return res.json({
-      adventures: adventures.map(function(adventure){
-        return adventure.toJSONFor();
-      }),
-      adventuresCount: adventuresCount
+    if (req.payload == undefined) {
+      req.payload = {
+        id: "asdfasdfasdf"
+      }
+    }
+    console.log(req.payload.id);
+    User.findById(req.payload.id).then(function(user){
+      console.log(user);
+      if (!user) {
+        return res.json({
+          adventures: adventures.map(function(adventure){
+            return adventure.toJSONFor();
+          }),
+          adventuresCount: adventuresCount
+        });
+      } else {
+        return res.json({
+          adventures: adventures.map(function(adventure){
+            return adventure.toJSONFor(user);
+          }),
+          adventuresCount: adventuresCount
+        });
+      }
+    }, function (reason) {
+      console.log(reason);
     });
   });
 });
@@ -116,4 +136,36 @@ router.delete('/:adventure', auth.required, function(req, res, next) {
   }).catch(next);
 });
 */
+
+
+// Favorite an adventure
+router.post('/:adventure/favorite', auth.required, function(req, res, next) {
+  var adventureId = req.adventure._id;
+
+  User.findById(req.payload.id).then(function(user){
+    if (!user) { return res.sendStatus(401); }
+    console.log(user);
+    return user.favoriteAdventure(adventureId).then(function(){
+      return req.adventure.updateFavoriteCount().then(function(adventure){
+        return res.json({adventure: adventure.toJSONFor(user)});
+      });
+    });
+  }).catch(next);
+});
+
+// Unfavorite an adventure
+router.delete('/:adventure/favorite', auth.required, function(req, res, next) {
+  var adventureId = req.adventure._id;
+
+  User.findById(req.payload.id).then(function (user){
+    if (!user) { return res.sendStatus(401); }
+
+    return user.unfavoriteAdventure(adventureId).then(function(){
+      return req.adventure.updateFavoriteCount().then(function(adventure){
+        return res.json({adventure: adventure.toJSONFor(user)});
+      });
+    });
+  }).catch(next);
+});
+
 module.exports = router;

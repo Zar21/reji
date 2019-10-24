@@ -97,16 +97,16 @@ export default class Cities {
       }
       return this._GQL.get(query);
     }
-      /*getAll() {
+    
+      getAll() {
         // Create the $http object for this request
         let request = {
           //url: this._AppConstants.api + '/products' + ((config.type === 'feed') ? '/feed' : ''),
-          url: this._AppConstants.api + "/graphql?query={travels{id name destination {name country {name}}exit {name country {name}}}}",
+          url: this._AppConstants.api + "/graphql?query={cities{name}}",
           method: 'GET',
           //params: config.filters ? config.filters : null
         };
         return this._$http(request).then((res) => res.data);
-      }*/
+      }
   
   }
-  

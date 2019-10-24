@@ -12,7 +12,10 @@ var TravelSchema = new mongoose.Schema({
   destination: { type: mongoose.Schema.Types.ObjectId, ref: 'City' },
   exit: { type: mongoose.Schema.Types.ObjectId, ref: 'City' },
   price: Number
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  usePushEach: true
+});
 
 TravelSchema.plugin(uniqueValidator, {message: 'is already taken'});
 

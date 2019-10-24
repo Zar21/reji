@@ -13,7 +13,10 @@ var RetaurantSchema = new mongoose.Schema({
   city: { type: mongoose.Schema.Types.ObjectId, ref: 'City' },
   streetAddress: String,
   image: String
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  usePushEach: true
+});
 
 
 RetaurantSchema.plugin(uniqueValidator, {message: 'is already taken'});

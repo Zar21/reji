@@ -6,7 +6,10 @@ var CountrySchema = new mongoose.Schema({
   slug: {type: String, lowercase: true, unique: true},
   name: String,
   description: String,
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  usePushEach: true
+});
 
 CountrySchema.plugin(uniqueValidator, {message: 'is already taken'});
 

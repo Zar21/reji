@@ -9,7 +9,7 @@ function ResultsConfig($stateProvider) {
       templateUrl: 'results/results.html',
       title: 'Results',
       resolve: {
-        hotels: function($state, $stateParams, Hotels, Slug) {
+        /*hotels: function($state, $stateParams, Hotels, Slug) {
             return Hotels.getHotelsByCity(Slug.slugify($stateParams.city));
         },
         restaurants: function($state, $stateParams, Restaurants, Slug) {
@@ -17,6 +17,9 @@ function ResultsConfig($stateProvider) {
         },
         city: function($state, $stateParams, Cities, Slug) {
           return Cities.get(Slug.slugify($stateParams.city));
+        },*/
+        results: function($state, $stateParams, Cities, Slug) {
+          return Cities.getResults(Slug.slugify($stateParams.city));
         }
       }
     });

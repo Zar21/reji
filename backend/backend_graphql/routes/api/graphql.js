@@ -17,29 +17,22 @@
 import { ApolloServer, AuthenticationError } from "apollo-server-express"
 import typeDefs from "../../graphql/schemas/schema";
 import resolvers from "../../graphql/resolvers/resolver";
-
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-// var auth = require('../auth');
 
 const SERVER = new ApolloServer({
     typeDefs,
+    resolvers
+});
+
+const SERVERAUTH = new ApolloServer({
+    typeDefs,
     resolvers,
     context: async ({ req }) => {
-        // get the user token from the headers
-        const token = req.headers.authorization || null;
         let user = null;
-        // auth.required.then((results) => {
-        //     console.log(results);
-        // });
-
-        // auth.required(req);
-
-        // console.log(req.payload);
         
-        
-        if (token) {
-            user = await User.findOne({username: 'admin'});
+        if (req.payload) {
+            user = await User.findById(req.payload.id);
         } // else do nothing and let user be null
 
         // add the user to the context
@@ -47,4 +40,9 @@ const SERVER = new ApolloServer({
     }
 });
 
-export default SERVER;
+const SERVERS = {
+    graphql: SERVER,
+    graphqlauth: SERVERAUTH
+};
+
+export default SERVERS;

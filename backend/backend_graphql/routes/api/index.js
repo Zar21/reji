@@ -1,5 +1,5 @@
 var router = require('express').Router();
-import SERVER from "./graphql";
+import SERVERS from "./graphql";
 
 router.use('/', require('./users'));
 router.use('/profiles', require('./profiles'));
@@ -12,7 +12,9 @@ router.use('/cities', require('./travels/cities'));
 router.use('/countries', require('./travels/countries'));
 router.use('/travels', require('./travels/travels'));
 router.use('/restaurants', require('./restaurants/restaurants'));
-SERVER.applyMiddleware({ app: router, path:'/graphql' });
+SERVERS.graphql.applyMiddleware({ app: router, path:'/graphql'});
+router.use('/graphqlauth', require('../auth').required); // not nice
+SERVERS.graphqlauth.applyMiddleware({ app: router, path:'/graphqlauth'});
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){

@@ -14,5 +14,7 @@ profileModule.controller('ProfileCtrl', ProfileCtrl);
 import ProfileArticlesCtrl from './profile-articles.controller';
 profileModule.controller('ProfileArticlesCtrl', ProfileArticlesCtrl);
 
+import ProfileAdventuresCtrl from './profile-adventures.controller';
+profileModule.controller('ProfileAdventuresCtrl', ProfileAdventuresCtrl);
 
 export default profileModule;

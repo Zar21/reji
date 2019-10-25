@@ -17,7 +17,9 @@ class ProfileArticlesCtrl {
       $rootScope.setPageTitle('@' + this.profile.username);
 
     } else if (this.profileState === 'favorites') {
-      this.listConfig.filters = {favorited: this.profile.username};
+      this.listConfig.filters = {
+        favorited: this.profile.username,
+      };
       // Set page title
       $rootScope.setPageTitle(`Articles favorited by ${this.profile.username}`);
     }

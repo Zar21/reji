@@ -3,11 +3,11 @@ class AdventureListCtrl {
     'ngInject';
 
     this._Adventures = Adventures;
+    $scope.$watch('this.listConfig.filters', (filters) => {
+      this.setListTo(this.listConfig);
+    })
 
-    this.setListTo(this.listConfig);
-
-
-    $scope.$on('setListTo', (ev, newList) => {
+    $scope.$on('setListTo', (newList) => {
       this.setListTo(newList);
     });
 
@@ -20,7 +20,6 @@ class AdventureListCtrl {
   setListTo(newList) {
     // Set the current list to an empty array
     this.list = [];
-
     // Set listConfig to the new list's config
     this.listConfig = newList;
 

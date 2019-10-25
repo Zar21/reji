@@ -32,8 +32,14 @@ function ProfileConfig($stateProvider) {
     controllerAs: '$ctrl',
     templateUrl: 'profile/profile-articles.html',
     title: 'Favorites'
+  })
+  .state('app.profile.favoriteAdventures', {
+    url:'/favoriteAdventures',
+    controller: 'ProfileAdventuresCtrl',
+    controllerAs: '$ctrl',
+    templateUrl: 'profile/profile-adventures.html',
+    title: 'Favorite adventures'
   });
-
 };
 
 export default ProfileConfig;

@@ -4,7 +4,10 @@ import { merge } from 'lodash';
 
 const QueryResolvers = {
   Query: {
-      message: () => 'Hello World!'
+      message: () => 'Hello World!',
+      authenticationError: () => {
+        throw new AuthenticationError('must authenticate');
+      }
   }
 }
 

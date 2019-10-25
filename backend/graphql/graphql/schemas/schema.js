@@ -9,6 +9,7 @@ const Query = gql`
     scalar Date
     type Query {
         message: String
+        authenticationError: String
     }
     type Mutation {
         _empty: String

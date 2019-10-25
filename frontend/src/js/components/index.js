@@ -69,7 +69,4 @@ componentsModule.component('travelList', TravelList);
 import SearchBar from './searchbar/searchbar.component';
 componentsModule.component('searchBar', SearchBar);
 
-import Suggestions from './searchbar/suggestions.component';
-componentsModule.component('suggestions', Suggestions);
-
 export default componentsModule;

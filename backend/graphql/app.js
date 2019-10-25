@@ -11,7 +11,7 @@ var http = require('http'),
     swaggerUi = require('swagger-ui-express');
 //// Swagger ////
 var swaggerDocument = require('./swagger.json');
-swaggerDocument.host="localhost:3001"
+swaggerDocument.host="localhost:5555"
 
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -45,10 +45,6 @@ if(isProduction){
 require('./models/User');
 require('./models/Article');
 require('./models/Comment');
-require('./config/passport');
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 require('./models/adventures/Adventure');
 require('./models/restaurants/Restaurant');
@@ -100,6 +96,6 @@ app.use(function(err, req, res, next) {
 });
 
 // finally, let's start our server...
-var server = app.listen( 3001, function(){
-  console.log('Listening on port ' + 3001);
+var server = app.listen( 5555, function(){
+  console.log('Listening on port ' + 5555);
 });

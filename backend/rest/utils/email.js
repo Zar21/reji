@@ -1,4 +1,4 @@
-var credentialsmg = require('../credentials/credentials.json');
+var credentialsmg = require('../credentials/credentials.json.js');
 const apiKey = credentialsmg.apiKey;
 const domain = credentialsmg.domain;
 

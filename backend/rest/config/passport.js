@@ -4,7 +4,7 @@ var GithubStrategy = require('passport-github').Strategy;
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var keys = require('../credentials/credentials.json');
+var keys = require('../credentials/credentials.json.js');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

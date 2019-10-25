@@ -17,7 +17,54 @@ router.param('adventure', function(req, res, next, slug) {
     }).catch(next);
 });
 
+
 router.get('/', auth.optional, function(req, res, next) {
+  var query = {};
+  var limit = 8;
+  var offset = 0;
+
+  if(typeof req.query.limit !== 'undefined'){
+    limit = req.query.limit;
+  }
+
+  if(typeof req.query.offset !== 'undefined'){
+    offset = req.query.offset;
+  }
+
+  Promise.all([
+    req.query.favoriteAdventures ? User.findOne({username: req.query.favoriteAdventures}) : null
+  ]).then(function(results){
+    var favoriter = results[0];
+    if(favoriter){
+      query._id = {$in: favoriter.favoriteAdventures};
+    } else if(req.query.favoriteAdventures){
+      query._id = {$in: []};
+    }
+
+    return Promise.all([
+      Adventure.find(query)
+        .limit(Number(limit))
+        .skip(Number(offset))
+        .sort({createdAt: 'asc'})
+        .exec(),
+      Adventure.count(query).exec(),
+      req.payload ? User.findById(req.payload.id) : null,
+    ]).then(function(results){
+      var adventures = results[0];
+      var adventuresCount = results[1];
+      var user = results[2];
+
+      return res.json({
+        adventures: adventures.map(function(adventure){
+          return adventure.toJSONFor(user);
+        }),
+        adventuresCount: adventuresCount
+      });
+    });
+  }).catch(next);
+});
+
+router.get('/prova', auth.optional, function(req, res, next) {
   var limit = 8;
   var offset = 0;
 
@@ -41,7 +88,7 @@ router.get('/', auth.optional, function(req, res, next) {
 
     if (req.payload == undefined) {
       req.payload = {
-        id: "asdfasdfasdf"
+        id: "none" //Is necessary to have it set to something to skip error "undefined"
       }
     }
     console.log(req.payload.id);

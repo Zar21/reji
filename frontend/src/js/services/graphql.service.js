@@ -31,7 +31,7 @@ export default class GraphQL {
     createAuthClient() {
         return new ApolloClient({
             // concats the 2 ApolloLinks to add the headers to the request
-            link: this.createAuthLink().concat(createHttpLink({ uri: this._AppConstants.api+'/graphql/' })),
+            link: this.createAuthLink().concat(createHttpLink({ uri: this._AppConstants.api+'/graphqlauth/' })),
             cache: new InMemoryCache()
         });
     }

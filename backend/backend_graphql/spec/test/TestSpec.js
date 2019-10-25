@@ -1,6 +1,6 @@
 var request = require("request");
 var server = require("../../app.js");
-var base_url = "http://localhost:3001";
+var base_url = "http://localhost:5555";
 
 describe("Test",() =>{
     it("first test", () => {

@@ -23,7 +23,7 @@ export default class GraphQL {
 
     createClient() {
         return new ApolloClient({
-            link: createHttpLink({ uri: this._AppConstants.api+'/graphql/' }),
+            link: createHttpLink({ uri: this._AppConstants.api_gql+'/graphql/' }),
             cache: new InMemoryCache()
         });
     }
@@ -31,7 +31,7 @@ export default class GraphQL {
     createAuthClient() {
         return new ApolloClient({
             // concats the 2 ApolloLinks to add the headers to the request
-            link: this.createAuthLink().concat(createHttpLink({ uri: this._AppConstants.api+'/graphqlauth/' })),
+            link: this.createAuthLink().concat(createHttpLink({ uri: this._AppConstants.api_gql+'/graphqlauth/' })),
             cache: new InMemoryCache()
         });
     }

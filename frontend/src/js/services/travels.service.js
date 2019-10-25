@@ -37,7 +37,7 @@ export default class Travels {
       }
   
       this._$http({
-        url: this._AppConstants.api + "/graphql?query={travel(slug:\"" + slug + "\"){id name destination {name country {name}}exit {name country {name}}}}",
+        url: this._AppConstants.api_gql + "/graphql?query={travel(slug:\"" + slug + "\"){id name destination {name country {name}}exit {name country {name}}}}",
         method: 'GET'
       }).then(
         (res) =>
@@ -67,7 +67,7 @@ export default class Travels {
         // Create the $http object for this request
         let request = {
           //url: this._AppConstants.api + '/products' + ((config.type === 'feed') ? '/feed' : ''),
-          url: this._AppConstants.api + "/graphql?query={travels{id name destination {name country {name}}exit {name country {name}}}}",
+          url: this._AppConstants.api_gql + "/graphql?query={travels{id name destination {name country {name}}exit {name country {name}}}}",
           method: 'GET',
           //params: config.filters ? config.filters : null
         };

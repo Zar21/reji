@@ -1,8 +1,7 @@
 class HotelActionsCtrl {
-  constructor(Hotel, User, $state) {
+  constructor(User, $state) {
     'ngInject';
 
-    this._Hotel = Hotel;
     this._$state = $state;
 
   }

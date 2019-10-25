@@ -4,7 +4,9 @@ class SearchBarCtrl {
     this.cities = "";
     // getcities
     Cities.getAll().then((cities)=>{
-      this.cities = cities.data.cities;
+      
+      this.cities = cities.cities;
+      console.log(this.cities);
     });
     this.selectedCity = "";
 

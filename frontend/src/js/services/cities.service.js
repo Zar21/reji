@@ -17,7 +17,7 @@ export default class Cities {
       }
   
       this._$http({
-        url: this._AppConstants.api + "/graphql?query={city(slug:\"" + slug + "\"){slug name latitude longitude country{slug name description}}}",
+        url: this._AppConstants.api_gql + "/graphql?query={city(slug:\"" + slug + "\"){slug name latitude longitude country{slug name description}}}",
         method: 'GET'
       }).then(
         (res) =>
@@ -99,14 +99,14 @@ export default class Cities {
     }
     
       getAll() {
-        // Create the $http object for this request
-        let request = {
-          //url: this._AppConstants.api + '/products' + ((config.type === 'feed') ? '/feed' : ''),
-          url: this._AppConstants.api + "/graphql?query={cities{name}}",
-          method: 'GET',
-          //params: config.filters ? config.filters : null
-        };
-        return this._$http(request).then((res) => res.data);
+        let query = `
+        query {
+          cities {
+            name
+          }
+        }
+      `;
+        return this._GQL.get(query);
       }
   
   }

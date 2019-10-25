@@ -57,16 +57,18 @@ class HotelsListCtrl {
     // queryConfig.filters.offset = 0;
     queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
+
+
+
+
     // Run the query
     this._Hotels
       .query(queryConfig)
       .then(
         (res) => {
           this.loading = false;
-
           // Update list and total pages
           this.list = res.hotels;
-
           this.listConfig.totalPages = Math.ceil(res.hotelsCount / this.limit);
         }
       );

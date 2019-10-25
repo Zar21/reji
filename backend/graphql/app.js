@@ -11,7 +11,7 @@ var http = require('http'),
     swaggerUi = require('swagger-ui-express');
 //// Swagger ////
 var swaggerDocument = require('./swagger.json');
-swaggerDocument.host="localhost:5555"
+swaggerDocument.host="localhost:3002"
 
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -96,6 +96,6 @@ app.use(function(err, req, res, next) {
 });
 
 // finally, let's start our server...
-var server = app.listen( 5555, function(){
-  console.log('Listening on port ' + 5555);
+var server = app.listen( 3002, function(){
+  console.log('Listening on port ' + 3002);
 });

@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  rest:
+    build: .
+    volumes:
+      - ./rest:/app
+    ports:
+      - "3001:3001"
+    networks:
+      - backend
+
+  graphql:
+    build: .
+    volumes:
+      - ./graphql:/app
+    ports:
+      - "3002:3002"
+    networks:
+      - backend
+
+  mongo:
+    image: mongo:3.6
+    ports:
+      - '27017:27017'
+    volumes:
+      - /var/lib/mongodb:/data/db
+    networks:
+      - backend
+
+volumes:
+  mongo: ~
+
+networks:
+  backend:

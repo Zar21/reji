@@ -2,7 +2,9 @@ version: "3"
 
 services:
   rest:
-    build: .
+    image: mhart/alpine-node:8
+    command: npm run dev
+    working_dir: /app
     volumes:
       - ./rest:/app
     ports:
@@ -11,7 +13,9 @@ services:
       - backend
 
   graphql:
-    build: .
+    image: mhart/alpine-node:8
+    command: npm run dev
+    working_dir: /app
     volumes:
       - ./graphql:/app
     ports:
@@ -20,7 +24,7 @@ services:
       - backend
 
   mongo:
-    image: mongo:3.6
+    image: mvertes/alpine-mongo
     ports:
       - '27017:27017'
     volumes:
@@ -30,6 +34,8 @@ services:
 
 volumes:
   mongo: ~
+  graphql: ~
+  rest: ~
 
 networks:
   backend:

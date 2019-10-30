@@ -32,10 +32,5 @@ services:
     networks:
       - backend
 
-volumes:
-  mongo: ~
-  graphql: ~
-  rest: ~
-
 networks:
   backend:

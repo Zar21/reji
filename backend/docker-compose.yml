@@ -19,6 +19,21 @@ services:
     networks:
       - backend
 
+  prisma:
+    image: prismagraphql/prisma:1.34
+    ports:
+      - '4466:4466'
+    environment:
+      PRISMA_CONFIG: |
+        port: 4466
+        databases:
+          default:
+            connector: mongo
+            database: conduit_nodejs
+            uri: mongodb://mongo/conduit_nodejs
+    networks:
+      - backend
+
   mongo:
     image: mongo:3.6
     ports:

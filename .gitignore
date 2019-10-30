@@ -81,3 +81,5 @@ app.templates.js
 credentials.json
 
 package-lock.json
+
+generated

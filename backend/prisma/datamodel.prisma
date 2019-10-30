@@ -1,0 +1,9 @@
+type Restaurant @db(name: "restaurants") {
+    id: ID! @id
+    slug: String!
+    title: String
+    description: String
+    reservePrice: Int
+    streetAddress: String
+    image: String
+}

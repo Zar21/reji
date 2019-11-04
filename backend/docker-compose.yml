@@ -1,15 +1,6 @@
 version: "3"
 
 services:
-  mongo:
-    image: mvertes/alpine-mongo
-    ports:
-      - '27017:27017'
-    volumes:
-      - /var/lib/mongodb:/data/db
-    networks:
-      - backend
-  
   rest:
     image: mhart/alpine-node:8
     command: npm run dev
@@ -19,6 +10,10 @@ services:
       - ./rest:/app
     ports:
       - "3001:3001"
+    links: 
+      - 'mongo'
+    depends_on:
+      - 'mongo'
     networks:
       - backend
 
@@ -31,6 +26,10 @@ services:
       - ./graphql:/app
     ports:
       - "3002:3002"
+    links: 
+      - 'mongo'
+    depends_on:
+      - 'mongo'
     networks:
       - backend
     
@@ -46,6 +45,10 @@ services:
             connector: mongo
             database: conduit_nodejs
             uri: mongodb://mongo/conduit_nodejs
+    links: 
+      - 'mongo'
+    depends_on:
+      - 'mongo'
     networks:
       - backend
 
@@ -57,10 +60,21 @@ services:
       - ./prisma:/app
     ports:
       - "3003:3003"
+    links: 
+      - 'prisma'
+    depends_on:
+      - 'prisma'
     networks:
       - backend
 
-  
+  mongo:
+    image: mvertes/alpine-mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - /var/lib/mongodb:/data/db
+    networks:
+      - backend
 
 networks:
   backend:

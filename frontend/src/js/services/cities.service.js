@@ -6,7 +6,6 @@ export default class Cities {
       this._$http = $http;
       this._$q = $q;
       this._GQL = GraphQLClient;
-  
     }
 
     get(slug) {
@@ -95,7 +94,8 @@ export default class Cities {
         }
         `;
       }
-      return this._GQL.get(query);
+      console.log("hey3");
+      return this._GQL.get(query, this._AppConstants.api_pr);
     }
     
       getAll() {

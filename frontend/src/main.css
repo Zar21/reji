@@ -13,6 +13,10 @@ a.button {
     border-bottom: 1px solid #333333;
     border-left: 1px solid #CCCCCC;
 }
+
+.navbar .container .navbar-brand {
+    color:#69c !important;
+}
 /* Custom search bar */
 a {
 	color: #69C;
@@ -110,4 +114,11 @@ input::-webkit-input-placeholder {
 .results-page h2 {
 	text-align: center;
 	margin-bottom: 20px;
+}
+
+.angucomplete-dropdown {
+    position: absolute;
+    background: #fff;
+	width: 100%;
+	cursor: pointer;
 }

@@ -13,17 +13,19 @@ import gql from 'graphql-tag'
 export default class GraphQL {
     constructor(AppConstants, $q, JWT) {
         'ngInject';
-    
+
         this._AppConstants = AppConstants;
         this._$q = $q;
-        this._client = this.createClient();
+        console.log("hey3");
+        this._clients = new Map([[this._AppConstants.api_gql, this.createClient()]]);
+        console.log(this._clients);
         this._authClient = this.createAuthClient();
         this._JWT = JWT;
     }
 
-    createClient() {
+    createClient(server = this._AppConstants.api_gql) {
         return new ApolloClient({
-            link: createHttpLink({ uri: this._AppConstants.api_gql+'/graphql/' }),
+            link: createHttpLink({ uri: server }),
             cache: new InMemoryCache()
         });
     }
@@ -31,7 +33,7 @@ export default class GraphQL {
     createAuthClient() {
         return new ApolloClient({
             // concats the 2 ApolloLinks to add the headers to the request
-            link: this.createAuthLink().concat(createHttpLink({ uri: this._AppConstants.api_gql+'/graphqlauth/' })),
+            link: this.createAuthLink().concat(createHttpLink({ uri: this._AppConstants.api_gql + '/graphqlauth/' })),
             cache: new InMemoryCache()
         });
     }
@@ -53,29 +55,30 @@ export default class GraphQL {
         });
     }
 
-    get(query) {
+    get(query, server = this._AppConstants.api_gql) {
         let deferred = this._$q.defer();
-        
-        this._client.query({
+        if (!this._clients.has(server)) {
+            this._clients.set(server, this.createClient(server));
+        }
+        this._clients.get(server).query({
             query: gql(query)
         }).then(
             (res) => deferred.resolve(res.data),
             (err) => deferred.reject(err)
         );
-  
-      return deferred.promise;
+        return deferred.promise;
     }
 
     getAuth(query) {
         let deferred = this._$q.defer();
-        
+
         this._authClient.query({
             query: gql(query)
         }).then(
             (res) => deferred.resolve(res.data),
             (err) => deferred.reject(err)
         );
-  
-      return deferred.promise;
+
+        return deferred.promise;
     }
 };

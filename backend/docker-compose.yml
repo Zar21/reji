@@ -23,20 +23,31 @@ services:
     networks:
       - backend
 
-  prisma:
-    image: prismagraphql/prisma:1.34
+  graphql2:
+    image: mhart/alpine-node:8
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./graphql:/app
     ports:
-      - '4466:4466'
-    environment:
-      PRISMA_CONFIG: |
-        port: 4466
-        databases:
-          default:
-            connector: mongo
-            database: conduit_nodejs
-            uri: mongodb://mongo/conduit_nodejs
+      - "3003:3002"
     networks:
       - backend
+
+  #prisma:
+    #image: prismagraphql/prisma:1.34
+    #ports:
+    #  - '4466:4466'
+    #environment:
+    #  PRISMA_CONFIG: |
+    #    port: 4466
+    #    databases:
+    #      default:
+    #        connector: mongo
+    #        database: conduit_nodejs
+    #        uri: mongodb://mongo/conduit_nodejs
+    #networks:
+    #  - backend
 
   mongo:
     image: mvertes/alpine-mongo

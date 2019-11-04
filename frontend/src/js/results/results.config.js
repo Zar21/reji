@@ -19,6 +19,7 @@ function ResultsConfig($stateProvider) {
           return Cities.get(Slug.slugify($stateParams.city));
         },*/
         results: function($state, $stateParams, Cities, Slug) {
+          console.log("hey");
           return Cities.getResults(Slug.slugify($stateParams.city));
         }
       }

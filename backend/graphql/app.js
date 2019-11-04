@@ -35,14 +35,31 @@ if (!isProduction) {
   app.use(errorhandler());
 }
 
-if(isProduction){
-  mongoose.connect(process.env.MONGODB_URI);
-} else {
-  mongoose.set('useNewUrlParser', true);
-  // mongoose.set('useUnifiedTopology', true);
-  mongoose.connect('mongodb://mongo/conduit_nodejs');
-  mongoose.set('debug', true);
+function mongooseConnect() {
+  setTimeout(() => {
+    if(isProduction){
+      mongoose.connect(process.env.MONGODB_URI);
+    } else {
+      mongoose.set('useNewUrlParser', true);
+      mongoose.set('useUnifiedTopology', true);
+      try {
+        mongoose.connect('mongodb://mongo/conduit_nodejs');
+      } catch (error) {
+        console.log(error);
+        
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+        console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+        process.exit(1);
+        mongooseConnect();
+      }
+      mongoose.set('debug', true);
+    }
+  }, 10);
 }
+
+mongooseConnect()
 
 require('./models/User');
 require('./models/Article');

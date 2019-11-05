@@ -88,7 +88,15 @@ router.post('/', function (req, res, next) {
 
 // return a hotel
 router.get('/:hotel', function(req, res, next) {
-  return res.json({hotel: req.hotel.toJSONFor()});
+  const request = require('request');
+  request('http://graphql:3002/api?query={restaurants(city:"5da87b1e837dc98302778527"){slug}}', function (error, response, body) {
+    if (error) {
+      console.error('error:', error); 
+    } else {
+      let results = JSON.parse(body);
+      return res.json({hotel: req.hotel.toJSONFor(),restaurants: results.data.restaurants});
+    }
+  });
 });
 
 // update adventure

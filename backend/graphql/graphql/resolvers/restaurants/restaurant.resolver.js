@@ -4,16 +4,18 @@ const City = mongoose.model('City');
 
 const resolvers = {
     Query: {
-        restaurant: (root, {slug},context) => {
-          // console.log(context.AuthenticationError);
-          
+        restaurant: (root, {slug},context) => {          
           // example for authentication
           if (!context.user) throw new context.AuthenticationError('You must be logged in');
           
           return Restaurant.findOne({slug: slug}).exec();
         },
-        restaurants: (root, {limit, offset}) => {
-          return Restaurant.find().skip(offset).limit(limit).exec();
+        restaurants: (root, {limit, offset, city}) => {
+          if (city) {
+            return Restaurant.find({'city':city}).skip(offset).limit(limit).exec();
+          } 
+          return Restaurant.find().skip(offset).limit(limit).exec(); 
+          
         },
         restaurantsCount: () => {
           return Restaurant.count().exec();

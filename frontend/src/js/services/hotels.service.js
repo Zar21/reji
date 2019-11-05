@@ -41,7 +41,11 @@ export default class Hotels {
         url: this._AppConstants.api + '/hotels/' + slug,
         method: 'GET'
       }).then(
-        (res) => deferred.resolve(res.data.hotel),
+        (res) => {
+          console.log(res.data);
+          
+          deferred.resolve(res.data.hotel);
+        },
         (err) => deferred.reject(err)
       );
   

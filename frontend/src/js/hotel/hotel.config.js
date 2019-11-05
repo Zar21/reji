@@ -11,7 +11,10 @@ function HotelConfig($stateProvider) {
     resolve: {
       hotel: function(Hotels, $state, $stateParams) {
         return Hotels.get($stateParams.slug).then(
-          (hotel) => hotel,
+          (data) => {
+            console.log(data);
+            return data; 
+          },
           (err) => $state.go('app.hotels')
         )
       }

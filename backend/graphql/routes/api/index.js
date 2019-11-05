@@ -1,9 +1,9 @@
 var router = require('express').Router();
 import SERVERS from "./graphql";
 
-SERVERS.graphql.applyMiddleware({ app: router, path:'/' });
 router.use('/graphqlauth', require('../auth').required); // not nice
 SERVERS.graphqlauth.applyMiddleware({ app: router, path:'/graphqlauth'});
+SERVERS.graphql.applyMiddleware({ app: router, path:'/' });
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){

@@ -5,6 +5,8 @@ const City = mongoose.model('City');
 const resolvers = {
     Query: {
         restaurant: (root, {slug},context) => {
+          // console.log(context.AuthenticationError);
+          
           // example for authentication
           if (!context.user) throw new context.AuthenticationError('You must be logged in');
           

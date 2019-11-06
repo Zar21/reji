@@ -42,9 +42,9 @@ export default class Hotels {
         method: 'GET'
       }).then(
         (res) => {
-          console.log(res.data);
+          // console.log(res.data);
           
-          deferred.resolve(res.data.hotel);
+          deferred.resolve(res.data);
         },
         (err) => deferred.reject(err)
       );

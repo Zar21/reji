@@ -7,6 +7,13 @@ class HotelCtrl {
     this.hotel = hotel;
     this._Comments = Comments;
 
+    this.listConfig = { 
+      type: 'all',
+      filters: {
+        limit: 4,
+        offset: 0
+      }};
+
     $rootScope.setPageTitle(this.hotel.name);
 
   }

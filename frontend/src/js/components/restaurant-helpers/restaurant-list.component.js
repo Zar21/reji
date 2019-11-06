@@ -4,8 +4,9 @@ class RestaurantListCtrl {
 
     this._Restaurants = Restaurants;
 
-    this.setListTo(this.listConfig);
-
+    $scope.$watch('this.listConfig.filters', (filters) => {
+      this.setListTo(this.listConfig);
+    })
 
     $scope.$on('setListTo', (ev, newList) => {
       this.setListTo(newList);

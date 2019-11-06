@@ -4,7 +4,7 @@
   <div class="banner">
     <div class="container">
 
-      <h1 ng-bind="::$ctrl.hotel.name"></h1>
+      <h1 ng-bind="::$ctrl.hotel.hotel.name"></h1>
 
       <div class="hotel-meta">
         <!-- Show author info + favorite & follow buttons -->
@@ -21,34 +21,33 @@
     <!-- Article's HTML & tags rendered here -->
     <div class="row adventure-content">
       <div class="col-xs-12">
-        <img style="float: right;" ng-src="{{$ctrl.hotel.image}}" />
+        <img style="float: right;" ng-src="{{$ctrl.hotel.hotel.image}}" />
         <div style="float: left;">
-          <h3 ><span ng-bind="::$ctrl.hotel.name"></span></h3>
-          <p ><span ng-bind="$ctrl.hotel.description" class="description"></span></p>
+          <h3 ><span ng-bind="::$ctrl.hotel.hotel.name"></span></h3>
+          <p ><span ng-bind="$ctrl.hotel.hotel.description" class="description"></span></p>
 
           
-          <p><b>Stars: </b> <span ng-bind="::$ctrl.hotel.stars"></span></p>
-          <p><b>Review score: </b> <span ng-bind="::$ctrl.hotel.reviewScore"></span></p>
-          <p><b>Features: </b> <span ng-bind="::$ctrl.hotel.features"></span></p>
-          <p><b>Rooms: </b> <span ng-bind="::$ctrl.hotel.rooms"></span></p>
-          <p><b>Services: </b> <span ng-bind="::$ctrl.hotel.services"></span></p>
+          <p><b>Stars: </b> <span ng-bind="::$ctrl.hotel.hotel.stars"></span></p>
+          <p><b>Review score: </b> <span ng-bind="::$ctrl.hotel.hotel.reviewScore"></span></p>
+          <p><b>Features: </b> <span ng-bind="::$ctrl.hotel.hotel.features"></span></p>
+          <p><b>Rooms: </b> <span ng-bind="::$ctrl.hotel.hotel.rooms"></span></p>
+          <p><b>Services: </b> <span ng-bind="::$ctrl.hotel.hotel.services"></span></p>
           <!-- <p><b>City: </b> <span ng-bind="::$ctrl.hotel.city.name"></span></p> -->
         </div>
       </div>
     </div>
 
-    <hr />
+    <!-- <hr />
 
-    <div class="hotel-actions">
+    <div class="hotel-actions"> -->
 
       <!-- Show author info + favorite & follow buttons -->
-      <hotel-actions hotel="$ctrl.hotel"></hotel-actions>
+      <!-- <hotel-actions hotel="$ctrl.hotel"></hotel-actions>
 
-    </div>
+    </div> -->
 
     <hr />
-
-    <!-- <restaurants-list class="row col-md-12" limit="4" list-config="$ctrl.listConfig"></restaurants-list> -->
+    <restaurant-list class="row col-md-12" limit="4" list-config="$ctrl.listConfig"></restaurant-list>
 
   </div>
 

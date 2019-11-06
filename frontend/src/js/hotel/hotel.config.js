@@ -13,6 +13,7 @@ function HotelConfig($stateProvider) {
         return Hotels.get($stateParams.slug).then(
           (data) => {
             console.log(data);
+            
             return data; 
           },
           (err) => $state.go('app.hotels')

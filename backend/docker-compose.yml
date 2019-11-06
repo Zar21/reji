@@ -62,8 +62,10 @@ services:
       - "3003:3003"
     links: 
       - 'prisma'
+      - 'mongo'
     depends_on:
       - 'prisma'
+      - 'mongo'
     networks:
       - backend
 

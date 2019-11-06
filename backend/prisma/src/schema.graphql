@@ -3,6 +3,10 @@ type Query {
   restaurants(limit: Int, offset: Int): [Restaurant]
   restaurantsCount: Int
   restaurantsResults(slug: String!): [Restaurant]
+  city(slug: String!): City
+  cities(limit: Int, offset: Int): [City]
+  country(slug: String!): Country
+  countries(limit: Int, offset: Int): [Country]
 }
 type Mutation {
   createRestaurant(input: RestaurantInput): Restaurant
@@ -17,6 +21,23 @@ type Restaurant {
   streetAddress: String
   image: String
 }
+
+type City {
+    id: ID!
+    slug: String!
+    name: String
+    latitude: Float
+    longitude: Float
+    country: Country
+}
+
+type Country {
+    id: ID!
+    slug: String!
+    name: String
+    description: String
+}
+
 input RestaurantInput {
   title: String!
   description: String

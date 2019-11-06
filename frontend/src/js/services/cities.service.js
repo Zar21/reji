@@ -94,8 +94,7 @@ export default class Cities {
         }
         `;
       }
-      console.log("hey3");
-      return this._GQL.get(query, this._AppConstants.api_pr);
+      return this._GQL.get(query);
     }
     
       getAll() {

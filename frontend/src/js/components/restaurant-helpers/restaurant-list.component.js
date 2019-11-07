@@ -4,8 +4,13 @@ class RestaurantListCtrl {
 
     this._Restaurants = Restaurants;
 
-    this.setListTo(this.listConfig);
+    $scope.$watch('this.listConfig.filters', (filters) => {
+      this.setListTo(this.listConfig);
+    })
 
+    $scope.$watch('this.currentData', () => {
+      this.runQuery();
+    })
 
     $scope.$on('setListTo', (ev, newList) => {
       this.setListTo(newList);
@@ -56,19 +61,29 @@ class RestaurantListCtrl {
     // Add the offset filter
     queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
-    // Run the query
-    this._Restaurants
-      .query(queryConfig)
-      .then(
-        (res) => {
-          this.loading = false;
-
-          // Update list and total pages
-          this.list = res.restaurants;
-          console.log(res);
-          this.listConfig.totalPages = Math.ceil(res.restaurantsCount / this.limit);
-        }
-      );
+    // if we pass the component data we already have
+    if (this.currentData) {
+      this.loading = false;
+      
+      // Update list and total pages with existing data
+      this.list = this.currentData;
+      
+      this.listConfig.totalPages = Math.ceil(this.currentData.length / this.limit);
+    } else {
+      
+      // Run the query
+      this._Restaurants
+        .query(queryConfig)
+        .then(
+          (res) => {
+            this.loading = false;
+  
+            // Update list and total pages
+            this.list = res.restaurants;
+            this.listConfig.totalPages = Math.ceil(res.restaurantsCount / this.limit);
+          }
+        );
+    }
   }
 
 }
@@ -76,7 +91,8 @@ class RestaurantListCtrl {
 let RestaurantList = {
   bindings: {
     limit: '=',
-    listConfig: '='
+    listConfig: '=',
+    currentData: '='
   },
   controller: RestaurantListCtrl,
   templateUrl: 'components/restaurant-helpers/restaurant-list.html'

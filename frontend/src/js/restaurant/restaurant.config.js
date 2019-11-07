@@ -21,7 +21,9 @@ function RestaurantConfig($stateProvider) {
               User.logout();
             }
             console.log(err);
-            $state.go('app.restaurantshop')
+            
+            // return to same page
+            $state.go($state.current.name)
           }
         )
       }

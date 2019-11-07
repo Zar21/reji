@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express';
 const typeDefs = gql`
     extend type Query {
         restaurant(slug: String!): Restaurant
-        restaurants(limit: Int, offset: Int): [Restaurant]
+        restaurants(limit: Int, offset: Int, city: String): [Restaurant]
         restaurantsCount: Int
         restaurantsResults(slug: String!): [Restaurant]
     }

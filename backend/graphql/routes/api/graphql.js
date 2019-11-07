@@ -34,7 +34,7 @@ const SERVERAUTH = new ApolloServer({
         if (req.payload) {
             user = await User.findById(req.payload.id);
         } // else do nothing and let user be null
-
+        
         // add the user to the context
         return { user, AuthenticationError };
     }

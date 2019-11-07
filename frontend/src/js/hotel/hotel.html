@@ -47,7 +47,9 @@
     </div> -->
 
     <hr />
-    <restaurant-list class="row col-md-12" limit="4" list-config="$ctrl.listConfig"></restaurant-list>
+
+    <toaster-container></toaster-container>
+    <restaurant-list class="row col-md-12" limit="4" list-config="$ctrl.listConfig" current-data="$ctrl.hotel.restaurants"></restaurant-list>
 
   </div>
 

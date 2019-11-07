@@ -88,8 +88,10 @@ router.post('/', function (req, res, next) {
 
 // return a hotel
 router.get('/:hotel', function(req, res, next) {
+  // Backend communication
+  // REST requests the restaurants in the same city as the hotel from GraphQL
   const request = require('request');
-  request('http://graphql:3002/api?query={restaurants(city:"5dc2e81a203c9321cafe46bd"){slug id title image reservePrice}}', function (error, response, body) {
+  request(`http://graphql:3002/api?query={restaurants(city:"${req.hotel.city}"){slug id title image reservePrice}}`, function (error, response, body) {
     if (error) {
       console.error('error:', error); 
     } else {

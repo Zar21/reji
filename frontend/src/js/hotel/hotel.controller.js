@@ -12,7 +12,7 @@ class HotelCtrl {
       filters: {
         limit: 4,
         offset: 0
-      }};
+    }};
 
     $rootScope.setPageTitle(this.hotel.name);
 

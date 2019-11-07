@@ -7,6 +7,10 @@ type Query {
   cities(limit: Int, offset: Int): [City]
   country(slug: String!): Country
   countries(limit: Int, offset: Int): [Country]
+  adventure(slug: String!): Adventure
+  adventures(limit: Int, offset: Int): [Adventure]
+  hotel(slug: String!): Hotel
+  hotels(limit: Int, offset: Int): [Hotel]
 }
 type Mutation {
   createRestaurant(input: RestaurantInput): Restaurant
@@ -17,7 +21,7 @@ type Restaurant {
   title: String
   description: String
   reservePrice: Int
-  city: String
+  city: City
   streetAddress: String
   image: String
 }
@@ -36,6 +40,30 @@ type Country {
     slug: String!
     name: String
     description: String
+}
+
+type Adventure {
+    id: ID!
+    slug: String!
+    title: String
+    description: String
+    price: Int
+    favoritesCount: Int
+    image: String
+}
+
+type Hotel {
+    id: ID!
+    slug: String!
+    name: String
+    description: String
+    city: City 
+    stars: Int
+    reviewScore: Int
+    rooms: Int
+    image: String
+    services: [String]
+    features: [String]
 }
 
 input RestaurantInput {

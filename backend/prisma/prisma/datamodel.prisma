@@ -6,6 +6,7 @@ type Restaurant @db(name: "restaurants") {
     reservePrice: Int
     streetAddress: String
     image: String
+    city: City @relation(link: INLINE)
 }
 
 type City @db(name: "cities") {

@@ -105,7 +105,7 @@ export default class Cities {
           }
         }
       `;
-        return this._GQL.get(query);
+        return this._GQL.get(query, this._AppConstants.api_pr);
       }
   
   }

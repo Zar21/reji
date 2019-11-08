@@ -173,6 +173,7 @@ module.exports = {
 				offset: { type: "number", optional: true, convert: true },
 			},
 			handler(ctx) {
+				console.log('aslkjhdfasldkjfhlaksjdfhlkjasdgfjhasdgflkhjagsdlkjfhalskdjfhlkjashdfkjhasdjfjkasjñdlkfjñalksd');
 				const limit = ctx.params.limit ? Number(ctx.params.limit) : 20;
 				const offset = ctx.params.offset ? Number(ctx.params.offset) : 0;
 

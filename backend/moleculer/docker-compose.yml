@@ -64,81 +64,81 @@ services:
     #deploy:
     #  replicas: 2
 
-  comments:
-    image: alpine-node:8
-    command: npm start
-    working_dir: /app
-    volumes:
-      - ".:/app"
-    env_file: docker-compose.env
-    environment:
-      NODE_ENV: production
-      SERVICES: comments
-    links:
-      - redis
-      - mongo
-    depends_on:
-      - redis
-      - mongo
-    #deploy:
-    #  replicas: 2
+  # comments:
+  #   image: alpine-node:8
+  #   command: npm start
+  #   working_dir: /app
+  #   volumes:
+  #     - ".:/app"
+  #   env_file: docker-compose.env
+  #   environment:
+  #     NODE_ENV: production
+  #     SERVICES: comments
+  #   links:
+  #     - redis
+  #     - mongo
+  #   depends_on:
+  #     - redis
+  #     - mongo
+  #   #deploy:
+  #   #  replicas: 2
 
-  favorites:
-    image: alpine-node:8
-    command: npm start
-    working_dir: /app
-    volumes:
-      - ".:/app"
-    env_file: docker-compose.env
-    environment:
-      NODE_ENV: production
-      SERVICES: favorites
-    links:
-      - redis
-      - mongo
-    depends_on:
-      - redis
-      - mongo
-    #deploy:
-    #  replicas: 2
+  # favorites:
+  #   image: alpine-node:8
+  #   command: npm start
+  #   working_dir: /app
+  #   volumes:
+  #     - ".:/app"
+  #   env_file: docker-compose.env
+  #   environment:
+  #     NODE_ENV: production
+  #     SERVICES: favorites
+  #   links:
+  #     - redis
+  #     - mongo
+  #   depends_on:
+  #     - redis
+  #     - mongo
+  #   #deploy:
+  #   #  replicas: 2
 
-  follows:
-    image: alpine-node:8
-    command: npm start
-    working_dir: /app
-    volumes:
-      - ".:/app"
-    env_file: docker-compose.env
-    environment:
-      NODE_ENV: production
-      SERVICES: follows
-    links:
-      - redis
-      - mongo
-    depends_on:
-      - redis
-      - mongo
-    #deploy:
-    #  replicas: 2
+  # follows:
+  #   image: alpine-node:8
+  #   command: npm start
+  #   working_dir: /app
+  #   volumes:
+  #     - ".:/app"
+  #   env_file: docker-compose.env
+  #   environment:
+  #     NODE_ENV: production
+  #     SERVICES: follows
+  #   links:
+  #     - redis
+  #     - mongo
+  #   depends_on:
+  #     - redis
+  #     - mongo
+  #   #deploy:
+  #   #  replicas: 2
 
-  users:
-    image: alpine-node:8
-    command: npm start
-    working_dir: /app
-    volumes:
-      - ".:/app"
-    env_file: docker-compose.env
-    environment:
-      NODE_ENV: production
-      SERVICES: users
-    links:
-      - redis
-      - mongo
-    depends_on:
-      - redis
-      - mongo
-    #deploy:
-    #  replicas: 2
+  # users:
+  #   image: alpine-node:8
+  #   command: npm start
+  #   working_dir: /app
+  #   volumes:
+  #     - ".:/app"
+  #   env_file: docker-compose.env
+  #   environment:
+  #     NODE_ENV: production
+  #     SERVICES: users
+  #   links:
+  #     - redis
+  #     - mongo
+  #   depends_on:
+  #     - redis
+  #     - mongo
+  #   #deploy:
+  #   #  replicas: 2
 
   redis:
     image: redis:alpine

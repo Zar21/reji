@@ -23,7 +23,7 @@ To get the repo running locally:
 
 | Page | Features |
 | - | - |
-| Home | ??? |
+| Home | List with Prisma |
 | Restaurants | List with GraphQL, Details with GraphQL |
 | Hotels | List with REST, Details with REST |
 | Adventures | List with REST, Details with REST |

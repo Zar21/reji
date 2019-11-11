@@ -16,9 +16,7 @@ export default class GraphQL {
 
         this._AppConstants = AppConstants;
         this._$q = $q;
-        console.log("hey3");
         this._clients = new Map([[this._AppConstants.api_gql, this.createClient()]]);
-        console.log(this._clients);
         this._authClient = this.createAuthClient();
         this._JWT = JWT;
     }

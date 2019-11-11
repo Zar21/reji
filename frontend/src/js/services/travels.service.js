@@ -1,12 +1,12 @@
 export default class Travels {
-    constructor(AppConstants, $http, $q) {
+    constructor(AppConstants, $http, $q, GraphQLClient) {
       'ngInject';
   
       this._AppConstants = AppConstants;
       this._$http = $http;
-      this._$q = $q;
-  
-  
+      this._$q = $q; 
+      this._GQL = GraphQLClient;
+      
     }
   
     /*
@@ -113,6 +113,71 @@ export default class Travels {
       })
     }*/
   
-  
+    
+    getHome() {
+      let query = `
+      query {
+        restaurants(limit: 5) {
+          id
+          slug
+          title
+          description
+          reservePrice
+          city {
+            id
+            slug
+            name
+            latitude
+            longitude
+            country {
+              id
+              slug
+              name
+              description
+            }
+          }
+          streetAddress
+          image
+        }
+        
+        hotels(limit: 5) {
+          id
+          slug
+          name
+          description
+          city {
+            id
+            slug
+            name
+            latitude
+            longitude
+            country {
+              id
+              slug
+              name
+              description
+            }
+          }
+          stars
+          reviewScore
+          rooms
+          image
+          services
+          features
+        }
+        
+        adventures(limit: 5) {
+          id
+          slug
+          title
+          description
+          price
+          favoritesCount
+          image
+        }
+      }
+    `;
+      return this._GQL.get(query, this._AppConstants.api_pr);
+    }
   }
   

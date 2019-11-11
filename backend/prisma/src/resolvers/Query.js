@@ -3,7 +3,10 @@ async function restaurant(parent, { slug }, context) {
   return getOne(restaurants, slug)
 }
 
-async function restaurants(parent, args, context) {
+async function restaurants(parent, { limit }, context) {
+  if (limit) {
+    return context.prisma.restaurants({first: limit})
+  }
   return context.prisma.restaurants({})
 }
 
@@ -30,8 +33,8 @@ async function adventure(parent, { slug }, context) {
   return getOne(adventures, slug)
 }
 
-async function adventures(parent, args, context) {
-  return context.prisma.adventures({})
+async function adventures(parent, { limit }, context) {
+  return context.prisma.adventures({first: limit})
 }
 
 async function hotel(parent, { slug }, context) {
@@ -39,8 +42,8 @@ async function hotel(parent, { slug }, context) {
   return getOne(hotels, slug)
 }
 
-async function hotels(parent, args, context) {
-  return context.prisma.hotels({})
+async function hotels(parent, { limit }, context) {
+  return context.prisma.hotels({first: limit})
 }
 
 function getOne(data, slug) {

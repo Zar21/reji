@@ -16,7 +16,7 @@
       <!-- Main view - contains tabs & article list -->
       <div class="col-md-9">
         <!-- Tabs for toggling between feed, article lists -->
-        <div class="feed-toggle">
+        <!--<div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
 
             <li class="nav-item" show-authed="true">
@@ -42,11 +42,22 @@
             </li>
 
           </ul>
-        </div>
+        </div>-->
 
         <!-- List the current articles -->
-        <article-list limit="8" list-config="$ctrl.listConfig"></article-list>
-
+        <!--<article-list limit="8" list-config="$ctrl.listConfig"></article-list>-->
+        <h3>Restaurants</h3>
+        <div ng-repeat="restaurant in $ctrl.data.restaurants">
+            <p>{{restaurant.title}}</p>
+        </div>
+        <h3>Hotels</h3>
+        <div ng-repeat="hotel in $ctrl.data.hotels">
+            <p>{{hotel.name}}</p>
+        </div>
+        <h3>Adventures</h3>
+        <div ng-repeat="adventure in $ctrl.data.adventures">
+            <p>{{adventure.name}}</p>
+        </div>
       </div>
 
       <!-- Sidebar where popular tags are listed -->

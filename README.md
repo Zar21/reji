@@ -46,7 +46,7 @@ To get the repo running locally:
 | Favourites | Adventures list and the user's profile |
 | Backend Communication | Hotel details requests the restaurants in the same city from the GraphQL backend |
 | GraphQL (Apollo Server and Client) | Restaurant list and details, City search |
-| PrismaJS | Home? |
+| PrismaJS | Home list |
 | Docker | Entire backend is dockerized |
 | Relational data | All the data uses or is used in another |
 | Seed | Faker.js fills out Mongo with 50 of each model |

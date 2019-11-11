@@ -14,8 +14,6 @@ services:
       - 'mongo'
     depends_on:
       - 'mongo'
-    networks:
-      - backend
 
   graphql:
     image: mhart/alpine-node:8
@@ -30,8 +28,6 @@ services:
       - 'mongo'
     depends_on:
       - 'mongo'
-    networks:
-      - backend
     
   prisma:
     image: prismagraphql/prisma:1.34
@@ -49,8 +45,6 @@ services:
       - 'mongo'
     depends_on:
       - 'mongo'
-    networks:
-      - backend
 
   prismabackend:
     image: mhart/alpine-node:8
@@ -66,17 +60,83 @@ services:
     depends_on:
       - 'prisma'
       - 'mongo'
-    networks:
-      - backend
+
+  api:
+    image: alpine-node:8
+    command: npm start
+    working_dir: /app
+    volumes:
+      - "./moleculer:/app"
+    env_file: ./moleculer/docker-compose.env
+    environment:
+      NODE_ENV: production
+      SERVICES: api
+      PORT: 3000
+    links:
+      - redis
+    depends_on:
+      - redis
+    labels:
+      - "traefik.enable=true"   
+      - "traefik.backend=api"
+      - "traefik.port=3000"
+      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.rule=PathPrefix:/"
+    #deploy:
+    #  replicas: 2
+
+  articles:
+    image: alpine-node:8
+    command: npm start
+    working_dir: /app
+    volumes:
+      - "./moleculer:/app"
+    env_file: ./moleculer/docker-compose.env
+    environment:
+      NODE_ENV: production
+      SERVICES: articles
+    links:
+      - redis
+      - mongo
+    depends_on:
+      - redis
+      - mongo
+    #deploy:
+    #  replicas: 2
+
+  adventures:
+    image: alpine-node:8
+    command: npm start
+    working_dir: /app
+    volumes:
+      - "./moleculer:/app"
+    env_file: ./moleculer/docker-compose.env
+    environment:
+      NODE_ENV: production
+      SERVICES: adventures
+    links:
+      - redis
+      - mongo
+    depends_on:
+      - redis
+      - mongo
+    #deploy:
+    #  replicas: 2
+
+  redis:
+    image: redis:alpine
 
   mongo:
     image: mvertes/alpine-mongo
-    ports:
-      - '27017:27017'
     volumes:
       - /var/lib/mongodb:/data/db
-    networks:
-      - backend
 
-networks:
-  backend:
+  traefik:
+    image: traefik:v1.7
+    # command: --web --docker --docker.domain=docker.localhost --logLevel=INFO --docker.exposedbydefault=false
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./moleculer/traefik/traefik.toml:/traefik.toml

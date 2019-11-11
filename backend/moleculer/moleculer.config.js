@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-	namespace: "conduit",
+	namespace: "conduit_nodejs",
 	//transporter: "TCP",
 	logger: true,
 	logLevel: "info",

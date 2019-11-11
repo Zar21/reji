@@ -74,6 +74,7 @@ To get the repo running locally:
 * Gulp
 * Swagger
 * PassportJS
+* Jasmine
 
 ---
 
@@ -105,5 +106,5 @@ To get the repo running locally:
 ---
 
 #### TODO 
-- [ ] MoleculerJS integration
+- [x] MoleculerJS integration
 - [ ] Fill home with information from every backend

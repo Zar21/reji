@@ -6,4 +6,45 @@ type Restaurant @db(name: "restaurants") {
     reservePrice: Int
     streetAddress: String
     image: String
+    city: City @relation(link: INLINE)
+}
+
+type City @db(name: "cities") {
+    id: ID! @id
+    slug: String!
+    name: String
+    latitude: Float
+    longitude: Float
+    country: Country @relation(link: INLINE)
+}
+
+type Country @db(name: "countries") {
+    id: ID! @id
+    slug: String!
+    name: String
+    description: String
+}
+
+type Adventure @db(name: "adventures") {
+    id: ID! @id
+    slug: String!
+    title: String
+    description: String
+    price: Int
+    favoritesCount: Int @default(value: 0)
+    image: String
+}
+
+type Hotel @db(name: "hotels") {
+    id: ID! @id
+    slug: String!
+    name: String
+    description: String
+    city: City @relation(link: INLINE)
+    stars: Int
+    reviewScore: Int
+    rooms: Int
+    image: String
+    services: [String]
+    features: [String]
 }

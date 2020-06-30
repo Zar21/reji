@@ -29,7 +29,7 @@
     "ejs": "2.5.5",
     "errorhandler": "1.4.3",
     "express": "4.13.4",
-    "express-jwt": "3.3.0",
+    "express-jwt": "6.0.0",
     "express-session": "1.13.0",
     "faker": "^4.1.0",
     "fastify": "^2.9.0",
